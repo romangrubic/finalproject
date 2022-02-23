@@ -4,6 +4,8 @@ class App
 {
 public static function start()
     {
-        echo 'Hello world';
+        $route=Request::getRoute();
+
+        echo $route;
     }
 }

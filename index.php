@@ -23,10 +23,10 @@ $routes = implode(PATH_SEPARATOR, [
 set_include_path($routes);
 
 //Autoload register
-spl_autoload_register(function ($klasa) {
+spl_autoload_register(function ($class) {
     $routes = explode(PATH_SEPARATOR, get_include_path());
     foreach ($routes as $route) {
-        $file = $route . DIRECTORY_SEPARATOR . $klasa . '.php';
+        $file = $route . DIRECTORY_SEPARATOR . $class . '.php';
         if (file_exists($file)) {
             include_once $file;
             break;
