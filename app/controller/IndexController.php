@@ -1,10 +1,9 @@
 <?php
 
-class IndexController
+class IndexController extends Controller
 {
     public function index()
     {
-        $view=new View();
-        $view->render('index');
+        $this->view->render('index');
     }
 }
