@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'url'=>'http://romangrubic.com'
+    'url'=>'http://romangrubic.com/'
 ];

@@ -2,19 +2,26 @@
 <html lang="en">
 
 <head>
+    <!-- Including head.phtml -->
     <?php include 'includes/head.phtml'?>
 </head>
 
 <body>
+    <!-- Including navigation bar -->
+    <?php include_once 'includes/navbar.phtml'?>
+
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
             <div class="large-12 cell">
-                <?= $content ?>
+                <div class="callout" id="content">
+                    <!-- Content from controllers is displayed here -->
+                    <?= $content ?>
+                </div>
             </div>
         </div>
     </div>
 
-
+    <!-- Including javacsript and other scripts -->
     <?php include_once 'includes/script.phtml'?>
 </body>
 
