@@ -2,7 +2,7 @@
 
 class App
 {
-public static function start()
+    public static function start()
     {
         // Taking the user url and splitting it into parts
         $route=Request::getRoute();
@@ -32,5 +32,12 @@ public static function start()
         } else {
             echo $class . '->' . $method . '() does not exist. 404 error.';
         }
+    }
+
+    // Method for easy extraction data from config.php file
+    public static function config($key)
+    {
+        $config=include BP_APP . 'config.php';
+        return $config[$key];
     }
 }
