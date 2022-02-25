@@ -1,3 +1,11 @@
+/* Development indication */
+.development{
+    background-color: red;
+    color: white;
+    font-size: 40px;
+}
+/*  */
+
 .grid-container {
     margin: 0.4rem;
     max-width: 100%;
