@@ -27,8 +27,11 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-      <li><input type="search" placeholder="Search"></li>
-      <li><button type="button" class="button">Search</button></li>
+      <?php if(App::authorized()): ?>
+      <li><a href="<?= App::config('url') ?>login/logout">Odjava</a></li>
+      <?php else:?>
+      <li><a href="<?= App::config('url') ?>login/index">Login</a></li>
+      <?php endif;?>
     </ul>
   </div>
 </div>

@@ -1,0 +1,13 @@
+<form class="log-in-form" action="<?= App::config('url') ?>login/authorize" method="POST">
+    <h4 class="text-center">Prijava</h4>
+    <label>Email
+        <input type="email" name="email" placeholder="marija@edunova.hr" value="<?= $email ?>" />
+    </label>
+    <label>Lozinka
+        <input type="password" name="user_password" />
+    </label>
+    <p>
+        <input type="submit" class="button expanded" value="Prijava" />
+    </p>
+    <?= $message ?>
+</form> 
