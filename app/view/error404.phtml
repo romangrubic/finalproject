@@ -1,0 +1,10 @@
+<?php if(App::config('dev')):?>
+    <h1> Tražili ste <?=$missing?></h1>
+    <ul>
+        <li>Mozda je potrebno kreirati klasu ili metodu.</li>
+        <li>Možda je kriva ruta.</li>
+    </ul>
+<?php else :?>
+    <h1>Ono što ste tražili ne postoji</h1>
+    <a href="<?=App::config('url')?>">Početna stranica</a>
+<?php endif;?>

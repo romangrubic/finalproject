@@ -30,7 +30,10 @@ class App
             $instance=new $class();
             $instance->$method();
         } else {
-            echo $class . '->' . $method . '() does not exist. 404 error.';
+            $view = new View();
+            $view->render('error404', [
+                'missing' => $class . '->' . $method
+            ]);
         }
     }
 
