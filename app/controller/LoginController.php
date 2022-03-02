@@ -39,6 +39,9 @@ class LoginController extends Controller
         }
 
         $_SESSION['authorized'] = $operator;
+
+        $db = new DashboardController();
+        $db->index();
     }
 
     public function logout()

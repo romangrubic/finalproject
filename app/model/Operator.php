@@ -6,7 +6,7 @@ class Operator
     {
         $connection = DB::getInstance();
         $query = $connection->prepare('
-            select * from operater where email=:email
+            select * from operator where email=:email
         ');
         $query->execute(['email' => $email]);
 
@@ -20,7 +20,7 @@ class Operator
             return null;
         }
 
-        // Micemo lozinku iz operatera da ju ne spremimo u SESSION
+        // Removing password from session
         unset($operator->user_password);
         return $operator;
     }

@@ -43,4 +43,13 @@ class App
         $config=include BP_APP . 'config.php';
         return $config[$key];
     }
+
+    // Method for checking if user is authorized
+    public static function authorized()
+    {
+        if(isset($_SESSION) && isset($_SESSION['authorized'])){
+            return true;
+        }
+        return false;
+    }
 }

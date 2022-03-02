@@ -28,7 +28,7 @@
   <div class="top-bar-right">
     <ul class="menu">
       <?php if(App::authorized()): ?>
-      <li><a href="<?= App::config('url') ?>login/logout">Odjava</a></li>
+      <li><a href="<?= App::config('url') ?>login/logout">Logout</a></li>
       <?php else:?>
       <li><a href="<?= App::config('url') ?>login/index">Login</a></li>
       <?php endif;?>
