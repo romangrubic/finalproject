@@ -14,4 +14,16 @@ class Category
         $query->execute();
         return $query->fetchall();
     }
+
+    public static function insert($paramaters)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                insert into category (name,description)
+                values (:name,:description)
+        
+        ');
+        $query->execute($paramaters);
+    }
 }
