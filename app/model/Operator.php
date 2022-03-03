@@ -16,7 +16,7 @@ class Operator
             return null;
         }
 
-        if (password_verify($password, $operator->user_password)){
+        if (!password_verify($password, $operator->user_password)){
             return null;
         }
 

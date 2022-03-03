@@ -4,33 +4,37 @@
 </div>
 
 <!-- Banner with current discounts and promotions -->
+<?php if($_SERVER['REQUEST_URI'] === '/'):?>
 <img src="<?=App::config('url')?>public/images/banner.webp" alt="Banner image" title="Registrirajte se i za prvu kupnju dobivate 20% popusta!">
-
+<?php endif;?>
 <!-- Development environment -->
 <?php if(App::config('dev') === true){echo '<div class="development text-center">Development</div>';}?>
 
 <div class="top-bar" id="example-menu">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text"><?=App::config('appName')?></li>
+      <li class="menu-text"><a href="<?=App::config('url')?>" class="homepage"><?=App::config('appName')?></a></li>
       <li class="has-submenu">
-        <a href="#0">One</a>
+        <a href="#0">Proizvodi</a>
         <ul class="submenu menu vertical" data-submenu>
-          <li><a href="#0">One</a></li>
-          <li><a href="#0">Two</a></li>
-          <li><a href="#0">Three</a></li>
+          <!-- Category list -->
+          <li><a href="#0">Tipkovnica</a></li>
+          <li><a href="#0">Miš</a></li>
+          <li><a href="#0">Matična ploča</a></li>
         </ul>
       </li>
       <li><a href="#0">Two</a></li>
-      <li><a href="#0">Three</a></li>
+      <?php if(App::authorized()):?>
+      <li><a href="<?=App::config('url')?>dashboard/index">Nadzorna ploča</a></li>
+      <?php endif;?>
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="menu">
       <?php if(App::authorized()): ?>
-      <li><a href="<?= App::config('url') ?>login/logout">Logout</a></li>
+      <li><a href="<?= App::config('url') ?>login/logout">Odjava, <?=$_SESSION['authorized']->firstname?></a></li>
       <?php else:?>
-      <li><a href="<?= App::config('url') ?>login/index">Login</a></li>
+      <li><a href="<?= App::config('url') ?>login/index">Prijava</a></li>
       <?php endif;?>
     </ul>
   </div>

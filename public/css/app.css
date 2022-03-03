@@ -22,3 +22,8 @@
     max-width: 400px;
     margin: auto;
   } 
+
+/* Homepage quicklink */
+#example-menu > div.top-bar-left > ul > li.menu-text > a{
+    padding: 0px;
+}
