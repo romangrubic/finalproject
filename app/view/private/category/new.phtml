@@ -1,0 +1,16 @@
+<form action="<?=App::config('url')?>category/addNew" method="post">
+    <fieldset>
+        <legend>Nova kategorija</legend>
+
+            <label for="name">Ime kategorije</label>
+            <input type="text" name="name" id="name" value="<?=$category->name?>">
+            <?=$message->name?>
+
+            <label for="description">Opis kategorije (do 255 znakova)</label>
+            <input type="text" name="description" id="description" value="<?=$category->description?>">
+            <?=$message->description?>
+
+            <a href="<?App::config('url')?>category/index">Natrag na kategorije</a>
+            <input type="submit" value="Dodaj kategoriju.">
+    </fieldset>
+</form>
