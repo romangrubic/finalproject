@@ -1,0 +1,18 @@
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Opis</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($categories as $category):?>
+        <tr>
+            <td><?=$category->name?></td>
+            <td><?=$category->description?></td>
+            <td></td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>

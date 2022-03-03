@@ -27,6 +27,15 @@
       <?php if(App::authorized()):?>
       <li><a href="<?=App::config('url')?>dashboard/index">Nadzorna ploča</a></li>
       <?php endif;?>
+      <?php if(App::authorized() && ($_SESSION['authorized']->user_role === 'oper' || $_SESSION['authorized']->user_role === 'admin')):?>
+      <li><a href="#0">Admin/Operator</a>
+        <ul class="submenu menu vertical" data-submenu>
+            <li><a href="<?=App::config('url')?>category/index">Kategorija</a></li>
+            <li><a href="#0">Proizvod</a></li>
+            <li><a href="#0">Kupac</a></li>
+          </ul>
+      </li>
+      <?php endif;?>
     </ul>
   </div>
   <div class="top-bar-right">
