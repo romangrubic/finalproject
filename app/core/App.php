@@ -25,10 +25,21 @@ class App
             $method=lcfirst($parts[2]);
         }
 
+        $parameter = null;
+        if(!isset($parts[3]) || $parts[3]==''){
+            $parameter = null;
+        }else{
+            $parameter = $parts[3];
+        }
+
         // Now we check if the class and method in the same class exist and activate it. Otherwise we show 404error page.
         if(class_exists($class) && method_exists($class, $method)){
             $instance=new $class();
-            $instance->$method();
+            if($parameter == null){
+                $instance->$method();
+            }else{
+                $instance->$method($parameter);
+            }
         } else {
             $view = new View();
             $view->render('error404', [
