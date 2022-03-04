@@ -52,6 +52,12 @@ class CategoryController extends AuthorizedController
         }
     }
 
+    public function delete($id)
+    {
+        Category::delete($id);
+        $this->index();
+    }
+
     // Validation functions
     private function validationName()
     {

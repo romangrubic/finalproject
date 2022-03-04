@@ -20,7 +20,13 @@
         <tr>
             <td><?=$category->name?></td>
             <td><?=$category->description?></td>
-            <td></td>
+            <td>
+                    <?php if($category->hasproducts == 0):?>
+                        <a onclick="return confirm('Sigurno obrisati <?=$category->name?> ?')" style="margin-left: 20px; color: red;" href="<?=App::config('url')?>category/delete/<?=$category->id?>"><i title="Obriši &quot;<?=$category->name?>&quot;." class="fas fa-2x fa-trash"></i></a>
+                    <?php else:?>
+                        <i style="margin-left: 20px; color: gray;" title="Ne moze se obrisati &quot;<?=$category->name?>&quot; jer ima proizvode." class="fas fa-2x fa-trash"></i>
+                    <?php endif;?>
+                </td>
         </tr>
     <?php endforeach;?>
     </tbody>
