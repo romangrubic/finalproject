@@ -46,6 +46,34 @@ class CategoryController extends AuthorizedController
             $this->index();
         }else{
             $this->view->render($this->viewDir . 'new', [
+                'css' => $this->cssDir . 'new.css',
+                'message' => $this->message,
+                'category' => $this->category
+            ]);
+        }
+    }
+
+    public function update($id)
+    {
+        $this->category = Category::selectforupdate($id);
+
+        $this->view->render($this->viewDir . 'update', [
+            'css' => $this->cssDir . 'update.css',
+            'message' => $this->message,
+            'category' => $this->category
+        ]);
+    }
+
+    public function updateNew()
+    {
+        $this->category = (object)$_POST;
+
+        if($this->validationName() && $this->validationDescription()){
+            Category::update($_POST);
+            $this->index();
+        }else{
+            $this->view->render($this->viewDir . 'update', [
+                'css' => $this->cssDir . 'update.css',
                 'message' => $this->message,
                 'category' => $this->category
             ]);

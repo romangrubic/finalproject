@@ -21,10 +21,11 @@
             <td><?=$category->name?></td>
             <td><?=$category->description?></td>
             <td>
+                <a href="<?=App::config('url')?>category/update/<?=$category->id?>"><i title="Promijeni &quot;<?=$category->name?>&quot; kategoriju." class="fas fa-2x fa-edit"></i></a>
                     <?php if($category->hasproducts == 0):?>
-                        <a onclick="return confirm('Sigurno obrisati <?=$category->name?> ?')" style="margin-left: 20px; color: red;" href="<?=App::config('url')?>category/delete/<?=$category->id?>"><i title="Obriši &quot;<?=$category->name?>&quot;." class="fas fa-2x fa-trash"></i></a>
+                        <a onclick="return confirm('Sigurno obrisati <?=$category->name?> kategoriju ?')" style="margin-left: 20px; color: red;" href="<?=App::config('url')?>category/delete/<?=$category->id?>"><i title="Obriši &quot;<?=$category->name?>&quot; kategoriju." class="fas fa-2x fa-trash"></i></a>
                     <?php else:?>
-                        <i style="margin-left: 20px; color: gray;" title="Ne moze se obrisati &quot;<?=$category->name?>&quot; jer ima proizvode." class="fas fa-2x fa-trash"></i>
+                        <i style="margin-left: 20px; color: gray;" title="Ne moze se obrisati kategorija &quot;<?=$category->name?>&quot; jer ima proizvode." class="fas fa-2x fa-trash"></i>
                     <?php endif;?>
                 </td>
         </tr>

@@ -29,6 +29,32 @@ class Category
         $query->execute($paramaters);
     }
 
+    public static function selectforupdate($id)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                select *
+                from category
+                where id=:id
+        
+        ');
+        $query->execute(['id' => $id]);
+        return  $query->fetch();
+    }
+
+    public static function update($parameters)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                update category
+                set name = :name, description = :description
+                where id = :id
+        ');
+        $query->execute($parameters);
+    }
+
     public static function delete($id)
     {
         $connection = DB::getInstance();

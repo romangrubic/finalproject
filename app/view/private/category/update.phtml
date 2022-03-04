@@ -1,6 +1,6 @@
-<form action="<?=App::config('url')?>category/addNew" method="post">
+<form action="<?=App::config('url')?>category/updateNew" method="post">
     <fieldset>
-        <legend>Nova kategorija</legend>
+        <legend>Promjena postojece kategorija</legend>
 
             <label for="name">Ime kategorije</label>
             <input type="text" name="name" id="name" value="<?=$category->name?>">
@@ -10,7 +10,8 @@
             <input type="text" name="description" id="description" value="<?=$category->description?>">
             <?=$message->description?>
 
+            <input type="hidden" name="id" value="<?=$category->id?>">
             <a href="<?=App::config('url')?>category/index">Natrag na kategorije</a>
-            <input type="submit" value="Dodaj kategoriju.">
+            <input type="submit" value="Sacuvaj promjenu kategorije.">
     </fieldset>
 </form>
