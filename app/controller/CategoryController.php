@@ -43,7 +43,7 @@ class CategoryController extends AuthorizedController
 
         if($this->validationName() && $this->validationDescription()){
             Category::insert($_POST);
-            $this->index();
+            header('Location:'.App::config('url').'category/index');
         }else{
             $this->view->render($this->viewDir . 'new', [
                 'css' => $this->cssDir . 'new.css',
@@ -70,7 +70,7 @@ class CategoryController extends AuthorizedController
 
         if($this->validationName() && $this->validationDescription()){
             Category::update($_POST);
-            $this->index();
+            header('Location:'.App::config('url').'category/index');
         }else{
             $this->view->render($this->viewDir . 'update', [
                 'css' => $this->cssDir . 'update.css',
@@ -83,7 +83,7 @@ class CategoryController extends AuthorizedController
     public function delete($id)
     {
         Category::delete($id);
-        $this->index();
+        header('Location:'.App::config('url').'category/index');
     }
 
     // Validation functions
