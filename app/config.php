@@ -14,14 +14,14 @@ switch ($_SERVER['SERVER_ADDR']) {
         ];
         break;
     // Production
-    case '185.62.73.200':
+    case '46.101.238.150':
         $dev = false;
         $url = 'https://mojatrgovina.online/';
         $database = [
             'server' => 'localhost',
-            'database' => 'mojatrgo_shop',
-            'user' => 'mojatrgo_user',
-            'password' => 'R6h}[)N?jt]j'
+            'database' => 'shop',
+            'user' => 'edunova',
+            'password' => 'edunova'
         ];
         break;
 
