@@ -77,7 +77,7 @@ insert into operator(email,user_password,firstname,lastname, user_role) values
 ('oper@edunova.hr','$2a$12$S6vnHiwtRDdoUW4zgxApvezBlodWj/tmTADdmKxrX28Y2FXHcoHOm','Operater','Edunova','oper');
 
 
-insert into customer(id,firstname,lastname,email,phonenumber,street,city,postalnumber,datecreated) values
+insert into customer(id,firstname,lastname,email,user_password,phonenumber,street,city,postalnumber,datecreated) values
 (null,'Matija','Bling-blong','blingblong@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000','2021-11-25 17:15'),
 (null,'Darija','Kupus-Bupus','kupusnjaca@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Valpovo','31550','2021-11-26 09:23:45'),
 (null,'Kata','Kupus-Bupus','kata.bata@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Valpovo','31550',now()),
