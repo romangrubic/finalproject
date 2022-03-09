@@ -11,9 +11,7 @@ class Product
         
                 select a.id, a.name, a.description, a.category, a.price, b.imageurl as imageurl
                 from product a
-                left join productimage b on a.id=b.product
-                group by a.id, b.imageurl
-                
+                left join productimage b on a.id=b.product                
         
             ');
             $query->execute();
@@ -24,7 +22,6 @@ class Product
                 from product a
                 left join productimage b on a.id=b.product
                 where a.category = :category
-                group by a.id, b.imageurl
                 
             ');
             $query->execute(['category' => $category]);

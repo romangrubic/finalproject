@@ -7,6 +7,7 @@ create table customer(
     firstname varchar(50) not null,
     lastname varchar(50) not null,
     email varchar(255) not null,
+    user_password char(60) not null,
     phonenumber varchar(15),
     street varchar(255),
     city varchar(50),
@@ -77,7 +78,7 @@ insert into operator(email,user_password,firstname,lastname, user_role) values
 
 
 insert into customer(id,firstname,lastname,email,phonenumber,street,city,postalnumber,datecreated) values
-(null,'Matija','Bling-blong','blingblong@gmail.com',null,null,'Osijek','31000','2021-11-25 17:15'),
+(null,'Matija','Bling-blong','blingblong@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000','2021-11-25 17:15'),
 (null,'Darija','Kupus-Bupus','kupusnjaca@gmail.com',null,null,'Valpovo','31550','2021-11-26 09:23:45'),
 (null,'Kata','Kupus-Bupus','kata.bata@gmail.com',null,null,'Valpovo','31550',now()),
 (null,'Tata','Mata','tata.mata@gmail.com',null,null,'Osijek','31000',now()),
