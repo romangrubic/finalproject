@@ -79,15 +79,15 @@ insert into operator(email,user_password,firstname,lastname, user_role) values
 
 insert into customer(id,firstname,lastname,email,phonenumber,street,city,postalnumber,datecreated) values
 (null,'Matija','Bling-blong','blingblong@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000','2021-11-25 17:15'),
-(null,'Darija','Kupus-Bupus','kupusnjaca@gmail.com',null,null,'Valpovo','31550','2021-11-26 09:23:45'),
-(null,'Kata','Kupus-Bupus','kata.bata@gmail.com',null,null,'Valpovo','31550',now()),
-(null,'Tata','Mata','tata.mata@gmail.com',null,null,'Osijek','31000',now()),
-(null,'Dalibor','Zipok','dalzop@gmail.com',null,null,'Osijek','31000',now()),
-(null,'Aleksa','Kizo','akizo@gmail.com',null,null,'Osijek','31000',now()),
-(null,'Jon','Filipov','jonfilipov@gmail.com',null,null,'Vinkovci','32100',now()),
-(null,'Jana','Katarina','janakatarina@gmail.com',null,null,'Đakovo','31400',now()),
-(null,'Branko','Ivanov','bivanov@gmail.com',null,null,'Osijek','31000',now()),
-(null,'Ivana','Kusik','ikus@gmail.com',null,null,'Beli Manastir','31300',now());
+(null,'Darija','Kupus-Bupus','kupusnjaca@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Valpovo','31550','2021-11-26 09:23:45'),
+(null,'Kata','Kupus-Bupus','kata.bata@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Valpovo','31550',now()),
+(null,'Tata','Mata','tata.mata@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000',now()),
+(null,'Dalibor','Zipok','dalzop@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000',now()),
+(null,'Aleksa','Kizo','akizo@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000',now()),
+(null,'Jon','Filipov','jonfilipov@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Vinkovci','32100',now()),
+(null,'Jana','Katarina','janakatarina@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Đakovo','31400',now()),
+(null,'Branko','Ivanov','bivanov@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000',now()),
+(null,'Ivana','Kusik','ikus@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Beli Manastir','31300',now());
 
 insert into category(id,name,description) values
 (null,'Tipkovnica','Membranska,mehanička,žičana,bežična'),
