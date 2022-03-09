@@ -40,8 +40,7 @@ class LoginController extends Controller
 
         $_SESSION['authorized'] = $operator;
 
-        $db = new DashboardController();
-        $db->index();
+        header('location: ' . App::config('url'));
     }
 
     public function logout()
