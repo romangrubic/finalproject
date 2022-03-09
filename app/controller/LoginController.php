@@ -31,7 +31,7 @@ class LoginController extends Controller
             $this->loginView('Lozinka obavezna.', $_POST['email']);
         }
 
-        $operator = Operator::authorize($_POST['email'], $_POST['user_password']);
+        $operator = Login::authorize($_POST['email'], $_POST['user_password']);
 
         if($operator == null){
             $this->loginView('Neispravna kombinacija emaila i lozinke', $_POST['email']);
