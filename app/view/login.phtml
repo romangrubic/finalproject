@@ -1,5 +1,6 @@
 <form class="log-in-form" action="<?= App::config('url') ?>login/authorize" method="POST">
     <h4 class="text-center">Prijava</h4>
+    <p class="text-center">Ukoliko nemate račun, registrirajte se <a href="<?= App::config('url') ?>registration/index">ovdje.</a></p>
     <label>Email
         <input type="email" name="email" placeholder="marija@edunova.hr" value="<?= $email ?>" />
     </label>

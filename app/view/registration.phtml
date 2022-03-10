@@ -1,0 +1,66 @@
+<form class="log-in-form" action="<?= App::config('url') ?>registration/newCustomer" method="POST">
+    <h4 class="text-center">Registracija</h4>
+
+    <legend>Obavezna polja:</legend>
+    
+    <label for="firstname">Ime</label>
+    <input type="text" name="firstname" id="firstname" aria-describedby="messageFirstname" value="<?= $customer->firstname ?>">
+    <p class="help-text red-message" id="messageFirstname">
+        <?= $message->firstname ?>
+    </p>
+
+    <label for="lastname">Prezime</label>
+    <input type="text" name="lastname" id="lastname" aria-describedby="messageLastname" value="<?= $customer->lastname ?>">
+    <p class="help-text red-message" id="messageLastname">
+        <?= $message->lastname ?>
+    </p>
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" aria-describedby="messageEmail" placeholder="vas.email@gmail.com" value="<?= $customer->email ?>">
+    <p class="help-text red-message" id="messageEmail">
+        <?= $message->email ?>
+    </p>
+
+    <label for="user_password">Lozinka</label>
+    <input type="text" name="user_password" id="user_password" aria-describedby="messagePassword" value="<?= $customer->user_password ?>">
+    <p class="help-text red-message" id="messagePassword">
+        <?= $message->user_password ?>
+    </p>
+
+    <label for="user_password_repeat">Ponovno unesite lozinku</label>
+    <input type="text" name="user_password_repeat" id="user_password_repeat" aria-describedby="messagePasswordRepeat" value="<?= $customer->user_password_repeat ?>">
+    <p class="help-text red-message" id="messagePasswordRepeat">
+        <?= $message->user_password_repeat ?>
+    </p>
+
+    <hr>
+    <legend>Dodatno:</legend>
+
+    <label for="phonenumber">Broj telefona</label>
+    <input type="number" name="phonenumber" id="phonenumber" aria-describedby="messagePhoneNumber" placeholder="0123456789" value="<?= $customer->phonenumber ?>">
+    <p class="help-text red-message" id="messagePhoneNumber">
+        <?= $message->phonenumber ?>
+    </p>
+
+    <label for="street">Ulica i kucni broj</label>
+    <input type="text" name="street" id="street" aria-describedby="messageStreet" placeholder="Ulica Republike, 3a" value="<?= $customer->street ?>">
+    <p class="help-text red-message" id="messageStreet">
+        <?= $message->street ?>
+    </p>
+
+    <label for="city">Grad</label>
+    <input type="text" name="city" id="city" aria-describedby="messageCity" placeholder="Osijek" value="<?= $customer->city ?>">
+    <p class="help-text red-message" id="messageCity">
+        <?= $message->city ?>
+    </p>
+
+    <label for="postalnumber">Postanski broj</label>
+    <input type="number" name="postalnumber" id="postalnumber" aria-describedby="messagePostalNumber" placeholder="31000" value="<?= $customer->postalnumber ?>">
+    <p class="help-text red-message" id="messagePostalNumber">
+        <?= $message->postalnumber ?>
+    </p>
+
+    <p>
+        <input type="submit" class="button expanded" value="Registriraj se!" />
+    </p>
+</form>
