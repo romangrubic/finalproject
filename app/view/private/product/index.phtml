@@ -1,14 +1,18 @@
 <div class="grid-x grid-padding-x">
-<?php foreach ($products as $product):?>
+  <?php include 'addNew.phtml' ?>
+  <?php foreach ($products as $product) : ?>
     <div class="card large-3 cell">
-  <div class="card-divider">
-    <?=$product->name?>
-  </div>
-  <img src="<?=$product->imageurl?>">
-  <div class="card-section">
-    <h4><?=$product->price?> kn</h4>
-    <p><?=$product->description?></p>
-  </div>
-</div>
-<?php endforeach;?>
+      <div class="card-divider">
+        <?= $product->name ?>
+      </div>
+      <img src="<?= $product->imageurl ?>">
+      <div class="card-section">
+        <h4><?= $product->price ?> kn</h4>
+      </div>
+      <div class="text-center">
+        <a href="<?= App::config('url') ?>product/details/<?= $product->id ?>" class="button expand info">View details (update/delete)</a>
+      </div>
+    </div>
+  <?php endforeach; ?>
+  <?php include 'addNew.phtml' ?>
 </div>
