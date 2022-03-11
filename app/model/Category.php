@@ -29,7 +29,7 @@ class Category
         $query->execute($paramaters);
     }
 
-    public static function selectforupdate($id)
+    public static function readOne($id)
     {
         $connection = DB::getInstance();
         $query = $connection->prepare('

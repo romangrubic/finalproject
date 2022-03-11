@@ -55,7 +55,7 @@ class CategoryController extends AuthorizedController
 
     public function update($id)
     {
-        $this->category = Category::selectforupdate($id);
+        $this->category = Category::readOne($id);
 
         $this->view->render($this->viewDir . 'update', [
             'css' => $this->cssDir . 'update.css',
