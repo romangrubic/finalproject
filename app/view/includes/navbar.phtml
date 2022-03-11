@@ -7,7 +7,7 @@
 <?php 
 $route=$_SERVER['REQUEST_URI'];
 $parts=explode(DIRECTORY_SEPARATOR, $route);
-$bannerPages = ['', 'index', 'product', 'dashboard'];
+$bannerPages = ['', 'index', 'customerproduct', 'dashboard'];
 if(in_array($parts[1], $bannerPages)):?>
 <img src="<?=App::config('url')?>public/images/banner.webp" alt="Banner image" title="Registrirajte se i za prvu kupnju dobivate 20% popusta!">
 <?php endif;?>
@@ -19,13 +19,13 @@ if(in_array($parts[1], $bannerPages)):?>
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text"><a href="<?=App::config('url')?>" class="homepage"><?=App::config('appName')?></a></li>
       <li class="has-submenu">
-        <a href="<?=App::config('url')?>product/index">Proizvodi</a>
+        <a href="<?=App::config('url')?>customerproduct/index">Proizvodi</a>
         <ul class="submenu menu vertical" data-submenu>
           <!-- Category list -->
-          <li><a href="<?=App::config('url')?>product/index">Svi proizvodi</a></li>
-          <li><a href="<?=App::config('url')?>product/index/1">Tipkovnica</a></li>
-          <li><a href="<?=App::config('url')?>product/index/2">Miš</a></li>
-          <li><a href="<?=App::config('url')?>product/index/4">Matična ploča</a></li>
+          <li><a href="<?=App::config('url')?>customerproduct/index">Svi proizvodi</a></li>
+          <li><a href="<?=App::config('url')?>customerproduct/index/1">Tipkovnica</a></li>
+          <li><a href="<?=App::config('url')?>customerproduct/index/2">Miš</a></li>
+          <li><a href="<?=App::config('url')?>customerproduct/index/4">Matična ploča</a></li>
         </ul>
       </li>
       <?php if(App::authorized()):?>

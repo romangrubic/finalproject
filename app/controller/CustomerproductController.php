@@ -1,13 +1,13 @@
 <?php
 
-class ProductController extends Controller
+class CustomerproductController extends Controller
 {
-    private $viewDir = 'private' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR;
+    private $viewDir = 'customer' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR;
     private $cssDir =  'product' . DIRECTORY_SEPARATOR;
 
     public function index($category=null)
     {
-        $products = Product::read($category);
+        $products = CustomerProduct::read($category);
         $this->view->render($this->viewDir . 'index', [
             'css' => $this->cssDir . 'index.css',
             'products' => $products

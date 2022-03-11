@@ -1,7 +1,7 @@
 <?php 
 
 
-class Product
+class CustomerProduct
 {
     public static function read($category)
     {
