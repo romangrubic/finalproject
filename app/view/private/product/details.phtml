@@ -1,0 +1,54 @@
+<form class="product-form" action="<?= App::config('url') ?>product/action" method="POST">
+<!-- <?= print_r($_SESSION)?> -->
+    <?php if(App::authorized() && ($_SESSION['authorized']->user_role === 'admin') && ($product->id != 0)):?>
+        <div>
+        <a onclick="return confirm('Confirm deletion for <?=$product->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>product/delete/<?=$product->id?>">DELETE PRODUCT</a>
+        </div>
+    <?php endif;?>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" aria-describedby="messagename" value="<?= $product->name ?>">
+    <p class="help-text red-message" id="messagename">
+        <?= $message->name ?>
+    </p>
+
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description" aria-describedby="messagedescription" value="<?= $product->description ?>">
+    <p class="help-text red-message" id="messagedescription">
+        <?= $message->description ?>
+    </p>
+
+    <label for="category">Category</label>
+    <select>
+        <option value="<?= $product->categoryId ?>"><?= $product->categoryName ?></option>
+        <?php foreach ($categories as $category) : ?>
+            <?php if ($category->id === $product->categoryId) : ?>
+                <?php continue; ?>
+            <?php else : ?>
+                <option value="<?= $category->id ?>"><?= $category->name ?></option>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </select>
+
+    <label for="price">Price</label>
+    <input type="text" name="price" id="price" aria-describedby="messageprice" value="<?= $product->price ?>">
+    <p class="help-text red-message" id="messageprice">
+        <?= $message->price ?>
+    </p>
+
+    <label for="inventoryquantity">Inventory Quantity</label>
+    <input type="number" name="inventoryquantity" id="inventoryquantity" aria-describedby="messageinventoryquantity" value="<?= $product->inventoryquantity ?>">
+    <p class="help-text red-message" id="messageinventoryquantity">
+        <?= $message->inventoryquantity ?>
+    </p>
+
+    <label for="productimage">Product image input here </label>
+
+    <div class="grid-x grid-padding-x">
+        <div class="large-5 cell">
+            <a class="alert button expanded" href="<?= App::config('url') ?>product/index">Cancel.</a>
+        </div>
+        <div class="large-7 cell">
+            <input type="submit" class="info button expanded" value="<?= $action ?>">
+        </div>
+    </div>
+</form>

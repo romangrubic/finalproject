@@ -1,0 +1,12 @@
+.red-message{
+    color: red;
+    font-size: 1rem;
+}
+
+.product-form{
+    border: 1px solid #cacaca;
+    padding: 1rem;
+    border-radius: 0;
+    max-width: 600px;
+    margin: auto;
+}

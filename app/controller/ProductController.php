@@ -46,6 +46,7 @@ class ProductController extends Controller
                 'css' => $this->cssDir . 'details.css',
                 'product'=>$this->product,
                 'message'=>$this->message,
+                'categories'=>Category::read(),
                 'action'=>'Add new.'
             ]);
         }else{
