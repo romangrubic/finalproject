@@ -7,7 +7,7 @@ class DashboardController extends AuthorizedController
     public function index()
     {
         $this->view->render($this->viewDir . 'dashboard',[
-            'customer'=>$_SESSION['authorized'],
+            'customer'=>Customer::readOne($_SESSION['authorized']->id),
             'orders'=>Dashboard::getOrders($_SESSION['authorized']->id)
         ]);
     }

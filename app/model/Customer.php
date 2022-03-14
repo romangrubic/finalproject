@@ -2,6 +2,33 @@
 
 class Customer
 {
+    public static function readOne($id)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                select *
+                from customer
+                where id=:id
+        
+        ');
+        $query->execute(['id' => $id]);
+        return  $query->fetch();
+    }
+
+    public static function read()
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                select *
+                from customer
+        
+        ');
+        $query->execute();
+        return  $query->fetch();
+    }
+
     public static function insert($paramaters)
     {
         $connection = DB::getInstance();
@@ -21,5 +48,34 @@ class Customer
             'city'=>$paramaters['city'],
             'postalnumber'=>$paramaters['postalnumber']
         ]);
-    }        
+    } 
+    
+    public static function update($paramaters)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                
+        update customer set 
+        firstname=:firstname,
+        lastname=:lastname,
+        email=:email,
+        phonenumber=:phonenumber,
+        street=:street,
+        city=:city,
+        postalnumber=:postalnumber
+        where id=:id
+        ');
+        
+        $query->execute([
+            'firstname'=>$paramaters['firstname'],
+            'lastname'=>$paramaters['lastname'],
+            'email'=>$paramaters['email'],
+            'phonenumber'=>$paramaters['phonenumber'],
+            'street'=>$paramaters['street'],
+            'city'=>$paramaters['city'],
+            'postalnumber'=>$paramaters['postalnumber'],
+            'id'=>$paramaters['id'],
+        ]);
+    }  
 }

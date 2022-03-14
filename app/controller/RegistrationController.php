@@ -77,6 +77,26 @@ class RegistrationController extends Controller
         }
     }
 
+    public function details($id)
+    {
+        $this->customer = Customer::readOne($id);
+        $this->view->render('private/dashboard/details', [
+            'css' => $this->cssDir . 'index.css',
+            'customer'=>$this->customer,
+            'message'=>$this->message
+        ]);
+    }
+
+    public function update()
+    {
+        $this->customer = (object) $_POST;
+        // print_r($this->customer);
+        // Validators
+        Customer::update((array)$this->customer);
+        header('location:' . App::config('url').'dashboard/index');
+
+    }
+
     // Validating input methods
     private function validateFirstname()
     {
