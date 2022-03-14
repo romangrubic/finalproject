@@ -1,14 +1,38 @@
-<h1>Welcome back, <?=$customer->firstname?></h1>
+<h1>Dobrodošli, <?= $customer->firstname ?></h1>
+<hr>
 
-<form action="" method="post">
 <legend>Vaši podaci</legend>
 
-</form>
+<div class="grid-x grid-padding-x">
+        <div class="large-3 cell">
+        <label for="firstname">Ime</label>
+            <p><?=$customer->firstname?></p>
+            
+            <label for="lastname">Prezime</label>
+            <p><?=$customer->lastname?></p>
 
+            <label for="email">Email</label>
+            <p><?=$customer->email?></p>
+        </div>
+        <div class="large-3 cell">
+        <label for="phonenumber">Broj telefona</label>
+            <p><?=$customer->phonenumber?></p>
 
+            <label for="street">Ulica i kućni broj</label>
+            <p><?=$customer->street?></p>
+
+            <label for="city">Grad i poštanski broj</label>
+            <p><?=$customer->city?>, <?=$customer->postalnumber?></p>
+
+        </div>
+</div>
+<div class="text-center">
+    <a href="<?= App::config('url') ?>registration/details/<?= $customer->id ?>" class="button expand info">Promijeni podatke/lozinku</a>
+</div>
+
+<hr>
 <pre>
-    <?php print_r($customer)?>
-    <hr>
-    <?php print_r($orders)?>
+
+    <?php print_r($orders) ?>
 
 </pre>
