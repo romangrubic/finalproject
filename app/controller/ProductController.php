@@ -19,14 +19,14 @@ class ProductController extends Controller
         $this->product->categoryName = '';
         $this->product->price = '';
         $this->product->inventoryquantity = '';
-        $this->product->productimage = '';
+        $this->product->imageurl = '';
 
         $this->message = new stdClass();
         $this->message->name='';
         $this->message->description='';
         $this->message->price='';
         $this->message->inventoryquantity='';
-        $this->message->productimage='';
+        $this->message->imageurl='';
     }
 
     public function index()
@@ -60,5 +60,24 @@ class ProductController extends Controller
                 'action'=>'Update.'
             ]);
         }
+    }
+
+    public function action()
+    {
+        $this->product = (object)$_POST;
+
+        if($this->product->id == 0){
+            Product::create((array)$this->product);
+        }else{
+            Product::update((array)$this->product);
+        }
+        header('location:' . App::config('url').'product/index');
+
+    }
+
+    public function delete($id)
+    {
+        Product::delete($id);
+        header('location:' . App::config('url').'product/index');
     }
 }
