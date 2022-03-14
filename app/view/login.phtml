@@ -2,15 +2,25 @@
     <h4 class="text-center">Prijava</h4>
     <p class="text-center">Ukoliko nemate račun, registrirajte se <a href="<?= App::config('url') ?>registration/index">ovdje.</a></p>
     <label>Email
-        <input type="email" name="email" placeholder="marija@edunova.hr" value="<?= $email ?>" />
+        <input type="email" name="email" placeholder="marija@edunova.hr" id="email" aria-describedby="messageEmail" value="<?= $email ?>" />
     </label>
+    <p class="help-text red-message" id="messageEmail">
+        <?= $message->email ?>
+    </p>
     <label>Lozinka
-        <input type="password" name="user_password" />
+        <input type="password" name="user_password" id="user_password" aria-describedby="messagePassword"/>
     </label>
+    <p class="help-text red-message" id="messagePassword" >
+        <?= $message->password ?>
+    </p>
     <p>
         <input type="submit" class="button expanded" value="Prijava" />
     </p>
-    <?= $message ?>
+    <?php if (isset($message->logout)):?>
+        <p class="help-text red-message">
+        <?= $message->logout ?>
+        </p>
+    <?php endif;?>
 </form> 
 
 <div>
