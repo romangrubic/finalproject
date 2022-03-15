@@ -69,26 +69,195 @@ alter table shoppingorder add foreign key (customer) references customer(id);
 alter table cart add foreign key (shoppingorder) references shoppingorder(id);
 alter table cart add foreign key (product) references product(id);
 
--- INSERT
+-- Insert Admin and Operator
 insert into operator(email,user_password,firstname,lastname, user_role) values
 # lozinka a
-('admin@edunova.hr','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla','Administrator','Edunova','admin'),
+('admin@edunova.hr','$2a$12$OZzCotkUOgkVKz9lxuFuGeRouCccsjl7klz9tY6sDryj/mv86XcKO','Administrator','Edunova','admin'),
 # lozinka o
 ('oper@edunova.hr','$2a$12$S6vnHiwtRDdoUW4zgxApvezBlodWj/tmTADdmKxrX28Y2FXHcoHOm','Operater','Edunova','oper');
 
+-- Temporary tables for inserting mock users
+create table firstname(
+    id int not null primary key auto_increment, 
+    firstname varchar(20) not null
+);
 
-insert into customer(id,firstname,lastname,email,user_password,phonenumber,street,city,postalnumber,datecreated) values
-(null,'Matija','Bling-blong','blingblong@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000','2021-11-25 17:15'),
-(null,'Darija','Kupus-Bupus','kupusnjaca@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Valpovo','31550','2021-11-26 09:23:45'),
-(null,'Kata','Kupus-Bupus','kata.bata@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Valpovo','31550',now()),
-(null,'Tata','Mata','tata.mata@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000',now()),
-(null,'Dalibor','Zipok','dalzop@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000',now()),
-(null,'Aleksa','Kizo','akizo@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000',now()),
-(null,'Jon','Filipov','jonfilipov@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Vinkovci','32100',now()),
-(null,'Jana','Katarina','janakatarina@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Đakovo','31400',now()),
-(null,'Branko','Ivanov','bivanov@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Osijek','31000',now()),
-(null,'Ivana','Kusik','ikus@gmail.com','$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',null,null,'Beli Manastir','31300',now());
+create table lastname(
+    id int not null primary key auto_increment,
+    lastname varchar(20) not null
+);
 
+create table city(
+    id int not null primary key auto_increment,
+    city varchar(20),
+    postalnumber char(5)
+);
+
+-- Mock names, surnames and city
+insert into firstname(firstname) values
+('Roman'),
+('Ivan'),
+('Matija'),
+('Dario'),
+('Dunja'),
+('Mirna'),
+('Saša'),
+('Lana'),
+('Ljupka'),
+('Vjera');
+
+insert into lastname(lastname) values
+('Knežević'),
+('Horvat'),
+('Kovačević'),
+('Pavlović'),
+('Blažević'),
+('Božić'),
+('Lovrić'),
+('Babić'),
+('Marković'),
+('Bošnjak');
+
+insert into city(city,postalnumber) values
+('Osijek','31000'),
+('Osijek','31000'),
+('Osijek','31000'),
+('Valpovo','31550'),
+('Beli Manastir','31300'),
+('Đakovo','31400'),
+('Belišće','31551'),
+('Donji Miholjac','31540'),
+('Našice','31500');
+
+-- Procedures to create mock users
+-- Random city picker
+-- Function is deterministic and only READS data
+-- https://stackoverflow.com/questions/26015160/deterministic-no-sql-or-reads-sql-data-in-its-declaration-and-binary-logging-i
+-- http://www.titov.net/2005/09/21/do-not-use-order-by-rand-or-how-to-get-random-rows-from-table/
+drop function if exists randomcity;
+DELIMITER $$
+create function randomcity() returns varchar(20)
+READS SQL DATA
+DETERMINISTIC
+begin
+    return (select city from city order by rand() limit 1);
+end;
+$$
+DELIMITER ;
+
+-- Email generator with @mojatrgovina.com at the end
+-- Function is deterministic and only READS data
+-- https://stackoverflow.com/questions/26015160/deterministic-no-sql-or-reads-sql-data-in-its-declaration-and-binary-logging-i
+drop function if exists emailfunction;
+DELIMITER $$
+create function emailfunction(firstname varchar(20), lastname varchar(20)) returns varchar(255)
+READS SQL DATA
+DETERMINISTIC
+begin
+    return concat(left(lower(firstname),1),'.', lower(replace(replace(replace(replace(replace(replace(upper(lastname),' ',''),'Č','C'),'Ć','C'),'Ž','Z'),'Š','S'),'Đ','D')), '@mojatrgovina.com');
+end;
+$$
+DELIMITER ;
+
+-- Customer creation procedure
+-- PW is 'a'
+drop procedure if exists customercreation;
+DELIMITER $$
+create procedure customercreation()
+begin
+
+    declare _firstname varchar(20);
+    declare firstname_kraj int default 0;
+    declare firstname_cursor cursor for select firstname from firstname order by id;    
+    declare continue handler for not found set firstname_kraj = 1;
+    
+    open firstname_cursor;
+
+    firstloop: loop
+
+        fetch firstname_cursor into _firstname;
+
+        if firstname_kraj=1 then leave firstloop;
+        end if;
+
+        BLOCK1: begin
+        declare _lastname varchar(20);
+        declare lastname_kraj int default 0;
+        declare lastname_cursor cursor for select lastname from lastname order by id;
+        declare continue handler for not found set lastname_kraj = 1;
+
+        open lastname_cursor;
+
+        secondloop: loop
+
+            fetch lastname_cursor into _lastname;
+
+            if lastname_kraj=1 then leave secondloop;
+            end if;
+
+            insert into customer(id,firstname,lastname,email, user_password, city,datecreated) values
+            (null,_firstname,_lastname,emailfunction(_firstname,_lastname),'$2a$12$gcFbIND0389tUVhTMGkZYem.9rsMa733t9J9e9bZcVvZiG3PEvSla',randomcity(),now());
+
+        end loop secondloop;
+        close lastname_cursor;
+        set lastname_kraj=0;
+        end BLOCK1;        
+    
+    end loop firstloop;
+
+    close firstname_cursor;
+
+end;
+$$
+DELIMITER ;
+
+call customercreation();
+
+-- Procedure to fill postal number in customer table
+drop procedure if exists postalnumber;
+DELIMITER $$
+create procedure postalnumber()
+begin
+    declare _postalnumber char(5);
+    declare _city varchar(20);
+    declare _id int;
+    declare kraj int default 0;
+    declare customer_cursor cursor for select city, postalnumber from customer order by id;
+    declare continue handler for not found set kraj=1;
+
+    open customer_cursor;
+    petlja: loop
+        fetch customer_cursor into _city, _postalnumber;
+
+        if kraj=1 then leave petlja;
+        end if;
+
+        if _postalnumber is not null then leave petlja;
+        end if;
+
+        set _postalnumber = (select distinct postalnumber from city where city=_city);
+
+        update customer set postalnumber=_postalnumber where city=_city;
+
+    end loop petlja;
+    close customer_cursor;
+
+end;
+$$
+DELIMITER ;
+
+call postalnumber();
+
+-- Clearing all temporary tables, functions and procedures
+drop table firstname;
+drop table lastname;
+drop table city;
+drop function emailfunction;
+drop function randomcity;
+drop procedure customercreation;
+drop procedure postalnumber;
+
+-- Insert Category
 insert into category(id,name,description) values
 (null,'Tipkovnica','Membranska,mehanička,žičana,bežična'),
 (null,'Miš','Žičani,bežični,ergonomski,standardni'),
@@ -101,6 +270,7 @@ insert into category(id,name,description) values
 (null,'Memorija za računala','RAM'),
 (null,'Procesor','Rzyen i Intel');
 
+-- Insert Product
 insert into product(id,name,description,category,price,inventoryquantity,dateadded) values
 (null,'REDRAGON K530 PRO RGB',null,1,479.99,5,now()),
 (null,'LOGITECH MX Master 3',null,2,750.99,5,now()),
@@ -113,6 +283,7 @@ insert into product(id,name,description,category,price,inventoryquantity,dateadd
 (null,'Kingston KCP426NS6/4',null,9,179.99,5,now()),
 (null,'Intel Core i3-10100F',null,10,749.99,5,now());
 
+-- Insert product images
 insert into productimage(id,product,imageurl,dateadded) values
 (null,1,'https://www.links.hr/content/images/thumbs/009/0096739_tipkovnica-redragon-draconic-k530-rgb-mehanicka-bezicna-usb-us-layout-crna-101200626.png','2021-11-26 13:05'),
 (null,5,'https://www.links.hr/content/images/thumbs/010/0104932_monitor-27-gigabyte-m27f-ek-kvm-gaming-monitor-ips-144hz-1ms-300cd-m2-1000-1-crni-100300841.png','2021-11-26 13:49'),
