@@ -295,3 +295,92 @@ insert into productimage(id,product,imageurl,dateadded) values
 (null,8,'https://www.instar-informatika.hr/slike/velike/akb1500.jpg',now()),
 (null,9,'https://www.instar-informatika.hr/slike/velike/memorija-kingston-ddr4-2666mhz-4gb-brand-king-kcp426ns6-4gb_1.jpg',now()),
 (null,10,'https://www.instar-informatika.hr/slike/velike/procesor-intel-core-i3-10100f-36ghz-6mb--inp-000151_1.jpg',now());
+
+-- To this point, we have 100 customers with ID 1-100
+-- Creating 5 orders for each
+-- 100 customers, 5 orders each, total 500 orders
+drop procedure if exists create_shoppingorder;
+delimiter $$
+create procedure create_shoppingorder()
+begin
+	
+	DECLARE kraj INT default 0;
+	
+petlja: loop
+	IF kraj=500 then leave petlja;
+	end if;	
+	insert into shoppingorder(id,customer,dateadded) 
+	values (null,floor(rand()*100+1), now());
+
+	set kraj=kraj+1;
+end loop petlja;	
+end;
+$$
+delimiter ;
+
+call create_shoppingorder();
+
+-- For each order, 5 products in cart with max quantity of 3
+-- Create 500 cart rows 
+-- 500 order with 5 carts = 2500
+drop procedure if exists create_cart;
+delimiter $$
+create procedure create_cart()
+begin
+	
+	DECLARE kraj INT default 0;
+	
+    petlja: loop
+        IF kraj=2500 then leave petlja;
+        end if;	
+
+        insert into cart(id,shoppingorder,product,quantity,dateadded) 
+        values (null,floor(rand()*500+1),floor(rand()*10+1), floor(rand()*3+1), now());
+
+        set kraj=kraj+1;
+    end loop petlja;
+
+end;
+$$
+delimiter ;
+
+call create_cart();
+
+-- Adding product.price and cart.quantity for cart.price total
+drop procedure if exists cart_price;
+delimiter $$
+create procedure cart_price()
+begin
+    DECLARE kraj INT default 0;
+    DECLARE _id INT;
+    DECLARE cart_kursor cursor for select id from cart order by id;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET kraj = 1;
+        
+    open cart_kursor;
+
+    petlja: loop
+    fetch cart_kursor into _id;
+
+        IF kraj=1 
+        then leave petlja;
+        end if;
+
+        update cart a 
+        inner join product b on a.product = b.id
+        set a.price = a.quantity * b.price
+        where a.id = _id;
+    
+    end loop petlja;
+
+    close cart_kursor;
+
+END;
+$$
+delimiter ;
+
+call cart_price();
+
+-- Clearing procedures for orders, carts and cart.price
+drop procedure create_shoppingorder;
+drop procedure create_cart;
+drop procedure cart_price;
