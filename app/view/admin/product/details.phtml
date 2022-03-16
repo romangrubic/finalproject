@@ -21,13 +21,9 @@
 
     <label for="category">Category</label>
     <select id="category" name="category">
-        <option value="<?= $product->categoryId ?>"><?= $product->categoryName ?></option>
+        <option value="0">Please select category</option>
         <?php foreach ($categories as $category) : ?>
-            <?php if ($category->id === $product->categoryId) : ?>
-                <?php continue; ?>
-            <?php else : ?>
-                <option value="<?= $category->id ?>"><?= $category->name ?></option>
-            <?php endif; ?>
+                <option value="<?= $category->id ?>" <?php if($category->id == $product->categoryId) echo 'selected="selected"';?>><?= $category->name ?></option>
         <?php endforeach; ?>
     </select>
 

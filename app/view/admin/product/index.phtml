@@ -1,18 +1,41 @@
-<div class="grid-x grid-padding-x">
-  <?php include 'addNew.phtml' ?>
-  <?php foreach ($products as $product) : ?>
-    <div class="card large-3 cell">
-      <div class="card-divider">
-        <?= $product->name ?>
-      </div>
-      <img src="<?= $product->imageurl ?>">
-      <div class="card-section">
-        <h4><?= $product->price ?> kn</h4>
-      </div>
-      <div class="text-center">
-        <a href="<?= App::config('url') ?>product/details/<?= $product->id ?>" class="button expand info">View details (update/delete)</a>
-      </div>
+<div class="grid-x">
+    <div class="cell large-6">
+        <h1 style="font-size: 1.5rem;">Products</h1>
     </div>
-  <?php endforeach; ?>
-  <?php include 'addNew.phtml' ?>
+    <div class="cell large-6" style="text-align: right;">
+        <a href="<?=App::config('url')?>product/details"><i style="color: green;" title="Add new product" class="fas fa-2x fa-plus-circle"></i></a>
+    </div>
 </div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Date added</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($products as $product):?>
+        <tr>
+            <td><?=$product->id?></td>
+            <td><?=$product->name?></td>
+            <td><?=$product->description?></td>
+            <td><?=$product->category?></td>
+            <td><?=$product->price?></td>
+            <td><?=$product->inventoryquantity?></td>
+            <td><?=$product->dateadded?></td>
+            <td>
+              <a href="<?= App::config('url') ?>product/details/<?= $product->id ?>" class="button expand info">View details (update<?php if($_SESSION['authorized']->user_role == 'admin') echo '/delete';?>)</a>
+            </td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>
+
+
