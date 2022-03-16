@@ -1,29 +1,58 @@
 /* Development indication */
-.development{
-    background-color: red;
-    color: white;
-    font-size: 40px;
+.development {
+  background-color: red;
+  color: white;
+  font-size: 40px;
 }
 /*  */
 
 .grid-container {
-    margin: 0.4rem;
-    max-width: 100%;
+  margin: 0.4rem;
+  max-width: 100%;
 }
 
-#content{
-    min-height: 400px;
+#content {
+  min-height: 400px;
 }
 
 .log-in-form {
-    border: 1px solid #cacaca;
-    padding: 1rem;
-    border-radius: 0;
-    max-width: 400px;
-    margin: auto;
-  } 
+  border: 1px solid #cacaca;
+  padding: 1rem;
+  border-radius: 0;
+  max-width: 400px;
+  margin: auto;
+}
 
 /* Homepage quicklink */
-#example-menu > div.top-bar-left > ul > li.menu-text > a{
-    padding: 0px;
+#example-menu > div.top-bar-left > ul > li.menu-text > a {
+  padding: 0px;
+}
+
+/* Admin side navbar */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(49, 82, 121);
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #ffffff;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #cccccc;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
 }
