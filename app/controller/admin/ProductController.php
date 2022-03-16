@@ -3,7 +3,7 @@
 class ProductController extends Controller
 {
     private $viewDir = 'admin' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR;
-    private $cssDir =  'product' . DIRECTORY_SEPARATOR;
+    private $cssDir =  'admin' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR;
 
     private $product;
     private $message;
@@ -19,6 +19,7 @@ class ProductController extends Controller
         $this->product->categoryName = '';
         $this->product->price = '';
         $this->product->inventoryquantity = '';
+        $this->product->dateadded = '';
         $this->product->imageurl = '';
 
         $this->message = new stdClass();

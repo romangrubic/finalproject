@@ -7,7 +7,7 @@
 <?php 
 $route=$_SERVER['REQUEST_URI'];
 $parts=explode(DIRECTORY_SEPARATOR, $route);
-$bannerPages = ['', 'index', 'customerproduct', 'dashboard'];
+$bannerPages = ['', 'index', 'product', 'dashboard'];
 if(in_array($parts[1], $bannerPages)):?>
 <img src="<?=App::config('url')?>public/images/banner.webp" alt="Banner image" title="Registrirajte se i za prvu kupnju dobivate 20% popusta!">
 <?php endif;?>

@@ -3,7 +3,7 @@
 class CategoryController extends AuthorizedController
 {
     private $viewDir = 'admin' . DIRECTORY_SEPARATOR . 'category' . DIRECTORY_SEPARATOR;
-    private $cssDir =  'category' . DIRECTORY_SEPARATOR;
+    private $cssDir =  'admin' . DIRECTORY_SEPARATOR . 'category' . DIRECTORY_SEPARATOR;
 
     private $category;
     private $message;
