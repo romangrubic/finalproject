@@ -2,7 +2,7 @@
 
 class ProductController extends Controller
 {
-    private $viewDir = 'private' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR;
+    private $viewDir = 'admin' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR;
     private $cssDir =  'product' . DIRECTORY_SEPARATOR;
 
     private $product;

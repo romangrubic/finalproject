@@ -7,10 +7,21 @@
 </head>
 
 <body>
-    <!-- Including navigation bar -->
-    <?php include_once 'includes/navbar.phtml'?>
+    <!-- Including navigation bar depending whether it is customer or admin/oper -->
+    <?php 
+        if(isset($_SESSION['authorized']->user_role) && ($_SESSION['authorized']->user_role == 'admin' || $_SESSION['authorized']->user_role == 'oper')){
+            include_once 'includes/adminNavbar.phtml';
+        }else{
+            include_once 'includes/publicNavbar.phtml';
+        }
+    ?>
 
+    <!-- Main view -->
+    <?php if(isset($_SESSION['authorized']->user_role) && ($_SESSION['authorized']->user_role == 'admin' || $_SESSION['authorized']->user_role == 'oper')):?>
+    <div class="main grid-container">
+    <?php else:?>
     <div class="grid-container">
+    <?php endif;?>
         <div class="grid-x grid-padding-x">
             <div class="large-12 cell">
                 <div class="callout" id="content">

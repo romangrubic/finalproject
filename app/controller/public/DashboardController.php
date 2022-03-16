@@ -2,7 +2,7 @@
 
 class DashboardController extends AuthorizedController
 {
-    private $viewDir = 'private' . DIRECTORY_SEPARATOR . 'dashboard' . DIRECTORY_SEPARATOR;
+    private $viewDir = 'public' . DIRECTORY_SEPARATOR . 'dashboard' . DIRECTORY_SEPARATOR;
 
     public function index()
     {
