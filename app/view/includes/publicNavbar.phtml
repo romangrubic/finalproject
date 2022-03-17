@@ -4,18 +4,14 @@
 </div>
 
 <!-- Banner with current discounts and promotions -->
-<img src="<?=App::config('url')?>public/images/banner.webp" alt="Banner image" title="Registrirajte se i za prvu kupnju dobivate 20% popusta!">
+<?php include 'banner.phtml';?>
 <!-- Development environment -->
-<?php
-
-            use LDAP\Result;
-
- if(App::config('dev') === true){echo '<div class="development text-center">Development</div>';}?>
+<?php if(App::config('dev') === true){echo '<div class="development text-center">Development</div>';}?>
 <div class="top-bar" id="example-menu">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text"><a href="<?=App::config('url')?>" class="homepage"><?=App::config('appName')?></a></li>
-      <li class="has-submenu">
+      <li>
         <a href="<?=App::config('url')?>product/index">Proizvodi</a>
         <ul class="submenu menu vertical" data-submenu>
           <!-- Category list -->
@@ -46,3 +42,14 @@
   }
     ?>
 </div>
+<!-- Category list -->
+<div class="top-bar" id="example-menu">
+  <div class="cat-menu">
+    <ul class="menu" id="cat-menu">
+      <?php foreach(Category::read() as $category):?>
+        <li><a href="<?=App::config('url')?>product/index/<?=$category->id?>"><?=$category->name?></a></li>
+        <?php endforeach;?>
+    </ul>
+  </div>
+</div>
+<br>

@@ -1,3 +1,11 @@
+/* Orbit conatiner */
+.orbit-container{
+  height: 115px;
+}
+.orbit-image{
+  height: 350px;
+}
+
 /* Development indication */
 .development {
   background-color: red;
@@ -65,4 +73,9 @@
   max-width: 400px;
   margin: auto;
   padding: auto;
+}
+
+/* Category navbar */
+.cat-menu{
+  margin: auto;
 }
