@@ -80,7 +80,7 @@ class RegistrationController extends Controller
     public function details($id)
     {
         $this->customer = Customer::readOne($id);
-        $this->view->render('private/dashboard/details', [
+        $this->view->render('public/dashboard/details', [
             'css' => $this->cssDir . 'index.css',
             'customer'=>$this->customer,
             'message'=>$this->message

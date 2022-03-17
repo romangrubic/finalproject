@@ -6,10 +6,7 @@ abstract class AuthorizedController extends Controller
     {
         parent::__construct();
         if (!isset($_SESSION['authorized'])){
-            $this->view->render('login', [
-                'email' => '',
-                'message' => 'Prvo se prijavite.'
-            ]);
+            header('location: ' . App::config('url') . 'login/index');
             exit;
         }
     }

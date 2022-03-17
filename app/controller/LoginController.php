@@ -4,9 +4,8 @@ class LoginController extends Controller
 {
 
     private $cssDir =  'login' . DIRECTORY_SEPARATOR;
-
-    private $email;
-    private $message;
+    protected $email;
+    protected $message;
 
     public function __construct()
     {
@@ -18,7 +17,7 @@ class LoginController extends Controller
         $this->message->email='';
         $this->message->password='';
     }
-
+    
     public function index()
     {
         $this->view->render('login',[
@@ -58,15 +57,25 @@ class LoginController extends Controller
 
         $_SESSION['authorized'] = $operator;
 
-        header('location: ' . App::config('url'));
+        if(!isset($_SESSION['authorized']->user_role)){
+            header('location: ' . App::config('url') . $_POST['currentPage']);
+        }else{
+            header('location: ' . App::config('url'));
+        }
     }
 
     public function logout()
     {
         unset($_SESSION['authorized']);
         session_destroy();
-        $this->message->logout = 'Uspješno ste odjavljeni.';
-        $this->index();
+        
+        if(!isset($_SESSION['authorized']->user_role)){
+            header('location: ' . App::config('url') . $_POST['currentPage']);
+        }else{
+            header('location: ' . App::config('url'));
+        }
+        // $this->message->logout = 'Uspješno ste odjavljeni.';
+        // $this->index();
     }
 
 

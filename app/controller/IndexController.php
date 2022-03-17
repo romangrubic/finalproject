@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends Controller
+class IndexController extends LoginController
 {
     public function index()
     {
@@ -8,6 +8,9 @@ class IndexController extends Controller
             $this->view->render('admin/index');
             return;
         }
-        $this->view->render('index');
+        $this->view->render('index',[
+            'email'=>$this->email,
+            'message'=>$this->message
+        ]);
     }
 }
