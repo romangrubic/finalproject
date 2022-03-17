@@ -7,7 +7,14 @@ class ProductController extends LoginController
 
     public function index($category=null)
     {
-        $products = Product::read($category);
+        if(!isset($_GET['search'])){
+            $search = '';
+        }else{
+            $search = $_GET['search'];
+        }
+
+        $products = Product::read($category, $search);
+        
         $this->view->render($this->viewDir . 'index', [
             'css' => $this->cssDir . 'index.css',
             'products' => $products,

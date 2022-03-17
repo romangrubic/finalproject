@@ -10,23 +10,14 @@
 <div class="top-bar grid-x" id="example-menu">
   <div class="top-bar-left ">
     <ul class="dropdown menu grid-x" data-dropdown-menu>
-      <li class="menu-text large-3 cell"><a href="<?=App::config('url')?>" class="homepage"><?=App::config('appName')?></a></li>
+      <li class="menu-text large-2 cell"><a href="<?=App::config('url')?>" class="homepage"><?=App::config('appName')?></a></li>
       <!-- Search product form -->
-      <form class="search-product large-6 cell" action="<?=App::config('url')?>product/index" method="get">
+      <form class="search-product large-6 cell blue-sky" action="<?=App::config('url')?>product/index" method="get">
           <input type="text" name="search" id="search" class="search-product" placeholder="Traži u proizvodima....">
       </form>
+      <!-- Dashboard link -->
       <?php if(App::authorized()):?>
-      <li><a href="<?=App::config('url')?>dashboard/index">Nadzorna ploča</a></li>
-      <?php endif;?>
-      <?php if(App::authorized() && isset($_SESSION['authorized']->user_role) && ($_SESSION['authorized']->user_role === 'oper' || $_SESSION['authorized']->user_role === 'admin')):?>
-      <li><a href="#0">Admin/Operator</a>
-        <ul class="submenu menu vertical" data-submenu>
-            <li><a href="<?=App::config('url')?>category/index">Kategorija</a></li>
-            <li><a href="<?=App::config('url')?>product/index">Proizvod</a></li>
-            <li><a href="#0">Kupac</a></li>
-          </ul>
-      </li>
-      <?php elseif(App::authorized() && !isset($_SESSION['authorized']->user_role)):?>
+      <li class="menu-text large-2 cell"><a class="homepage" href="<?=App::config('url')?>dashboard/index">Vaš profil</a></li>
       <?php endif;?>
     
       <!-- Login form dropdown -->
