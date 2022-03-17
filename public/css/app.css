@@ -15,13 +15,7 @@
   min-height: 400px;
 }
 
-.log-in-form {
-  border: 1px solid #cacaca;
-  padding: 1rem;
-  border-radius: 0;
-  max-width: 400px;
-  margin: auto;
-}
+
 
 /* Homepage quicklink */
 #example-menu > div.top-bar-left > ul > li.menu-text > a {
@@ -55,4 +49,20 @@
 
 .main {
   margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+/* Login button */
+.login-button{
+  margin-right: 50px;
+}
+#login-form{
+  width: 401px;
+}
+.log-in-form {
+  border: 1px solid #cacaca;
+  padding: 1rem;
+  border-radius: 0;
+  max-width: 400px;
+  margin: auto;
+  padding: auto;
 }

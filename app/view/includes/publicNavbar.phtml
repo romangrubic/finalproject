@@ -4,16 +4,13 @@
 </div>
 
 <!-- Banner with current discounts and promotions -->
-<?php 
-$route=$_SERVER['REQUEST_URI'];
-$parts=explode(DIRECTORY_SEPARATOR, $route);
-$bannerPages = ['', 'index', 'product', 'dashboard'];
-if(in_array($parts[1], $bannerPages)):?>
 <img src="<?=App::config('url')?>public/images/banner.webp" alt="Banner image" title="Registrirajte se i za prvu kupnju dobivate 20% popusta!">
-<?php endif;?>
 <!-- Development environment -->
-<?php if(App::config('dev') === true){echo '<div class="development text-center">Development</div>';}?>
+<?php
 
+            use LDAP\Result;
+
+ if(App::config('dev') === true){echo '<div class="development text-center">Development</div>';}?>
 <div class="top-bar" id="example-menu">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
@@ -43,13 +40,9 @@ if(in_array($parts[1], $bannerPages)):?>
       <?php endif;?>
     </ul>
   </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <?php if(App::authorized()): ?>
-      <li><a href="<?= App::config('url') ?>login/logout">Odjava, <?=$_SESSION['authorized']->firstname?></a></li>
-      <?php else:?>
-      <li><a href="<?= App::config('url') ?>login/index">Prijava</a></li>
-      <?php endif;?>
-    </ul>
-  </div>
+  <!-- Login form dropdown -->
+  <?php if(Request::getRoute() != '/registration/index'){
+    include 'loginForm.phtml';
+  }
+    ?>
 </div>
