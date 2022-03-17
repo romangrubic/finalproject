@@ -7,20 +7,14 @@
 <?php include 'banner.phtml';?>
 <!-- Development environment -->
 <?php if(App::config('dev') === true){echo '<div class="development text-center">Development</div>';}?>
-<div class="top-bar" id="example-menu">
-  <div class="top-bar-left">
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text"><a href="<?=App::config('url')?>" class="homepage"><?=App::config('appName')?></a></li>
-      <li>
-        <a href="<?=App::config('url')?>product/index">Proizvodi</a>
-        <ul class="submenu menu vertical" data-submenu>
-          <!-- Category list -->
-          <li><a href="<?=App::config('url')?>product/index">Svi proizvodi</a></li>
-          <li><a href="<?=App::config('url')?>product/index/1">Tipkovnica</a></li>
-          <li><a href="<?=App::config('url')?>product/index/2">Miš</a></li>
-          <li><a href="<?=App::config('url')?>product/index/4">Matična ploča</a></li>
-        </ul>
-      </li>
+<div class="top-bar grid-x" id="example-menu">
+  <div class="top-bar-left ">
+    <ul class="dropdown menu grid-x" data-dropdown-menu>
+      <li class="menu-text large-3 cell"><a href="<?=App::config('url')?>" class="homepage"><?=App::config('appName')?></a></li>
+      <!-- Search product form -->
+      <form class="search-product large-6 cell" action="<?=App::config('url')?>product/index" method="get">
+          <input type="text" name="search" id="search" class="search-product" placeholder="Traži u proizvodima....">
+      </form>
       <?php if(App::authorized()):?>
       <li><a href="<?=App::config('url')?>dashboard/index">Nadzorna ploča</a></li>
       <?php endif;?>
@@ -34,20 +28,21 @@
       </li>
       <?php elseif(App::authorized() && !isset($_SESSION['authorized']->user_role)):?>
       <?php endif;?>
+    
+      <!-- Login form dropdown -->
+      <?php if(Request::getRoute() != '/registration/index'){
+        include 'loginForm.phtml';
+      }
+    ?>
     </ul>
   </div>
-  <!-- Login form dropdown -->
-  <?php if(Request::getRoute() != '/registration/index'){
-    include 'loginForm.phtml';
-  }
-    ?>
 </div>
 <!-- Category list -->
-<div class="top-bar" id="example-menu">
+<div class="top-bar cat-bar">
   <div class="cat-menu">
     <ul class="menu" id="cat-menu">
       <?php foreach(Category::read() as $category):?>
-        <li><a href="<?=App::config('url')?>product/index/<?=$category->id?>"><?=$category->name?></a></li>
+        <li class="cat-button"><a href="<?=App::config('url')?>product/index/<?=$category->id?>"><?=$category->name?></a></li>
         <?php endforeach;?>
     </ul>
   </div>

@@ -59,6 +59,23 @@
   margin-left: 200px; /* Same as the width of the sidenav */
 }
 
+/*  */
+#example-menu{
+  padding: 20px 0px;
+}
+/* Search bar for product */
+.top-bar input{
+  max-width: 500px;
+  border-radius: 10px;
+}
+.example-menu input{
+  min-width:100%;
+}
+
+#example-menu{
+  text-align: center;
+}
+
 /* Login button */
 .login-button{
   margin-right: 50px;
@@ -76,6 +93,26 @@
 }
 
 /* Category navbar */
+.cat-bar{
+  background-color: transparent;
+}
+.cat-bar ul{
+  background-color: transparent;
+}
 .cat-menu{
   margin: auto;
+  background-color: white;
+}
+.cat-button{
+  background-color: white;
+  border: 1px lightskyblue solid;
+  border-radius: 40px;
+  margin: 5px;
+}
+
+.cat-button:hover{
+  background-color: rgb(241, 241, 241);
+  border: 1px lightskyblue solid;
+  border-radius: 40px;
+  margin: 5px;
 }
