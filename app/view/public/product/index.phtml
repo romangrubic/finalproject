@@ -1,14 +1,27 @@
 <div class="grid-x grid-padding-x">
-<?php foreach ($products as $product):?>
-    <div class="card large-3 cell">
-  <div class="card-divider">
-    <?=$product->name?>
+
+  <div class="large-2 large-offset-1">
   </div>
-  <img src="<?=$product->imageurl?>">
-  <div class="card-section">
-    <h4><?=$product->price?> kn</h4>
-    <p><?=$product->description?></p>
+  <div class="large-7">
+    <div class="grid-x grid-padding-x product-grid">
+      <?php foreach ($products as $product) : ?>
+        <div class="large-3" title="<?= $product->name ?>">
+          <div class="card">
+            <div class="card-divider">
+              <span>
+                <?= $product->name ?>
+              </span>
+            </div>
+            <img src="<?= $product->imageurl ?>">
+            <hr>
+            <div class="card-section">
+              <h4><?= $product->price ?> kn <i class="fas fa-cart-plus add-to-cart" title="Dodaj u košaricu!"></i> <i class="far fa-heart add-to-wishlist" title="Dodaj u popis želja!"></i></h4>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
   </div>
-</div>
-<?php endforeach;?>
+  <div class="large-1 cell">
+  </div>
 </div>

@@ -39,6 +39,8 @@ hr{
 }
 
 #content {
+  border: none;
+  padding-top: 30px;
   min-height: 400px;
 }
 
