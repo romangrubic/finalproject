@@ -33,6 +33,7 @@ switch ($_SERVER['SERVER_ADDR']) {
 return [
     'dev' => $dev,
     'url' => $url,
+    'ppp' => 8,
     'appName' => 'Moja Trgovina',
     'database' => $database
 ];
