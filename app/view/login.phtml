@@ -1,48 +1,53 @@
-<form class="log-in-form" action="<?= App::config('url') ?>login/authorize" method="POST">
-    <h4 class="text-center">Prijava</h4>
-    <p class="text-center">Ukoliko nemate račun, registrirajte se <a href="<?= App::config('url') ?>registration/index">ovdje.</a></p>
-    <label>Email
+<div class="log-in-page-form">
+    <form action="<?= App::config('url') ?>login/authorize" method="POST">
+        <h2 class="text-center">Prijava</h2>
+        <p class="text-center">Ukoliko nemate račun, registrirajte se <a href="<?= App::config('url') ?>registration/index">ovdje.</a></p>
+        <label name="email">Vaš email</label>
         <input type="email" name="email" placeholder="marija@edunova.hr" id="email" aria-describedby="messageEmail" value="<?= $email ?>" />
-    </label>
-    <p class="help-text red-message" id="messageEmail">
-        <?= $message->email ?>
-    </p>
-    <label>Lozinka
-        <input type="password" name="user_password" id="user_password" aria-describedby="messagePassword"/>
-    </label>
-    <p class="help-text red-message" id="messagePassword" >
-        <?= $message->password ?>
-    </p>
-    <p>
-        <input type="submit" class="button expanded" value="Prijava" />
-    </p>
-    <?php if (isset($message->logout)):?>
-        <p class="help-text red-message">
-        <?= $message->logout ?>
-        </p>
-    <?php endif;?>
-</form> 
 
-<div>
-    Uloga: admin
+        <p class="help-text red-message" id="messageEmail">
+            <?= $message->email ?>
+        </p>
+        <label name="user_password">Vaša lozinka</label>
+        <input type="password" name="user_password" id="user_password" aria-describedby="messagePassword" />
+
+        <p class="help-text red-message" id="messagePassword">
+            <?= $message->password ?>
+        </p>
+        <p>
+            <input type="submit" class="log-in-button" value="PRIJAVA" />
+        </p>
+        <?php if (isset($message->logout)) : ?>
+            <p class="help-text red-message">
+                <?= $message->logout ?>
+            </p>
+        <?php endif; ?>
+    </form>
     <br>
-    Email: admin@edunova.hr
-    <br>
-    Lozinka: a
-    <br>
-    <br>
-    Uloga: operator
-    <br>
-    Email: oper@edunova.hr
-    <br>
-    Lozinka: o
-    <br>
-    <br>
-    Uloga: kupac
-    <br>
-    Email: r.knezevic@mojatrgovina.com
-    <br>
-    Lozinka: a
-    <br>
-    <br>
+<hr>
+<br>
+    <div class="text-center">
+        Uloga: kupac
+        <br>
+        Email: r.knezevic@mojatrgovina.com
+        <br>
+        Lozinka: a
+        <br>
+        <br>
+        Uloga: admin
+        <br>
+        Email: admin@edunova.hr
+        <br>
+        Lozinka: a
+        <br>
+        <br>
+        Uloga: operator
+        <br>
+        Email: oper@edunova.hr
+        <br>
+        Lozinka: o
+        <br>
+        <br>
+
+    </div>
 </div>

@@ -1,5 +1,5 @@
-<div class="top-bar-right large-3 cell">
-    <ul class="menu">
+<div class="top-bar-right large-2 cell">
+    <ul class="menu blue-sky">
         <?php if (App::authorized()) : ?>
             <form action="<?= App::config('url') ?>login/logout" method="post">
                 <input type="hidden" name="currentPage" value="<?= substr($_SERVER['REQUEST_URI'], 1) ?>">
@@ -7,35 +7,43 @@
             </form>
         <?php else : ?>
             <button class="button login-button" type="button" data-toggle="login-form">Prijavite se!</button>
-            <div class="dropdown-pane" id="login-form" data-dropdown data-hover="true" data-hover-pane="true">
+            <div class="dropdown-pane" id="login-form" data-position="bottom" data-alignment="center" data-dropdown data-auto-focus="true">
                 <form class="log-in-form" action="<?= App::config('url') ?>login/authorize" method="POST">
                     <p class="text-center">Ukoliko nemate račun, registrirajte se <a href="<?= App::config('url') ?>registration/index">ovdje.</a></p>
                     <label for="email">Vaš email</label>
-                    <input type="email" name="email" id="email" aria-describedby="messageEmail" placeholder="vas.email@gmail.com" value="<?= $email ?>">
+                    <input type="email" name="email" id="email" class="log-in-form-input" aria-describedby="messageEmail" placeholder="vas.email@gmail.com" value="<?= $email ?>">
                     <p class="help-text red-message" id="messageEmail">
                         <?= $message->email ?>
                     </p>
                     <label for="user_password">Vaša lozinka</label>
-                    <input type="password" name="user_password" id="user_password" aria-describedby="messagePassword">
+                    <input type="password" name="user_password" id="user_password" class="log-in-form-input" aria-describedby="messagePassword">
                     <p class="help-text red-message" id="messagePassword">
                         <?= $message->password ?>
                     </p>
 
                     <input type="hidden" name="currentPage" value="<?= substr($_SERVER['REQUEST_URI'], 1) ?>">
-                    <p>
-                        <input type="submit" class="button expanded" value="Prijava" />
-                    </p>
-                    <ul>
-                        <li>Ekskluzivni popusti za članove kluba</li>
-                        <li>Brzo i jednostavno naručivanje</li>
-                        <li>Pratite svoje narudžbe i njihovu povijest</li>
-                    </ul>
+                    <div class="text-center ">
+                    <input type="submit" class="expanded prijava-button" value="Prijava" />
+                    </div>
+                    
                     <?php if (isset($message->logout)) : ?>
                         <p class="help-text red-message">
                             <?= $message->logout ?>
                         </p>
                     <?php endif; ?>
                 </form>
+                        <br>
+                        <li>* Ekskluzivni popusti za članove kluba</li>
+                        <li>* Brzo i jednostavno naručivanje</li>
+                        <li>* Pratite svoje narudžbe i njihovu povijest</li>
+                    <hr>
+                    Uloga: kupac
+                <br>
+                Email: r.knezevic@mojatrgovina.com
+                <br>
+                Lozinka: a
+                <br>
+                <br>
                 Uloga: admin
                 <br>
                 Email: admin@edunova.hr
@@ -50,13 +58,8 @@
                 Lozinka: o
                 <br>
                 <br>
-                Uloga: kupac
-                <br>
-                Email: r.knezevic@mojatrgovina.com
-                <br>
-                Lozinka: a
+                
             </div>
-            <!-- <li><a href="<?= App::config('url') ?>login/index">Prijava</a></li> -->
         <?php endif; ?>
     </ul>
 </div>

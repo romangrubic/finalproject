@@ -1,9 +1,28 @@
+/* CSS variables */
+
+:root {
+  /* Navbar color */
+  --navbar-color: #0096c7;
+}
+
+.text-center{
+  text-align: center;
+}
+.red-message{
+  color: red;
+  font-weight: 500;
+  padding-top: 10px;
+}
+hr{
+  max-width: 100%;
+}
+
 /* Orbit conatiner */
 .orbit-container{
   height: 115px;
 }
 .orbit-image{
-  height: 350px;
+  height: 400px;
 }
 
 /* Development indication */
@@ -62,10 +81,21 @@
 /*  */
 #example-menu{
   padding: 20px 0px;
+  background-color: var(--navbar-color);
+
+}
+.top-bar{
+  background-color: var(--navbar-color);
+}
+.top-bar ul{
+  background-color: var(--navbar-color);
+}
+.blue-sky{
+  background-color: var(--navbar-color);
 }
 /* Search bar for product */
 .top-bar input{
-  max-width: 500px;
+  max-width: 1000px;
   border-radius: 10px;
 }
 .example-menu input{
@@ -75,25 +105,75 @@
 #example-menu{
   text-align: center;
 }
+/* Logo homepage */
+.homepage{
+  color: white;
+  font-weight: 700px;
+  font-size: 20px;
+}
+.homepage:hover{
+  color: rgb(238, 235, 235);
+}
+/* Dashboard button */
+.dashboard-button{
+  max-width: 150px;
+  margin: auto;
+  margin:  0px;
+  border-radius: 10px;
+  background-color: #ade8f4;
+}
 
 /* Login button */
 .login-button{
-  margin-right: 50px;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  font-weight: 600;
 }
+
 #login-form{
   width: 401px;
 }
 .log-in-form {
-  border: 1px solid #cacaca;
-  padding: 1rem;
   border-radius: 0;
   max-width: 400px;
   margin: auto;
   padding: auto;
+  text-align: center;
+}
+.log-in-form:first-child{
+font-weight: 600;
+}
+
+.prijava-button{
+  font-weight: 600;
+  margin-top: 10px;
+  background-color: var(--navbar-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.privileges {
+  margin-top: 20px;
+  background-color: none;
+}
+.log-in-form label{
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.log-in-form input{
+  text-align: center;
+  width: 250px;
+}
+.dropdown-pane{
+  border: 15px var(--navbar-color) solid;
 }
 
 /* Category navbar */
 .cat-bar{
+  padding-top: 0px;
   background-color: transparent;
 }
 .cat-bar ul{
@@ -104,15 +184,28 @@
   background-color: white;
 }
 .cat-button{
+  padding: 10px 10px;
+  min-width: 100px;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
   background-color: white;
-  border: 1px lightskyblue solid;
-  border-radius: 40px;
-  margin: 5px;
+  border-left: 2px var(--navbar-color) solid;
+  border-right: 5px var(--navbar-color) solid;
+  border-bottom: 5px var(--navbar-color) solid;
+  border-top: none;
+  border-radius: 0px 0px 15px 15px;
+  margin: 0px 0px 0px 1px;
+}
+.cat-button a{
+  color: black;
 }
 
 .cat-button:hover{
   background-color: rgb(241, 241, 241);
-  border: 1px lightskyblue solid;
-  border-radius: 40px;
-  margin: 5px;
+  border-bottom: 2px var(--navbar-color) solid;
+  border-right: 2px var(--navbar-color) solid;
+  border-left: 5px var(--navbar-color) solid;
+  border-radius: 0px 0px 15px 15px;
+  transition: 0.2s;
 }

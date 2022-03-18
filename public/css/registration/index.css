@@ -2,3 +2,39 @@
     color: red;
     font-size: 1rem;
 }
+.registration-main{
+    width: 60%;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.registration-part{
+    margin-top: 40px;
+    margin-bottom: 25px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    /* text-align: center; */
+}
+.registration-part legend{
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+.registration-part label{
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.registration-part input{
+    border-radius: 5px;
+}
+.registration-button{
+    font-size: 1.3rem;
+    background: var(--navbar-color);
+    color: white;
+    border: none;
+    width: 200px;
+    border-radius: 5px;
+    padding: 15px 25px;
+    cursor: pointer;
+}

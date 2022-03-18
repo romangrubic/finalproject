@@ -2,3 +2,27 @@
     color: red;
     font-size: 1rem;
 }
+.log-in-page-form{
+    max-width: 350px;
+    margin: auto;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+}
+.log-in-page-form label{
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.log-in-page-form input{
+    text-align: center;
+    border-radius: 5px;
+    margin: none !important;
+}
+.log-in-button{
+    background: var(--navbar-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 25px;
+    cursor: pointer;
+}
