@@ -21,9 +21,16 @@ create table category(
     description varchar(255)
 );
 
+create table manufacturer(
+    id int not null primary key auto_increment,
+    name varchar(50) not null,
+    description varchar(255)
+);
+
 create table product(
     id int not null primary key auto_increment,
     name varchar(255) not null,
+    manufacturer int not null,
     description text,
     category int not null,
     price decimal(18,2),
@@ -64,6 +71,7 @@ create table operator(
 
 
 alter table product add foreign key (category) references category(id);
+alter table product add foreign key (manufacturer) references manufacturer(id);
 alter table productimage add foreign key (product) references product(id);
 alter table shoppingorder add foreign key (customer) references customer(id);
 alter table cart add foreign key (shoppingorder) references shoppingorder(id);
@@ -270,18 +278,30 @@ insert into category(id,name,description) values
 (null,'Memorija za računala','RAM'),
 (null,'Procesor','Rzyen i Intel');
 
+-- Insert Manufacturer
+insert into manufacturer(id,name,description) values
+(null,'Redragon',''),
+(null,'Logitech',''),
+(null,'MS',''),
+(null,'Gigabyte',''),
+(null,'Xilence',''),
+(null,'Hikvision',''),
+(null,'Akyga',''),
+(null,'Kingston',''),
+(null,'Intel','');
+
 -- Insert Product
-insert into product(id,name,description,category,price,inventoryquantity,dateadded) values
-(null,'REDRAGON K530 PRO RGB',null,1,479.99,5,now()),
-(null,'LOGITECH MX Master 3',null,2,750.99,5,now()),
-(null,'MS Industrial ARMOR V700 gaming',null,3,429.99,5,now()),
-(null,'GIGABYTE B450 Gaming X',null,4,669.99,5,now()),
-(null,'GIGABYTE M27F-EK',null,5,1799.99,5,now()),
-(null,'Xilence 40×40×10mm',null,6,14.99,5,now()),
-(null,'Hikvision C100, 2.5"',null,7,299.99,5,now()),
-(null,'Akyga AK-B1-500',null,8,299.99,5,now()),
-(null,'Kingston KCP426NS6/4',null,9,179.99,5,now()),
-(null,'Intel Core i3-10100F',null,10,749.99,5,now());
+insert into product(id,name,manufacturer,description,category,price,inventoryquantity,dateadded) values
+(null,'REDRAGON K530 PRO RGB',1,null,1,479.99,5,now()),
+(null,'LOGITECH MX Master 3',2,null,2,750.99,5,now()),
+(null,'MS Industrial ARMOR V700 gaming',3,null,3,429.99,5,now()),
+(null,'GIGABYTE B450 Gaming X',4,null,4,669.99,5,now()),
+(null,'GIGABYTE M27F-EK',4,null,5,1799.99,5,now()),
+(null,'Xilence 40×40×10mm',5,null,6,14.99,5,now()),
+(null,'Hikvision C100, 2.5"',6,null,7,299.99,5,now()),
+(null,'Akyga AK-B1-500',7,null,8,299.99,5,now()),
+(null,'Kingston KCP426NS6/4',8,null,9,179.99,5,now()),
+(null,'Intel Core i3-10100F',9,null,10,749.99,5,now());
 
 -- Insert product images
 insert into productimage(id,product,imageurl,dateadded) values

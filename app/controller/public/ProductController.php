@@ -22,10 +22,18 @@ class ProductController extends LoginController
             $page = 1;
         }
 
-        $totalProducts = Product::totalProducts($search, $category);
+        if(!isset($_GET['manufacturer'])){
+            $manufacturer = '';
+        }else{
+            $manufacturer = $_GET['manufacturer'];
+        }
+
+        $totalProducts = Product::totalProducts($search, $category, $manufacturer);
         $totalPages = ceil($totalProducts / App::config('ppp'));
         $products = Product::read($category, $search, $page);
         
+        $manufacturers = Manufacturer::read();
+
         if($page > $totalPages){
             $page = $totalPages;
         }
@@ -34,6 +42,7 @@ class ProductController extends LoginController
             'css' => $this->cssDir . 'index.css',
             'products' => $products,
             'totalProducts' => $totalProducts,
+            'manufacturers'=>$manufacturers,
             'email'=>$this->email,
             'message'=>$this->message,
             'page'=>$page,
