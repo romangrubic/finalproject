@@ -33,6 +33,7 @@ class ProductController extends LoginController
         $this->view->render($this->viewDir . 'index', [
             'css' => $this->cssDir . 'index.css',
             'products' => $products,
+            'totalProducts' => $totalProducts,
             'email'=>$this->email,
             'message'=>$this->message,
             'page'=>$page,

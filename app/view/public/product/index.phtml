@@ -3,6 +3,21 @@
 
   </div>
   <div class="large-7">
+    <!-- Showing user how many products meets their search specification -->
+    <p class="total-product-message">
+      <?php if($totalProducts < 2):?>
+      Jedan proizvod zadovoljava Vaše specifikacije.
+      <?php else:?>
+        Pronađeno ukupno <?=$totalProducts?> proizvoda.
+        Prikazujemo proizvode od <?= $page*App::config('ppp')-App::config('ppp')+1?> do 
+        <?php if($page*App::config('ppp') > $totalProducts){
+          echo $totalProducts;
+        }else{
+          echo $page*App::config('ppp').'.';
+        }?>
+        <?php endif;?>
+    </p>
+    <!--  -->
     <div class="grid-x grid-padding-x product-grid">
       <?php foreach ($products as $product) : ?>
         <!-- Product card  -->
