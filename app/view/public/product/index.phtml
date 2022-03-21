@@ -5,77 +5,15 @@
   <div class="large-7">
     <div class="grid-x grid-padding-x product-grid">
       <?php foreach ($products as $product) : ?>
-        <div class="large-3" title="<?= $product->name ?>" data-open="product<?= $product->id ?>">
-          <div class="card">
-            <div class="card-divider">
-              <span>
-                <?= $product->name ?>
-              </span>
-            </div>
-            <img src="<?= $product->imageurl ?>">
-            <hr>
-            <div class="card-section">
-              <h4><?= $product->price ?> kn 
-                <i class="fas fa-cart-plus add-to-cart" title="Dodaj u košaricu!"></i>
-                <i class="far fa-heart add-to-wishlist" title="Dodaj u popis želja!"></i>
-              </h4>
-              <div class="small reveal" id="product<?= $product->id ?>" data-reveal>
-                  <h1 class="modal-product-name"><?= $product->name ?></h1>
-                  <div class="grid-x grid-padding-x modal-product-section">
-                      <div class="large-6 modal-product-image">
-                        <img src="<?= $product->imageurl ?>" alt="<?= $product->name ?>">
-                      </div>
-                      <div class="large-6 modal-product-description">
-                        <p><?= $product->description ?></p>
-                      </div>
-                    </div>
-                  <div class="grid-x grid-padding-x text-center">
-                    <div class="large-6 large-offset-1">
-                    <h3><?= $product->price ?> kn</h3>
-                    </div>
-                    <div class="large-3">
-                    <i class="fas fa-3x fa-cart-plus add-to-cart" title="Dodaj u košaricu!"></i>
-                    </div>
-                  </div>
-                  <button class="close-button" data-close aria-label="Close modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-            </div>
-          </div>
-        </div>
+        <!-- Product card  -->
+        <?php include 'product.phtml'?>
+        <!--  -->
       <?php endforeach; ?>
     </div>
   </div>
-  <div class="large-1 cell">
+  <div class="large-2 cell">
   </div>
 </div>
-<nav aria-label="Pagination">
-  <ul class="pagination text-center">
-
-    <?php if($page-1 == 0):?>
-        <li class="pagination-previous disabled">Početak</li>
-        <li class="pagination-previous disabled">Prethodna</li>
-    <?php else:?>
-        <li class="pagination-previous "><a href="<?=App::config('url')?>product/index?search=<?=$search?>&page=1" aria-label="Start page" title="Povratak na prvu stranicu">Početak</a></li>
-        <li class="pagination-previous "><a href="<?=App::config('url')?>product/index?search=<?=$search?>&page=<?=$page-1?>" aria-label="Previous page" title="Prethodna stranica">Prethodna</a></li>
-    <?php endif;?>
-    
-    <li class="page-show-button"><span class="show-for-sr">Vi ste na stranici</span> <?=$page?>/<?=$totalPages?></li>
-    <!-- <li><a href="#" aria-label="Page 2">2</a></li>
-    <li><a href="#" aria-label="Page 3">3</a></li>
-    <li><a href="#" aria-label="Page 4">4</a></li>
-    <li class="ellipsis"></li>
-    <li><a href="#" aria-label="Page 12">12</a></li>
-    <li><a href="#" aria-label="Page 13">13</a></li> -->
-
-    <?php if($page == $totalPages):?>
-        <li class="pagination-next disabled">Sljedeća</li>
-        <li class="pagination-next disabled">Kraj</li>
-    <?php else:?>
-        <li class="pagination-next"><a href="<?=App::config('url')?>product/index?search=<?=$search?>&page=<?=$page+1?>" aria-label="Next page" title="Sljedeća stranica">Sljedeća</a></li>
-        <li class="pagination-next "><a href="<?=App::config('url')?>product/index?search=<?=$search?>&page=<?=$totalPages?>" aria-label="Final page" title="Idi na zadnju stranicu">Kraj</a></li>
-    <?php endif;?>
-
-  </ul>
-</nav>
+<!-- Customer product pagination -->
+<?php include 'pagination.phtml'?>
+<!--  -->
