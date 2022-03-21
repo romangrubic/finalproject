@@ -5,6 +5,10 @@
   --navbar-color: #0096c7;
 }
 
+.blue-sky{
+  background-color: var(--navbar-color);
+}
+
 .text-center{
   text-align: center;
 }
@@ -92,9 +96,7 @@ hr{
 .top-bar ul{
   background-color: var(--navbar-color);
 }
-.blue-sky{
-  background-color: var(--navbar-color);
-}
+
 /* Search bar for product */
 .top-bar input{
   max-width: 1000px;

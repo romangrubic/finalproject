@@ -16,6 +16,39 @@
   color: gray;
 }
 
+.manufacturer-filter{
+  margin-top: 50px;
+  border: 7px solid var(--navbar-color);
+  border-radius: 10px;
+  width: 225px;
+  text-align: left;
+  padding: 10px;
+}
+
+.manufacturer-filter legend{
+  margin:5px auto;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.manufacturer-list{
+  padding-bottom: 10px;
+  margin-left: 35px;
+}
+
+.manufacturer-list label{
+  font-size: 1.2rem;
+}
+
+.manufacturer-list-button{
+  text-align: center;
+}
+
+.manufacturer-list-button input{
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
 .product-grid {
   /* text-align: center; */
   padding: 0px;
