@@ -288,7 +288,8 @@ insert into manufacturer(id,name,description) values
 (null,'Hikvision',''),
 (null,'Akyga',''),
 (null,'Kingston',''),
-(null,'Intel','');
+(null,'Intel',''),
+(null,'AMD','');
 
 -- Insert Product
 insert into product(id,name,manufacturer,description,category,price,inventoryquantity,dateadded) values
@@ -301,7 +302,8 @@ insert into product(id,name,manufacturer,description,category,price,inventoryqua
 (null,'Hikvision C100, 2.5"',6,null,7,299.99,5,now()),
 (null,'Akyga AK-B1-500',7,null,8,299.99,5,now()),
 (null,'Kingston KCP426NS6/4',8,null,9,179.99,5,now()),
-(null,'Intel Core i3-10100F',9,null,10,749.99,5,now());
+(null,'Intel Core i3-10100F',9,null,10,749.99,5,now()),
+(null,'AMD procesor',10,null,10,749.99,5,now());
 
 -- Insert product images
 insert into productimage(id,product,imageurl,dateadded) values

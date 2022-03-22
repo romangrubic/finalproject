@@ -2,6 +2,22 @@
 
 class Category
 {
+    public static function readOne($id)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                select * 
+                from category 
+                where id=:id
+        
+        ');
+        $query->execute([
+            'id'=>$id
+        ]);
+        return $query->fetch();
+    }
+
     public static function read()
     {
         $connection = DB::getInstance();
