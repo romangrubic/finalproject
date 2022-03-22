@@ -1,0 +1,54 @@
+.dashboard-profil{
+    text-align: center;
+    width: 60%;
+    max-width: 700px;
+    margin: 30px auto 0px!important;
+}
+.dashboard-profil label{
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.dashboard-profil p{
+    font-size: 1.3rem;
+}
+
+.dashboard-update-button{
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: var(--navbar-color);
+    font-size: 1.1rem;
+}
+
+.dashboard-update-reveal{
+    text-align: center;
+    width: 80%;
+    margin: 75px auto;
+}
+
+.dashboard-update-reveal legend{
+    font-size: 1.2rem;
+    margin: 0px auto 30px;
+    text-decoration: underline;
+}
+
+.dashboard-update-reveal label{
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.dashboard-update-reveal  input{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.reveal-buttons{
+    width: 70%;
+    margin: auto;
+}
+
+.reveal-buttons .button{
+    border-radius: 5px;
+    font-size: 1.1rem;
+}

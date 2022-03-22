@@ -1,0 +1,37 @@
+<h1 class="text-center">Dobrodošli, <?= $customer->firstname ?></h1>
+<hr>
+<div class="grid-x grid-padding-x dashboard-profil">
+    <div class="large-6 cell">
+        <label for="firstname">Ime</label>
+        <p><?= $customer->firstname ?></p>
+
+        <label for="lastname">Prezime</label>
+        <p><?= $customer->lastname ?></p>
+
+        <label for="email">Email</label>
+        <p><?= $customer->email ?></p>
+    </div>
+    <div class="large-6 cell">
+        <label for="phonenumber">Broj telefona</label>
+        <p><?= $customer->phonenumber ?></p>
+
+        <label for="street">Ulica i kućni broj</label>
+        <p><?= $customer->street ?></p>
+
+        <label for="city">Grad i poštanski broj</label>
+        <p><?= $customer->city ?>, <?= $customer->postalnumber ?></p>
+
+    </div>
+</div>
+<div class="text-center">
+    <button class="button expand info dashboard-update-button" data-open="customer<?= $customer->id ?>">Promijeni podatke/lozinku</button>
+</div>
+<?php include 'reveal.phtml';?>
+<hr>
+
+
+<pre>
+
+    <?php print_r($orders) ?>
+
+</pre>

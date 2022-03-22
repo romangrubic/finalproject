@@ -1,0 +1,66 @@
+<div class="large reveal" id="customer<?= $customer->id ?>" data-reveal>
+    <form action="<?= App::config('url') ?>registration/update" method="POST">
+        <div class="grid-x grid-padding-x dashboard-update-reveal">
+            <div class="large-6 cell">
+                <legend>Obavezna polja</legend>
+
+                <input type="hidden" name="id" value="<?= $customer->id ?>">
+                <label for="firstname">Ime</label>
+                <input type="text" name="firstname" id="firstname" aria-describedby="messageFirstname" value="<?= $customer->firstname ?>">
+                <p class="help-text red-message" id="messageFirstname">
+                    <?= $message->firstname ?>
+                </p>
+
+                <label for="lastname">Prezime</label>
+                <input type="text" name="lastname" id="lastname" aria-describedby="messageLastname" value="<?= $customer->lastname ?>">
+                <p class="help-text red-message" id="messageLastname">
+                    <?= $message->lastname ?>
+                </p>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" aria-describedby="messageEmail" placeholder="vas.email@gmail.com" value="<?= $customer->email ?>">
+                <p class="help-text red-message" id="messageEmail">
+                    <?= $message->email ?>
+                </p>
+            </div>
+            <div class="large-6 cell">
+                <div class="text-center">
+                <legend>Dodatno</legend>
+
+                </div>
+
+                <label for="phonenumber">Broj telefona</label>
+                <input type="number" name="phonenumber" id="phonenumber" aria-describedby="messagePhoneNumber" placeholder="0123456789" value="<?= $customer->phonenumber ?>">
+                <p class="help-text red-message" id="messagePhoneNumber">
+                    <?= $message->phonenumber ?>
+                </p>
+
+                <label for="street">Ulica i kucni broj</label>
+                <input type="text" name="street" id="street" aria-describedby="messageStreet" placeholder="Ulica Republike, 3a" value="<?= $customer->street ?>">
+                <p class="help-text red-message" id="messageStreet">
+                    <?= $message->street ?>
+                </p>
+
+                <label for="city">Grad</label>
+                <input type="text" name="city" id="city" aria-describedby="messageCity" placeholder="Osijek" value="<?= $customer->city ?>">
+                <p class="help-text red-message" id="messageCity">
+                    <?= $message->city ?>
+                </p>
+
+                <label for="postalnumber">Postanski broj</label>
+                <input type="number" name="postalnumber" id="postalnumber" aria-describedby="messagePostalNumber" placeholder="31000" value="<?= $customer->postalnumber ?>">
+                <p class="help-text red-message" id="messagePostalNumber">
+                    <?= $message->postalnumber ?>
+                </p>
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x reveal-buttons">
+                <div class="large-6 cell">
+                    <a class="alert button expanded" href="<?= App::config('url') ?>dashboard/index">Natrag.</a>
+                </div>
+                <div class="large-6 cell">
+                    <input type="submit" class="blue-sky button expanded" value="Sačuvaj promijene.">
+                </div>
+            </div>
+    </form>
+</div>
