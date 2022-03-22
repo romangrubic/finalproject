@@ -1,0 +1,16 @@
+<section class="order-section">
+    <h2>Vaše prošle narudžbe</h2>
+    <ul class="accordion" data-accordion data-allow-all-closed="true">
+        <?php foreach ($orders as $order):?>
+        <li class="accordion-item" data-accordion-item>
+            <a href="#" class="accordion-title">Narudžba #<?=$order->id?></a>
+            <div class="accordion-content" data-tab-content>
+                <p>Panel 1. Lorem ipsum dolor</p>
+            </div>
+        </li>
+        <?php endforeach;?>
+    </ul>
+</section>
+<pre>
+    <?php print_r($orders) ?>
+</pre>
