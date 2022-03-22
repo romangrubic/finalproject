@@ -1,8 +1,8 @@
 <div class="grid-x grid-padding-x">
   <div class="large-2 large-offset-1">
-    <form action="<?=App::config('url')?>/product/index" method="get">
+    <form action="<?=App::config('url')?><?=substr($_SERVER['REQUEST_URI'], 1)?>" method="get">
       <div class="manufacturer-filter">
-        <legend>Manufacturer</legend>
+        <legend>Proizvođač</legend>
         <div class="manufacturer-list">
         <?php foreach($manufacturers as $m):?>
           <input type="radio" id="manufacturerId<?=$m->id?>" name="manufacturer" value="<?=$m->id?>">
@@ -10,25 +10,45 @@
         <?php endforeach;?>
         </div>
         <div class="manufacturer-list-button">
-          <input type="submit" class="button blue-sky" value="Search!">
+          <input type="submit" class="button blue-sky" value="<?= (isset($category->name))? 'Traži u kategoriji!' : 'Traži!' ?>">
         </div>
       </div>
     </form>
   </div>
   <div class="large-7">
     <!-- Showing user how many products meets their search specification -->
+    <p>
+    </p>
     <p class="total-product-message">
-      <?php if($totalProducts < 2):?>
-      Jedan proizvod zadovoljava Vaše specifikacije.
-      <?php else:?>
-        Pronađeno ukupno <?=$totalProducts?> proizvoda.
-        Prikazujemo proizvode od <?= $page*App::config('ppp')-App::config('ppp')+1?> do 
-        <?php if($page*App::config('ppp') > $totalProducts){
-          echo $totalProducts;
-        }else{
-          echo $page*App::config('ppp').'.';
-        }?>
-        <?php endif;?>
+          <?php if($totalProducts < 1):?>
+            Nema proizvoda.
+          <?php elseif($totalProducts < 2):?>
+            Pronađen 1 proizvod
+            <?php if(isset($category->name)):?>
+              <?php if(isset($_GET['manufacturer'])):?>
+                u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
+              <?php else:?>
+                u kategoriji "<?=$category->name?>".
+              <?php endif;?>
+            <?php endif;?>
+            <?=(!isset($category->name) && isset($_GET['manufacturer'])) ? ', proizvođača "'.$manufacturer->name.'".' : '';?>
+          <?php else:?>
+              <?=($_SERVER['REQUEST_URI'] == '/product/index') ? 'Pronađeno '.$totalProducts.' proizvoda.' : 'Pronađeno '.$totalProducts.' proizvoda';?>
+              <?php if(isset($category->name)):?>
+                <?php if(isset($_GET['manufacturer'])):?>
+                  u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
+                <?php else:?>
+                  u kategoriji "<?=$category->name?>".
+                <?php endif;?>
+              <?php endif;?>
+              <?=(!isset($category->name) && isset($_GET['manufacturer'])) ? ', proizvođača "'.$manufacturer->name.'".' : '';?>
+              Prikazujemo proizvode od <?= $page*App::config('ppp')-App::config('ppp')+1?> do 
+              <?php if($page*App::config('ppp') > $totalProducts){
+                echo $totalProducts;
+              }else{
+                echo $page*App::config('ppp').'.';
+              }?>.
+          <?php endif;?>
     </p>
     <!--  -->
     <div class="grid-x grid-padding-x product-grid">

@@ -13,12 +13,13 @@
 
 .total-product-message{
   font-style: italic;
+  font-size: 1.1rem;
   color: gray;
 }
 
 .manufacturer-filter{
-  margin-top: 50px;
-  border: 7px solid var(--navbar-color);
+  margin-top: 65px;
+  border: 5px solid var(--navbar-color);
   border-radius: 10px;
   width: 225px;
   text-align: left;
@@ -26,7 +27,7 @@
 }
 
 .manufacturer-filter legend{
-  margin:5px auto;
+  margin:6px auto;
   font-size: 1.5rem;
   font-weight: 600;
 }
@@ -47,6 +48,7 @@
 .manufacturer-list-button input{
   border-radius: 5px;
   margin-bottom: 5px;
+  font-size: 1.2rem;
 }
 
 .product-grid {

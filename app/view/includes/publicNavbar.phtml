@@ -32,6 +32,7 @@
 <div class="top-bar cat-bar">
   <div class="cat-menu">
     <ul class="menu" id="cat-menu">
+    <li class="cat-button"><a href="<?=App::config('url')?>product/index">Svi proizvodi</a></li>
       <?php foreach(Category::read() as $category):?>
         <li class="cat-button"><a href="<?=App::config('url')?>product/index/<?=$category->id?>"><?=$category->name?></a></li>
         <?php endforeach;?>
