@@ -60,6 +60,11 @@ create table cart(
     dateadded datetime not null
 );
 
+create table newsletter(
+    id int not null primary key auto_increment,
+    email varchar(255) not null
+);
+
 create table operator(
     id           int not null primary key auto_increment,
     email           varchar(50) not null,
