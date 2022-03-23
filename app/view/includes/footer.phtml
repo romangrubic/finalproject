@@ -1,4 +1,13 @@
-<hr>
-<h4 style="text-align:center;">
-    <?= App::config('appName') ?> &copy; 2022
-</h4>
+<div class="footer-main">
+    <div class="footer">
+        <p>Primajte novosti i posebne akcije na Vaš email!</p>
+        <form action="<?=App::config('url')?>index/emailNewsletter" method="post">
+            <input type="email" name="email" id="email" placeholder="Unesite Vaš email!">
+            <input type="submit" class="email-submit button warning " value="Pošalji!">
+            <input type="hidden" name="currentPage" value="<?= substr($_SERVER['REQUEST_URI'], 1) ?>">
+        </form>
+        <h2>
+            <?= App::config('appName') ?> &copy; 2022
+        </h2>
+    </div>
+</div>
