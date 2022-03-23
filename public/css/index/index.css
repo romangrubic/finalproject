@@ -1,0 +1,10 @@
+/* CSS for product card and modal */
+@import "../productCard/index.css";
+/*  */
+
+.index-main {
+  width: 60%;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  margin: auto;
+}
