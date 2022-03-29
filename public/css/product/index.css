@@ -64,3 +64,8 @@
     width: 80%;
     border: 1px solid var(--navbar-color);
 }
+
+/* Login modal */
+.login-modal{
+  margin: 30px 10px;
+}

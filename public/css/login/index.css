@@ -16,7 +16,7 @@
 .log-in-page-form input{
     text-align: center;
     border-radius: 5px;
-    margin: none !important;
+    margin: auto;
 }
 .log-in-button{
     background: var(--navbar-color);
