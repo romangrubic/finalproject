@@ -1,0 +1,23 @@
+<div class="small reveal" id="product<?= $product->id ?>" data-reveal>
+      <h1 class="modal-product-name"><?= $product->name ?></h1>
+      <div class="grid-x grid-padding-x modal-product-section">
+        <div class="large-6 modal-product-image">
+          <img src="<?= $product->imageurl ?>" alt="<?= $product->name ?>">
+        </div>
+        <div class="large-6 modal-product-description">
+          <p><?= $product->description ?></p>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x text-center">
+        <div class="large-6 large-offset-1">
+          <h3><?= $product->price ?> kn</h3>
+        </div>
+        <div class="large-3">
+          <i class="fas fa-3x fa-cart-plus add-to-cart" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u košaricu.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu košaricu." data-open="productprijava"'; ?>"></i>
+          <i class="far fa-3x fa-heart add-to-wishlist" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u listu želja.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu listu želja." data-open="productprijava"'; ?>"></i>
+        </div>
+      </div>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>

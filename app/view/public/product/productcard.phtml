@@ -1,0 +1,24 @@
+<div class="large-3">
+  <div class="card">
+    <div class="card-divider" data-open="product<?= $product->id ?>" title="Kliknite na sliku za detalje!">
+      <span>
+        <?= $product->name ?>
+      </span>
+    </div>
+    <img src="<?= $product->imageurl ?>" data-open="product<?= $product->id ?>" title="Kliknite na sliku za detalje!">
+    <hr>
+    <div class="card-section">
+      <h4><?= $product->price ?> kn
+        <i class="fas fa-cart-plus add-to-cart" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u košaricu.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu košaricu." data-open="productprijava"'; ?>"></i>
+        <i class="far fa-heart add-to-wishlist" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u listu želja." data-open="productprijava"' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu listu želja." data-open="productprijava"'; ?>"></i>
+      </h4>
+    </div>
+    <!-- Product modal  -->
+    <?php include 'productmodal.phtml' ?>
+    <!--  -->
+    
+    <!-- Login modal if user is not logged in -->
+    <?php include 'loginmodal.phtml' ?>
+    <!--  -->
+  </div>
+</div>
