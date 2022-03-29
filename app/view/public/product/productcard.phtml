@@ -9,8 +9,8 @@
     <hr>
     <div class="card-section">
       <h4><?= $product->price ?> kn
-        <i class="fas fa-cart-plus add-to-cart" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u košaricu.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu košaricu." data-open="productprijava"'; ?>"></i>
-        <i class="far fa-heart add-to-wishlist" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u listu želja." data-open="productprijava"' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu listu želja." data-open="productprijava"'; ?>"></i>
+        <i class="fas fa-cart-plus add-to-cart" id="addToCart" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u košaricu.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu košaricu." data-open="productprijava"'; ?>"></i>
+        <i class="far fa-heart add-to-wishlist" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u listu želja.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu listu želja." data-open="productprijava"'; ?>"></i>
       </h4>
     </div>
     <!-- Product modal  -->
@@ -22,3 +22,4 @@
     <!--  -->
   </div>
 </div>
+<script>let product= <?=$product->id?>;</script>
