@@ -48,7 +48,9 @@ create table productimage(
 create table shoppingorder(
     id int not null primary key auto_increment,
     customer int not null,
-    dateadded datetime not null
+    dateadded datetime not null,
+    isFinished boolean not null,
+    dateFinished datetime
 );
 
 create table cart(
@@ -336,8 +338,8 @@ begin
 petlja: loop
 	IF kraj=500 then leave petlja;
 	end if;	
-	insert into shoppingorder(id,customer,dateadded) 
-	values (null,floor(rand()*100+1), now());
+	insert into shoppingorder(id,customer,dateadded,isFinished) 
+	values (null,floor(rand()*100+1), now(),true);
 
 	set kraj=kraj+1;
 end loop petlja;	
