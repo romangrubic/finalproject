@@ -17,7 +17,8 @@
       </form>
       <!-- Dashboard link -->
       <?php if(App::authorized()):?>
-      <li class="menu-text large-2 cell"><a class="homepage" href="<?=App::config('url')?>dashboard/index">Vaš profil</a></li>
+      <li class="menu-text large-1 cell"><a class="homepage" href="<?=App::config('url')?>dashboard/index">Vaš profil</a></li>
+      <li class="menu-text large-1 cell shopping-icon"><a class="shopping-cart" href="<?=App::config('url')?>shoppingorder/index"><i  style="color: white;" class="fas fa-2x fa-shopping-cart"></i> </a></li>
       <?php endif;?>
     
       <!-- Login form dropdown -->

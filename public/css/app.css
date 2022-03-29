@@ -126,6 +126,10 @@ hr{
   border-radius: 10px;
   background-color: #ade8f4;
 }
+/* Shopping button */
+.shopping-icon{
+  padding: 5px 0px 0px !important;
+}
 
 /* Login button */
 .login-button{

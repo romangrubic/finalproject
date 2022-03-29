@@ -1,4 +1,8 @@
-<div class="top-bar-right large-2 cell">
+<?php if(App::authorized()):?>
+    <div class="top-bar-right large-1 cell">
+<?php else:?>
+    <div class="top-bar-right large-2 cell">
+<?php endif;?>
     <ul class="menu blue-sky">
         <?php if (App::authorized()) : ?>
             <form action="<?= App::config('url') ?>login/logout" method="post">
