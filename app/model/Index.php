@@ -23,12 +23,12 @@ class Index
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-            select a.id, a.name, a.description,c.imageurl as imageurl, a.price, a.dateadded, count(a.id)
+            select a.id, a.name, a.description,c.imageurl as imageurl, a.price, a.dateadded, count(a.id) as quantitySold
             from product as a
             inner join cart as b on a.id=b.product
             inner join productimage as c on c.product=a.id
-            group by a.name
-            order by count(a.id) desc
+            group by a.id, a.name, a.description, imageurl, a.price, a.dateadded
+            order by quantitySold desc
             limit 4; 
         
         ');
