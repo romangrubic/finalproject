@@ -125,12 +125,12 @@ class Shoppingorder
     }
 
     // Number of products in cart for badge
-    public static function numberOfProducts($id)
+    public static function numberOfUniqueProducts($id)
     {
         $connection = DB::getInstance();
         $query = $connection->prepare('
 
-            select sum(b.quantity) as number
+            select count(*) as number
             from shoppingorder a
             inner join cart b on a.id=b.shoppingorder
             where a.isFinished = 0 and a.customer = :customerId
@@ -142,5 +142,25 @@ class Shoppingorder
 
         return $query->fetchColumn();
     }
+
+    // Sum total of the order
+    public static function sumTotal($id)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+
+            select sum(b.price*b.quantity) as number
+            from shoppingorder a
+            inner join cart b on a.id=b.shoppingorder
+            where a.isFinished = 0 and a.customer = :customerId
+            
+        ');
+        $query->execute([
+            'customerId' => $id
+        ]);
+
+        return $query->fetchColumn();
+    }
+    
 
 }

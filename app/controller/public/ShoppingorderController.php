@@ -36,10 +36,8 @@ class ShoppingorderController extends AuthorizedController
 
     }
 
-    public function numberofproducts()
+    public function numberofuniqueproducts()
     {
-        $customerId = $_SESSION['authorized']->id;
-
-        echo Shoppingorder::numberOfProducts($customerId);
+        echo Shoppingorder::numberOfUniqueProducts($_SESSION['authorized']->id);
     }
 }

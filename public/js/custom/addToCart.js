@@ -6,10 +6,13 @@ $(".addToCart").on("click", function () {
     success: function (result) {
       if (result == "OK") {
         // Updates badge icon without refreshing window :D
-        $( "#shopping-icon" ).load(location.href+" #shopping-icon>*","");
+        $("#shopping-icon").load(location.href + " #shopping-icon>*", "");
+        alert("Proizvod uspješno dodan u košaricu!");
       } else {
         alert(result);
       }
     },
   });
 });
+
+
