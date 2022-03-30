@@ -10,11 +10,11 @@
     <div class="card-section">
       <h4><?= $product->price ?> kn
       <?php if(App::authorized()):?>
-        <i class="fas fa-cart-plus add-to-cart addToCart" data-id="<?=$product->id?>" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u košaricu.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu košaricu." data-open="productprijava"'; ?>"></i>
-        <i class="far fa-heart add-to-wishlist" data-id="<?=$product->id?>" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u listu želja.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu listu želja." data-open="productprijava"'; ?>"></i>
+        <i class="fas fa-cart-plus add-to-cart addToCart" data-id="<?=$product->id?>" title="Dodaj &quot;<?=$product->name?>&quot; u košaricu"></i>
+        <i class="far fa-heart add-to-wishlist" data-id="<?=$product->id?>" title="Dodaj &quot;<?=$product->name?>&quot; u listu želja"></i>
       <?php else:?>
-        <i class="fas fa-cart-plus add-to-cart" data-id="<?=$product->id?>" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u košaricu.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu košaricu." data-open="productprijava"'; ?>"></i>
-        <i class="far fa-heart add-to-wishlist" data-id="<?=$product->id?>" title="<?= (isset($_SESSION['authorized'])) ? 'Dodaj u listu želja.' : 'Prijavite se ili registrirajte za dodavanje ' . $product->name . ' u Vašu listu želja." data-open="productprijava"'; ?>"></i>
+        <i class="fas fa-cart-plus add-to-cart" title="Prijavite se ili registrirajte za dodavanje &quot;<?=$product->name?>&quot; u Vašu košaricu." data-open="productprijava"></i>
+        <i class="far fa-heart add-to-wishlist" title="Prijavite se ili registrirajte za dodavanje &quot;<?=$product->name?>&quot; u Vašu listu želja." data-open="productprijava"></i>
         <?php endif;?>
       </h4>
     </div>

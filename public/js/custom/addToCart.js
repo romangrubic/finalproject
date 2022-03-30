@@ -5,9 +5,10 @@ $(".addToCart").on("click", function () {
     url: "/shoppingorder/addtocart/" + productId,
     success: function (result) {
       if (result == "OK") {
-        alert("Proizvod uspjesno dodan u kosaricu!");
+        // Updates badge icon without refreshing window :D
+        $( "#shopping-icon" ).load(location.href+" #shopping-icon>*","");
       } else {
-        alert("Dogodila se greska. Pokusajte ponovo!");
+        alert(result);
       }
     },
   });

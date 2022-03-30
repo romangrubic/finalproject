@@ -1,0 +1,31 @@
+/* CSS for product card and modal */
+@import "../productCard/index.css";
+/*  */
+
+
+.shoppingorder{
+    max-width: 75%;
+    margin: auto;
+}
+
+.order-cart-item{
+    cursor: pointer;
+}
+.removeFromCart{
+    cursor: pointer;
+    color: red;
+}
+.no-cart{
+    margin: 80px 0px 0px !important;
+}
+
+.no-cart h5{
+    margin-top: 30px;
+    font-size: 1.5rem !important;
+
+}
+.no-cart-search{
+    color: #1468a0;
+    font-size: 1.5rem !important;
+    cursor: pointer;
+}

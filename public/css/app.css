@@ -4,7 +4,9 @@
   /* Navbar color */
   --navbar-color: #0096c7;
 }
-
+.badge{
+  font-size: 1.3rem !important;
+}
 .blue-sky{
   background-color: var(--navbar-color);
 }
@@ -129,6 +131,11 @@ hr{
 /* Shopping button */
 .shopping-icon{
   padding: 5px 0px 0px !important;
+}
+
+.badge{
+font-size: 1rem;
+position: inherit;
 }
 
 /* Login button */
