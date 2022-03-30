@@ -1,3 +1,72 @@
-Shopping order
+<div class="shoppingorder">
+<?php if (empty($shoppingorder)) : ?>
+    <div class="no-cart text-center">
+    <h2>Trenutno nemate proizvoda u košarici!</h2>
+    <h5>Pogledajte cijelu ponudu <a href="<?=App::config('url');?>product/">ovdje</a> ili unesite pojam u <label class="no-cart-search" for="search">tražilicu!</label></h5>
+    </div>
+<?php else : ?>
+    <h2>Vaša košarica.</h2>
+    <hr>
+    <table class="hover">
+        <thead>
+            <th>Naziv</th>
+            <th>Opis</th>
+            <th>Cijena</th>
+            <th>Kolicina</th>
+            <th>Total</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <?php foreach ($shoppingorder as $product) : ?>
+                <tr  id="product<?=$product->id?>">
+                    <td class="order-cart-item" data-open="productmodal<?= $product->id ?>" title="Klik za detalje."><?= $product->name ?></td>
+                    <td><?= $product->description ?></td>
+                    <td><?= $product->price ?></td>
+                    <td><?= $product->quantity ?></td>
+                    <td><?=$product->price*$product->quantity?></td>
+                    <td>
+                        <button class="removeFromCart" data-id="<?=$product->id?>"><i title="Obriši &quot;<?=$product->name?>&quot;." class="fas fa-2x fa-trash"></i></button>
+                    </td>
+                </tr>
+                <div class="small reveal" id="productmodal<?= $product->id ?>" data-reveal>
+                    <h1 class="modal-product-name"><?= $product->name ?></h1>
+                    <div class="grid-x grid-padding-x modal-product-section">
+                        <div class="large-6 modal-product-image">
+                        <img src="<?= $product->imageurl ?>" alt="<?= $product->name ?>">
+                        </div>
+                        <div class="large-6 modal-product-description">
+                        <p><?= $product->description ?></p>
+                        </div>
+                    </div>
+                    <div class="grid-x grid-padding-x text-center">
+                        <div class="large-6 large-offset-1">
+                        <h3><?= $product->price ?> kn</h3>
+                        </div>
+                        <div class="large-3">
+                        <?php if(App::authorized()):?>
+                        <i class="fas fa-3x fa-cart-plus add-to-cart addToCart" data-id="<?=$product->id?>" title="Dodaj &quot;<?=$product->name?>&quot; u košaricu."></i>
+                        <i class="far fa-3x fa-heart add-to-wishlist" data-id="<?=$product->id?>" title="Dodaj &quot;<?=$product->name?>&quot; u listu želja."></i>
+                    <?php else:?>
+                        <i class="fas fa-3x fa-cart-plus add-to-cart" title="Prijavite se ili registrirajte za dodavanje &quot;<?=$product->name?>&quot; u Vašu košaricu." data-open="productprijava"></i>
+                        <i class="far fa-3x fa-heart add-to-wishlist" title="Prijavite se ili registrirajte za dodavanje &quot;<?=$product->name?>&quot; u Vašu listu želja." data-open="productprijava"></i>
+                        <?php endif;?>
+                    </div>
+                    </div>
+                    <button class="close-button" data-close aria-label="Close modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
-<?php print_r($shoppingorder)?>
+    <?php
+        $sum=0;
+
+        foreach($shoppingorder as $product){
+            $sum += $product->price;
+        }
+    ?>
+    <!-- <h1>Iznos narudžbe: <?=$sum?> kn</h1> -->
+<?php endif; ?>
+</div>
