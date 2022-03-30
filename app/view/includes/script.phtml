@@ -2,6 +2,11 @@
 <script src="<?=App::config('url')?>public/js/vendor/what-input.js"></script>
 <script src="<?=App::config('url')?>public/js/vendor/foundation.js"></script>
 <script src="<?=App::config('url')?>public/js/app.js"></script> 
-<script src="<?=App::config('url')?>public/js/addToCart.js"></script> 
+<?php if(App::authorized()):?>
+<script src="<?=App::config('url')?>public/js/custom/addToCart.js"></script> 
+<?php endif;?>
 <!-- Fontawesome -->
 <script src="https://kit.fontawesome.com/41a908fb89.js" crossorigin="anonymous"></script>
+
+<!-- Custom Javascript -->
+<?php if(isset($javascript)) echo $javascript;?>
