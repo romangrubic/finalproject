@@ -1,5 +1,8 @@
 <h1 class="text-center">Dobrodošli, <?= $customer->firstname ?></h1>
 <hr>
+<?php if($change==1):?>
+    <h4 class="green-message text-center">Lozinka uspješno promijenjena!</h4>
+<?php endif;?>
 <div class="grid-x grid-padding-x dashboard-profil">
     <div class="large-6 cell">
         <label for="firstname">Ime</label>
@@ -19,13 +22,13 @@
         <p><?= $customer->street ?></p>
 
         <label for="city">Grad i poštanski broj</label>
-        <p><?= $customer->city ?>, <?= $customer->postalnumber ?></p>
+        <p><?= $customer->city ?> <?= $customer->postalnumber ?></p>
 
     </div>
 </div>
 <div class="text-center">
-    <button class="button expand info dashboard-update-button" data-open="customer<?= $customer->id ?>">Promijeni podatke/lozinku</button>
+    <a class="button expand info dashboard-update-button" href="<?= App::config('url') ?>dashboard/details" >Promijeni podatke</a>
+    <a class="button expand secondary dashboard-update-button" href="<?= App::config('url') ?>dashboard/passwordchange" >Promijeni lozinku</a>
 </div>
-<?php include 'reveal.phtml';?>
 <hr>
 <?php include 'orders.phtml';?>

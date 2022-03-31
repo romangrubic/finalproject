@@ -8,7 +8,10 @@
     max-width: 700px;
     margin: 30px auto 0px!important;
 }
-
+.green-message{
+    color: rgb(1, 167, 1);
+    text-decoration: underline;
+}
 .dashboard-profil label{
     font-style: italic;
     font-size: 0.95rem;
@@ -27,8 +30,11 @@
 
 .dashboard-update-reveal{
     text-align: center;
-    width: 80%;
     margin: 75px auto;
+}
+.details-form{
+    max-width: 800px;
+    margin: 50px auto 50px;
 }
 
 .dashboard-update-reveal legend{
@@ -49,7 +55,6 @@
 }
 
 .reveal-buttons{
-    width: 70%;
     margin: auto;
 }
 
