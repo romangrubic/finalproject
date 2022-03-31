@@ -29,25 +29,26 @@
           <?php if($totalProducts < 1):?>
             Nema proizvoda.
           <?php elseif($totalProducts < 2):?>
-            Pronađen 1 proizvod,
             <?php if(isset($category->name)):?>
-              <?php if(isset($_GET['manufacturer'])):?>u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
+              <?php if(isset($_GET['manufacturer'])):?>Pronađen 1 proizvod, u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
               <?php else:?>
-                u kategoriji "<?=$category->name?>".
+                Pronađen 1 proizvod, u kategoriji "<?=$category->name?>".
               <?php endif;?>
             <?php endif;?>
             <?php if(!isset($category->name) && isset($_GET['manufacturer'])):?>
-              proizvođača "<?=$manufacturer->name?>"
+              Pronađen 1 proizvod, proizvođača "<?=$manufacturer->name?>"
+              <?php elseif(!isset($category->name) && !isset($_GET['manufacturer'])):?>
+                Pronađen 1 proizvod.
               <?php endif;?>
           <?php else:?>
-              <?=($_SERVER['REQUEST_URI'] == '/product/index') ? 'Pronađeno '.$totalProducts.' proizvoda.' : 'Pronađeno '.$totalProducts.' proizvoda';?>
+              <?=($_SERVER['REQUEST_URI'] == '/product/index') ? 'Pronađeno '.$totalProducts.' proizvoda.' : 'Pronađeno '.$totalProducts.' proizvoda,';?>
               <?php if(isset($category->name)):?>
                 <?php if(isset($_GET['manufacturer'])):?>u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
                 <?php else:?>
                   u kategoriji "<?=$category->name?>".
                 <?php endif;?>
               <?php endif;?>
-              <?=(!isset($category->name) && isset($_GET['manufacturer'])) ? ', proizvođača "'.$manufacturer->name.'".' : '';?>
+              <?=(!isset($category->name) && isset($_GET['manufacturer'])) ? 'proizvođača "'.$manufacturer->name.'".' : '';?>
               Prikazujemo proizvode od <?= $page*App::config('ppp')-App::config('ppp')+1?> do 
               <?php if($page*App::config('ppp') > $totalProducts){
                 echo $totalProducts;

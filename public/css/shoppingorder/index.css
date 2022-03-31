@@ -4,8 +4,13 @@
 
 
 .shoppingorder{
-    max-width: 75%;
+    max-width: 750px;
     margin: auto;
+    text-align: center;
+}
+
+.text-left{
+    text-align: left;
 }
 
 .order-cart-item{

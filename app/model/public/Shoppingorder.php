@@ -113,7 +113,7 @@ class Shoppingorder
             from shoppingorder a
             inner join cart b on a.id=b.shoppingorder
             inner join product c on b.product=c.id
-            inner join productimage d on c.id=d.product
+            left join productimage d on c.id=d.product
             where a.isFinished = 0 and a.customer = :customerId
             
         ');
