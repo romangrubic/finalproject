@@ -87,16 +87,6 @@ class RegistrationController extends Controller
         ]);
     }
 
-    public function update()
-    {
-        $this->customer = (object) $_POST;
-        // print_r($this->customer);
-        // Validators
-        Customer::update((array)$this->customer);
-        header('location:' . App::config('url').'dashboard/index');
-
-    }
-
     // Validating input methods
     private function validateFirstname()
     {

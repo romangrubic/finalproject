@@ -16,6 +16,37 @@ class Customer
         return  $query->fetch();
     }
 
+    public static function getpassword($id)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                select user_password
+                from customer
+                where id=:id
+        
+        ');
+        $query->execute(['id' => $id]);
+        return  $query->fetchColumn();
+    }
+
+    public static function updatepassword($id,$password)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                update customer
+                set user_password=:password
+                where id=:id
+        
+        ');
+        $query->execute([
+            'id'=>$id,
+            'password'=>$password
+        ]);
+    }
+    
+
     public static function read()
     {
         $connection = DB::getInstance();
