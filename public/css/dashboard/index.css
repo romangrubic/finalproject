@@ -1,3 +1,7 @@
+/* CSS for product card and modal */
+@import "../productCard/index.css";
+/*  */
+
 .dashboard-profil{
     text-align: center;
     width: 60%;
@@ -55,7 +59,7 @@
 }
 
 .order-section{
-    width: 80%;
+    width: 700px;
     margin: 30px auto;
 }
 
@@ -64,4 +68,7 @@
 }
 .order-section a{
     font-size: 1.2rem;
+}
+.order-cart-item{
+    cursor: pointer;
 }

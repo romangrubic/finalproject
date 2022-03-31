@@ -40,11 +40,13 @@ class DashboardController extends AuthorizedController
     {
         $this->customer = Customer::readOne($_SESSION['authorized']->id);
 
+
         $this->view->render($this->viewDir . 'index',[
             'css' => $this->cssDir . 'index.css',
             'customer'=>$this->customer,
             'message'=>$this->message,
-            'orders'=>Dashboard::getOrders($_SESSION['authorized']->id)
+            'orders'=>Dashboard::getOrders($_SESSION['authorized']->id),
+            'cartitems'=>Dashboard::getOrderDetails($_SESSION['authorized']->id)
         ]);
     }
 }

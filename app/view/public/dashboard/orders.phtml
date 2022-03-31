@@ -1,16 +1,74 @@
 <section class="order-section">
     <h2>Vaše prošle narudžbe</h2>
     <ul class="accordion" data-accordion data-allow-all-closed="true">
-        <?php foreach ($orders as $order):?>
-        <li class="accordion-item" data-accordion-item>
-            <a href="#" class="accordion-title">Narudžba #<?=$order->id?></a>
-            <div class="accordion-content" data-tab-content>
-                <p>Panel 1. Lorem ipsum dolor</p>
-            </div>
-        </li>
-        <?php endforeach;?>
+        <!-- <?php print_r($orders) ?> -->
+        <?php foreach ($orders as $order) : ?>
+            <li class="accordion-item" data-accordion-item>
+                <a href="#" class="accordion-title" data-id=<?= $order->id ?>>Narudžba <?= $order->dateadded ?></a>
+                <div class="accordion-content" id="order<?= $order->id ?>" data-tab-content>
+                    <table class="hover">
+                        <thead>
+                            <th>Naziv</th>
+                            <th class="text-center">Cijena</th>
+                            <th class="text-center">Količina</th>
+                            <th class="text-center">Plaćeno</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sum = 0;
+                            foreach ($cartitems as $p) : ?>
+                                <?php if ($p->id == $order->id) : ?>
+                                    <tr>
+                                        <td class="order-cart-item" data-open="productmodal<?= $p->productId ?>" title="Klik za detalje."><?= $p->name ?></td>
+                                        <td class="text-center"><?= $p->price / $p->quantity ?> kn</td>
+                                        <td class="text-center"><?= $p->quantity ?></td>
+                                        <td class="text-center"><?= $p->price ?> kn</td>
+                                    </tr>
+                                    <div class="small reveal" id="productmodal<?= $p->productId ?>" data-reveal>
+                                        <h1 class="modal-product-name"><?= $p->name ?></h1>
+                                        <div class="grid-x grid-padding-x modal-product-section">
+                                            <div class="large-6 modal-product-image">
+                                                <img src="<?= $p->imageurl ?>" alt="<?= $p->name ?>">
+                                            </div>
+                                            <div class="large-6 modal-product-description">
+                                                <p><?= $p->description ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="grid-x grid-padding-x text-center">
+                                            <div class="large-6 large-offset-1">
+                                                <h3><?= $p->productPrice ?></h3>
+                                            </div>
+                                            <div class="large-3">
+
+                                                <i class="fas fa-3x fa-cart-plus add-to-cart addToCart" data-open="modal<?=$p->productId?>" data-id="<?= $p->productId ?>" title="Dodaj &quot;<?= $p->name ?>&quot; u košaricu."></i>
+                                                <div class="small reveal add-modal" id="modal<?=$p->productId?>" data-reveal>
+                                                    <div class="grid-x grid-padding-x text-center">
+                                                        <h4 class="text-center">"<?=$p->name?>" uspješno dodan u Vašu košaricu!</h4>
+                                                        <br>
+                                                        <br>
+                                                        <div class="large-6">
+                                                            <button data-close class="button warning">Zatvori</button>
+                                                        </div>
+                                                        <div class="large-6">
+                                                            <a href="<?= App::config('url') ?>shoppingorder/index" data-close class="button expanded">Vaša košarica</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <i class="far fa-3x fa-heart add-to-wishlist" data-close data-id="<?= $p->productId ?>" title="Dodaj &quot;<?= $p->name ?>&quot; u listu želja."></i>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php $sum += $p->price ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <h3 class="text-center">Total: <?= $sum ?>kn</h3>
+                </div>
+            </li>
+        <?php endforeach; ?>
+
+
     </ul>
 </section>
-<pre>
-    <?php print_r($orders) ?>
-</pre>
