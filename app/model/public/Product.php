@@ -18,9 +18,12 @@ class Product
             }else{
                 $query = $connection->prepare('
             
-                select count(id)
-                from product             
-                where concat(name, \' \', ifnull(description, \' \')) like :search
+                select count(a.id)
+                from product a
+                left join productimage b on a.id=b.product
+                inner join manufacturer c on a.manufacturer=c.id   
+                inner join category d on a.category=d.id        
+                where concat(a.name, \' \', ifnull(a.description, \' \'),c.name, d.name) like :search
             ');
 
             $search = '%' . $search . '%';
@@ -50,6 +53,29 @@ class Product
         return $query->fetchColumn();
     }
 
+    // Method for autocomplete functionality
+    public static function searchProduct($search)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+            select name from product
+            where name like :search
+            union
+            select name from manufacturer
+            where name like :search
+            union
+            select name from category
+            where name like :search
+            order by name limit 20
+        ');
+
+        $search = '%' . $search . '%';
+        $query->bindParam('search', $search);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public static function read($category, $search, $page, $manufacturer)
     {
         $ppp = App::config('ppp');
@@ -71,10 +97,12 @@ class Product
             }else{
                 $query = $connection->prepare('
         
-                select a.id, a.name, a.description, a.category, a.price, b.imageurl as imageurl
+                select a.id, a.name,c.name as manufacturer, a.description, d.name as category, a.price, b.imageurl as imageurl
                 from product a
-                left join productimage b on a.id=b.product             
-                where concat(a.name, \' \', ifnull(a.description, \' \')) like :search
+                left join productimage b on a.id=b.product
+                inner join manufacturer c on a.manufacturer=c.id   
+                inner join category d on a.category=d.id        
+                where concat(a.name, \' \', ifnull(a.description, \' \'),c.name, d.name) like :search
                 limit :from, :ppp
             ');
             $search = '%' . $search . '%';

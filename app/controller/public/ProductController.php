@@ -53,4 +53,9 @@ class ProductController extends LoginController
             'search'=>$search
         ]);
     }
+
+    public function searchproduct($search){
+        header('Content-type: application/json');
+        echo json_encode(Product::searchProduct($search));
+    }
 }
