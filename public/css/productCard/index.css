@@ -83,3 +83,13 @@
 .modal-product-description{
     padding: 40px 20px;
 }
+
+/* Confirmation modal */
+.add-modal{
+  border-radius: 5px;
+  padding: 45px 25px 25px;
+  top: 30% !important;
+}
+.add-modal h4{
+margin-bottom: 30px;
+}

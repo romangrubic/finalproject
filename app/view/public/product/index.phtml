@@ -5,7 +5,13 @@
         <legend>Proizvođač</legend>
         <div class="manufacturer-list">
         <?php foreach($manufacturers as $m):?>
-          <input type="radio" id="manufacturerId<?=$m->id?>" name="manufacturer" value="<?=$m->id?>">
+          <input type="radio" id="manufacturerId<?=$m->id?>" name="manufacturer" value="<?=$m->id?>" 
+          <?php if(isset($_GET['manufacturer'])){
+            if($_GET['manufacturer']==$m->id){
+              echo 'checked';
+            }
+          }?>
+          >
           <label for="manufacturerId<?=$m->id?>"><?=$m->name?></label><br>
         <?php endforeach;?>
         </div>
@@ -23,20 +29,20 @@
           <?php if($totalProducts < 1):?>
             Nema proizvoda.
           <?php elseif($totalProducts < 2):?>
-            Pronađen 1 proizvod
+            Pronađen 1 proizvod,
             <?php if(isset($category->name)):?>
-              <?php if(isset($_GET['manufacturer'])):?>
-                u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
+              <?php if(isset($_GET['manufacturer'])):?>u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
               <?php else:?>
                 u kategoriji "<?=$category->name?>".
               <?php endif;?>
             <?php endif;?>
-            <?=(!isset($category->name) && isset($_GET['manufacturer'])) ? ', proizvođača "'.$manufacturer->name.'".' : '';?>
+            <?php if(!isset($category->name) && isset($_GET['manufacturer'])):?>
+              proizvođača "<?=$manufacturer->name?>"
+              <?php endif;?>
           <?php else:?>
               <?=($_SERVER['REQUEST_URI'] == '/product/index') ? 'Pronađeno '.$totalProducts.' proizvoda.' : 'Pronađeno '.$totalProducts.' proizvoda';?>
               <?php if(isset($category->name)):?>
-                <?php if(isset($_GET['manufacturer'])):?>
-                  u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
+                <?php if(isset($_GET['manufacturer'])):?>u kategoriji "<?=$category->name?>", proizvođača "<?=$manufacturer->name?>".
                 <?php else:?>
                   u kategoriji "<?=$category->name?>".
                 <?php endif;?>

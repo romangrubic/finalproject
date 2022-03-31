@@ -14,8 +14,21 @@
         </div>
         <div class="large-3">
         <?php if(App::authorized()):?>
-        <i class="fas fa-3x fa-cart-plus add-to-cart addToCart" data-id="<?=$product->id?>" title="Dodaj &quot;<?=$product->name?>&quot; u košaricu." data-close></i>
-        <i class="far fa-3x fa-heart add-to-wishlist" data-id="<?=$product->id?>" title="Dodaj &quot;<?=$product->name?>&quot; u listu želja." data-close></i>
+          <i class="fas fa-3x fa-cart-plus add-to-cart addToCart" data-id="<?= $product->id ?>" data-open="modal<?= $product->id ?>" title="Dodaj &quot;<?= $product->name ?>&quot; u košaricu"></i>
+          <div class="small reveal add-modal" id="modal<?= $product->id ?>" data-reveal>
+            <div class="grid-x grid-padding-x text-center">
+                <h4 class="text-center">"<?=$product->name?>" uspješno dodan u Vašu košaricu!</h4>
+                <br>
+                <br>
+                <div class="large-6">
+                  <button data-close class="button warning">Zatvori</button>
+              </div>
+              <div class="large-6">
+                  <a href="<?=App::config('url')?>shoppingorder/index" data-close class="button expanded">Vaša košarica</a>
+              </div>
+            </div>
+          </div>        
+          <i class="far fa-3x fa-heart add-to-wishlist" data-id="<?=$product->id?>" title="Dodaj &quot;<?=$product->name?>&quot; u listu želja." data-close></i>
       <?php else:?>
         <i class="fas fa-3x fa-cart-plus add-to-cart" title="Prijavite se ili registrirajte za dodavanje &quot;<?=$product->name?>&quot; u Vašu košaricu." data-open="productprijava"></i>
         <i class="far fa-3x fa-heart add-to-wishlist" title="Prijavite se ili registrirajte za dodavanje &quot;<?=$product->name?>&quot; u Vašu listu želja." data-open="productprijava"></i>
