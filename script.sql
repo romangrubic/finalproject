@@ -36,7 +36,9 @@ create table product(
     category int not null,
     price decimal(18,2),
     inventoryquantity int not null,
-    dateadded datetime not null
+    dateadded datetime not null,
+    lastUpdated datetime
+
 );
 
 create table productimage(

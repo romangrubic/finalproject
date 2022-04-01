@@ -8,10 +8,11 @@ class Product
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-                select a.id, a.name, a.description, b.id as categoryId, b.name as categoryName, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded
+                select a.id, a.name, a.description, b.id as category, b.name as categoryName, d.id as manufacturer, d.name as manufacturerName, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded
                 from product a
                 inner join category b on a.category=b.id
-                inner join productimage c on c.product=a.id
+                left join productimage c on c.product=a.id
+                inner join manufacturer d on a.manufacturer=d.id
                 where a.id=:id
         
         ');
@@ -26,10 +27,11 @@ class Product
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-                select a.id, a.name, a.description, b.name as category, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded
+                select a.id, a.name, a.description, b.name as category,d.name as manufacturer, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded, a.lastUpdated
                 from product a
                 inner join category b on a.category=b.id
-                inner join productimage c on c.product=a.id
+                left join productimage c on c.product=a.id
+                inner join manufacturer d on a.manufacturer=d.id
                 order by a.id
         
         ');
@@ -83,7 +85,8 @@ class Product
             description=:description,
             category=:category,
             price=:price,
-            inventoryquantity=:inventoryquantity
+            inventoryquantity=:inventoryquantity,
+            lastUpdated=now()
             where id=:id
                 
         ');
