@@ -5,35 +5,51 @@
         <a onclick="return confirm('Confirm deletion for <?=$product->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>product/delete/<?=$product->id?>">DELETE PRODUCT</a>
         </div>
     <?php endif;?>
+
+    <legend>Detalji proizvoda:</legend>
     <input type="hidden" name="id" value="<?=$product->id?>">
     
-    <label for="name">Name</label>
+    <label for="name">Naziv</label>
     <input type="text" name="name" id="name" aria-describedby="messagename" value="<?= $product->name ?>">
     <p class="help-text red-message" id="messagename">
         <?= $message->name ?>
     </p>
 
-    <label for="description">Description</label>
+    <label for="description">Opis</label>
     <input type="text" name="description" id="description" aria-describedby="messagedescription" value="<?= $product->description ?>">
     <p class="help-text red-message" id="messagedescription">
         <?= $message->description ?>
     </p>
 
-    <label for="category">Category</label>
-    <select id="category" name="category">
-        <option value="0">Please select category</option>
+    <label for="category">Kategorija</label>
+    <select id="category" name="category" aria-describedby="messagecategory">
+        <option value="0">Odaberite kategoriju</option>
         <?php foreach ($categories as $category) : ?>
-                <option value="<?= $category->id ?>" <?php if($category->id == $product->categoryId) echo 'selected="selected"';?>><?= $category->name ?></option>
+                <option value="<?= $category->id ?>" <?php if($category->id == $product->category) echo 'selected="selected"';?>><?= $category->name ?></option>
         <?php endforeach; ?>
     </select>
+    <p class="help-text red-message" id="messagecategory">
+        <?= $message->category ?>
+    </p>
 
-    <label for="price">Price</label>
+    <label for="manufacturer">Proizvođač</label>
+    <select id="manufacturer" name="manufacturer" aria-describedby="messagemanufacturer">
+        <option value="0">Odaberite proizvođača</option>
+        <?php foreach ($manufacturers as $manufacturer) : ?>
+                <option value="<?= $manufacturer->id ?>" <?php if($manufacturer->id == $product->manufacturer) echo 'selected="selected"';?>><?= $manufacturer->name ?></option>
+        <?php endforeach; ?>
+    </select>
+    <p class="help-text red-message" id="messagemanufacturer">
+        <?= $message->manufacturer ?>
+    </p>
+
+    <label for="price">Cijena</label>
     <input type="text" name="price" id="price" aria-describedby="messageprice" value="<?= $product->price ?>">
     <p class="help-text red-message" id="messageprice">
         <?= $message->price ?>
     </p>
 
-    <label for="inventoryquantity">Inventory Quantity</label>
+    <label for="inventoryquantity">Stanje u skladištu</label>
     <input type="number" name="inventoryquantity" id="inventoryquantity" aria-describedby="messageinventoryquantity" value="<?= $product->inventoryquantity ?>">
     <p class="help-text red-message" id="messageinventoryquantity">
         <?= $message->inventoryquantity ?>
@@ -46,7 +62,7 @@
     </p>
     <div class="grid-x grid-padding-x">
         <div class="large-5 cell">
-            <a class="alert button expanded" href="<?= App::config('url') ?>product/index">Cancel.</a>
+            <a class="alert button expanded" href="<?= App::config('url') ?>product/index">Natrag.</a>
         </div>
         <div class="large-7 cell">
             <input type="submit" class="info button expanded" value="<?= $action ?>">

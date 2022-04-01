@@ -13,7 +13,7 @@
                 <th>Naziv</th>
                 <th>Opis</th>
                 <th>Zadnja promjena</th>
-                <th>Akcija</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,12 +23,7 @@
                     <td><?= $category->description ?></td>
                     <td><?= $category->lastUpdated ?></td>
                     <td>
-                        <a href="<?= App::config('url') ?>category/details/<?= $category->id ?>"><i title="Promijeni &quot;<?= $category->name ?>&quot; kategoriju." class="fas fa-2x fa-edit"></i></a>
-                        <?php if ($category->hasproducts == 0) : ?>
-                            <a onclick="return confirm('Sigurno obrisati <?= $category->name ?> kategoriju ?')" style="margin-left: 20px; color: red;" href="<?= App::config('url') ?>category/delete/<?= $category->id ?>"><i title="Obriši &quot;<?= $category->name ?>&quot; kategoriju." class="fas fa-2x fa-trash"></i></a>
-                        <?php else : ?>
-                            <i style="margin-left: 20px; color: gray;" title="Ne moze se obrisati kategorija &quot;<?= $category->name ?>&quot; jer ima proizvode." class="fas fa-2x fa-trash"></i>
-                        <?php endif; ?>
+                        <a href="<?= App::config('url') ?>category/details/<?= $category->id ?>" class="button expand info">View details (update<?php if ($_SESSION['authorized']->user_role == 'admin') echo '/delete'; ?>)</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

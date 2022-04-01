@@ -1,3 +1,20 @@
 .button{
     margin: 0px;
 }
+
+.red-message{
+    color: red;
+    font-size: 1rem;
+    margin: none;
+}
+
+.product-form{
+    padding: 1rem;
+    border-radius: 0;
+    max-width: 600px;
+    margin: auto;
+}
+
+.product-form input{
+    margin: none !important;
+}
