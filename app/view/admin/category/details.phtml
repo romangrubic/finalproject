@@ -1,0 +1,30 @@
+<div class="main-index">
+    <form action="<?= App::config('url') ?>category/action" method="post">
+        <fieldset>
+            <legend>Detalji kategorije</legend>
+
+            <label for="name">Naziv kategorije</label>
+            <input type="text" name="name" id="name" value="<?= $category->name ?>" aria-describedby="messagename">
+            <p class="help-text red-message" id="messagename">
+                <?= $message->name ?>
+            </p>
+
+            <label for="description">Opis kategorije (do 255 znakova)</label>
+            <input type="text" name="description" id="description" value="<?= $category->description ?>" aria-describedby="messagedescription">
+            <p class="help-text red-message" id="messagedescription">
+                <?= $message->description ?>
+            </p>
+
+            <input type="hidden" name="id" value="<?= $category->id ?>">
+
+            <div class="grid-x grid-padding-x">
+                <div class="large-4 cell">
+                    <a class="alert button expanded" href="<?= App::config('url') ?>category/index">Odustani</a>
+                </div>
+                <div class="large-8 cell">
+                    <input type="submit" class="success button expanded" value="<?= $action ?>">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
