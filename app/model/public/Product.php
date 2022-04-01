@@ -64,9 +64,6 @@ class Product
             union
             select name from manufacturer
             where name like :search
-            union
-            select name from category
-            where name like :search
             order by name limit 20
         ');
 

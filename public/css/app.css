@@ -60,12 +60,12 @@ hr{
 /* Admin side navbar */
 .sidenav {
   height: 100%;
-  width: 200px;
+  width: 220px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgb(49, 82, 121);
+  background-color:var(--navbar-color);
   overflow-x: hidden;
   padding-top: 20px;
 }

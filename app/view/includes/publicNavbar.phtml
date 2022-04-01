@@ -14,7 +14,7 @@
       <!-- Search product form -->
       <form class="search-product large-6 cell blue-sky" action="<?=App::config('url')?>product/index" method="get">
       <div class="ui-widget">
-          <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, kategoriji, proizvođaču..." <?=(isset($_GET['search']))? 'value="'.$_GET['search'].'"':''?>>
+          <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu proizvoda ili proizvođaču..." <?=(isset($_GET['search']))? 'value="'.$_GET['search'].'"':''?>>
       </div>
       </form>
       <!-- Dashboard link -->

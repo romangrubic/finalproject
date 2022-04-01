@@ -1,4 +1,13 @@
-<div class="footer-main">
+<?php if(isset($_SESSION['authorized']->user_role) && ($_SESSION['authorized']->user_role == 'admin' || $_SESSION['authorized']->user_role == 'oper')):?>
+    <div class="footer-main">
+    <div class="footer">
+        <h2>
+            <?= App::config('appName') ?> &copy; 2022
+        </h2>
+    </div>
+</div>
+<?php else:?>
+    <div class="footer-main">
     <div class="footer">
         <p>Primajte novosti i posebne akcije na Vaš email!</p>
         <form action="<?=App::config('url')?>index/emailNewsletter" method="post">
@@ -11,3 +20,4 @@
         </h2>
     </div>
 </div>
+<?php endif;?>

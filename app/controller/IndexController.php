@@ -7,7 +7,9 @@ class IndexController extends LoginController
     public function index()
     {
         if (isset($_SESSION['authorized']->user_role) && ($_SESSION['authorized']->user_role == 'admin' || $_SESSION['authorized']->user_role == 'oper')) {
-            $this->view->render('admin/index');
+            $this->view->render('admin/index',[
+                'css'=>'admin' . DIRECTORY_SEPARATOR .'index.css',
+            ]);
             return;
         }
         $this->view->render('index',[
