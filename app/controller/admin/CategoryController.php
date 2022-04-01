@@ -12,8 +12,10 @@ class CategoryController extends AuthorizedController
     {
         parent::__construct();
         $this->category = new stdClass();
+        $this->category->id = 0;
         $this->category->name = '';
         $this->category->description = '';
+        $this->category->lastUpdated = '';
 
         $this->message = new stdClass();
         $this->message->name='';
@@ -28,56 +30,57 @@ class CategoryController extends AuthorizedController
         ]);
     }
 
-    public function new()
+    public function details($id=0)
     {
-        $this->view->render($this->viewDir . 'new', [
-            'css' => $this->cssDir . 'new.css',
-            'message' => $this->message,
-            'category' => $this->category
-        ]);
-    }
-
-    public function addNew()
-    {
-        $this->category = (object)$_POST;
-
-        if($this->validationName() && $this->validationDescription()){
-            Category::insert($_POST);
-            header('Location:'.App::config('url').'category/index');
+        if($id == 0){
+            $this->view->render($this->viewDir . 'details',[
+                'css' => $this->cssDir . 'index.css',
+                'category'=>$this->category,
+                'message'=>$this->message,
+                'action'=>'Dodaj novu kategoriju'
+            ]);
         }else{
-            $this->view->render($this->viewDir . 'new', [
-                'css' => $this->cssDir . 'new.css',
-                'message' => $this->message,
-                'category' => $this->category
+            $this->view->render($this->viewDir . 'details',[
+                'css' => $this->cssDir . 'index.css',
+                'category'=>Category::readOne($id),
+                'message'=>$this->message,
+                'action'=>'Update'
             ]);
         }
     }
 
-    public function update($id)
-    {
-        $this->category = Category::readOne($id);
-
-        $this->view->render($this->viewDir . 'update', [
-            'css' => $this->cssDir . 'update.css',
-            'message' => $this->message,
-            'category' => $this->category
-        ]);
-    }
-
-    public function updateNew()
+    public function action()
     {
         $this->category = (object)$_POST;
 
-        if($this->validationName() && $this->validationDescription()){
-            Category::update($_POST);
-            header('Location:'.App::config('url').'category/index');
-        }else{
-            $this->view->render($this->viewDir . 'update', [
-                'css' => $this->cssDir . 'update.css',
-                'message' => $this->message,
-                'category' => $this->category
-            ]);
+        if($this->category->id ==0){
+            if($this->validationName() &&
+                $this->validationDescription()){
+                Category::insert((array)$this->category);
+            }else{
+                $this->view->render($this->viewDir . 'details',[
+                    'css' => $this->cssDir . 'index.css',
+                    'category'=>$this->category,
+                    'message'=>$this->message,
+                    'action'=>'Spremi promijene'
+                ]);
+                return;
+            }
+        }else{;
+            if($this->validationName() &&
+                $this->validationDescription()){
+                Category::update((array)$this->category);
+            }else{
+                $this->view->render($this->viewDir . 'details',[
+                    'css' => $this->cssDir . 'index.css',
+                    'category'=>(object)$_POST,
+                    'message'=>$this->message,
+                    'action'=>'Update'
+                ]);
+                return;
+            }
         }
+        header('location:' . App::config('url').'category/index');
     }
 
     public function delete($id)
@@ -102,6 +105,10 @@ class CategoryController extends AuthorizedController
 
     private function validationDescription()
     {
+        if(strlen(trim($this->category->description)) < 5){
+            $this->message->description = 'Kratak opis je dovoljan.';
+            return false;
+        }
         if(strlen(trim($this->category->description)) > 255){
             $this->message->description = 'Opis moze imati najvise 255 znakova.';
             return false;

@@ -7,7 +7,7 @@ class Category
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-                select a.id, a.name, a.description, count(b.id) as hasproducts
+                select a.id, a.name, a.description,a.lastUpdated, count(b.id) as hasproducts
                 from category a
                 left join product b on a.id=b.category
                 group by a.id, a.name, a.description;
@@ -22,11 +22,14 @@ class Category
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-                insert into category (name,description)
-                values (:name,:description)
+                insert into category (name,description, lastUpdated)
+                values (:name,:description, now())
         
         ');
-        $query->execute($paramaters);
+        $query->execute([
+            'name'=>$paramaters['name'],
+            'description'=>$paramaters['description'],
+        ]);
     }
 
     public static function readOne($id)
@@ -49,7 +52,7 @@ class Category
         $query = $connection->prepare('
         
                 update category
-                set name = :name, description = :description
+                set name = :name, description = :description, lastUpdated=now()
                 where id = :id
         ');
         $query->execute($parameters);

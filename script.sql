@@ -18,7 +18,8 @@ create table customer(
 create table category(
     id int not null primary key auto_increment,
     name varchar(50) not null,
-    description varchar(255)
+    description varchar(255),
+    lastUpdated datetime
 );
 
 create table manufacturer(
