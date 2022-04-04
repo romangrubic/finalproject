@@ -24,9 +24,11 @@ class CategoryController extends AuthorizedController
 
     public function index()
     {
+
         $this->view->render($this->viewDir . 'index', [
             'css' => $this->cssDir . 'index.css',
-            'categories' => Category::read()
+            'categories' => Category::read(),
+            'totalCategories'=>Category::countCategories()
         ]);
     }
 

@@ -3,9 +3,13 @@
         <div class="cell large-6">
             <h1 style="font-size: 1.5rem;">Kategorije</h1>
         </div>
+        <?php if($totalCategories <=  10):?>
         <div class="cell large-6" style="text-align: right;">
             <a href="<?= App::config('url') ?>category/details"><i style="color: green;" title="Dodaj novu kategoriju." class="fas fa-2x fa-plus-circle"></i></a>
         </div>
+        <?php else:?>
+            <h5>- Maksimalan broj kategorija je dosegnut! -</h5>
+        <?php endif;?>
     </div>
     <table>
         <thead>

@@ -2,6 +2,19 @@
 
 class Category
 {
+    public static function countCategories()
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                select count(*)
+                from category
+        
+        ');
+        $query->execute();
+        return  $query->fetchColumn();
+    }
+
     public static function read()
     {
         $connection = DB::getInstance();
