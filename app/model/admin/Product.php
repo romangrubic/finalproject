@@ -22,6 +22,29 @@ class Product
         return $query->fetchColumn();
     }
 
+    // Method for autocomplete functionality
+    public static function searchProduct($search)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+            select id, name from product
+            where concat(id, name) like :search
+            union
+            select id, name from manufacturer
+            where concat(id, name) like :search
+            union
+            select id, name from category
+            where concat(id, name) like :search
+            order by id, name limit 15
+        ');
+
+        $search = '%' . $search . '%';
+        $query->bindParam('search', $search);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public static function readOne($id)
     {
         $connection = DB::getInstance();

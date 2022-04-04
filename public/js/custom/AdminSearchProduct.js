@@ -16,7 +16,7 @@ $("#search")
   })
   .autocomplete("instance")._renderItem = function (ul, item) {
   return $("<li>")
-    .append("<div>" + item.name + "</div>")
+    .append("<div>ID: " + item.id + ' -> Naziv: ' + item.name + "</div>")
     .appendTo(ul);
 };
 

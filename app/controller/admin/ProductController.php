@@ -74,8 +74,16 @@ class ProductController extends Controller
             'totalProducts' => $totalProducts,
             'page'=>$page,
             'totalPages'=>$totalPages,
-            'search'=>$search
+            'search'=>$search,
+            'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminSearchProduct.js"></script> '
+
         ]);
+    }
+
+    // Autocomplete search
+    public function searchproduct($search){
+        header('Content-type: application/json');
+        echo json_encode(Product::searchProduct($search));
     }
 
     public function details($id=0)

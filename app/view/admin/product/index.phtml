@@ -9,7 +9,7 @@
     </div>
     <form class="search-product large-6 cell blue-sky" action="<?= App::config('url') ?>product/index" method="get">
         <div class="ui-widget">
-            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po id, imenu proizvoda,proizvođaču,kategoriji..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
+            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po id, imenu proizvoda, proizvođaču, kategoriji..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
         </div>
     </form>
     <table>
