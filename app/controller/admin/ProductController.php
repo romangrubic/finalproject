@@ -6,6 +6,7 @@ class ProductController extends Controller
     private $cssDir =  'admin' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR;
 
     private $product;
+    private $nf;
     private $message;
 
     public function __construct()
@@ -19,11 +20,14 @@ class ProductController extends Controller
         $this->product->categoryName = '';        
         $this->product->manufacturer = '';
         $this->product->manufacturerName = '';
-        $this->product->price = '';
+        $this->product->price = 1.00;
         $this->product->inventoryquantity = '';
         $this->product->dateadded = '';
         $this->product->lastUpdated = '';
         $this->product->imageurl = '';
+
+        $this->nf = new \NumberFormatter("hr-HR", \NumberFormatter::DECIMAL);
+        $this->nf->setPattern('#,##0.00');
 
         $this->message = new stdClass();
         $this->message->name='';
@@ -39,6 +43,10 @@ class ProductController extends Controller
     {
         $products = Product::read();
         
+        foreach($products as $product){
+            $product->price=$this->nf->format($product->price);
+        }
+
         $this->view->render($this->viewDir . 'index', [
             'css' => $this->cssDir . 'index.css',
             'products' => $products
@@ -59,6 +67,12 @@ class ProductController extends Controller
         }else{
             $this->product = Product::readOne($id);
 
+            if($this->product->price==0){
+                $this->product->price = '';
+            }else{
+                $this->product->price = $this->nf->format($this->product->price);
+            }
+
             $this->view->render($this->viewDir . 'details', [
                 'css' => $this->cssDir . 'index.css',
                 'product'=>$this->product,
@@ -78,7 +92,9 @@ class ProductController extends Controller
             if($this->validationName() &&
                 $this->validationDescription() &&
                 $this->validateCategory() &&
-                $this->validateManufacturer()){
+                $this->validateManufacturer()  &&
+                $this->validatePrice() &&
+                $this->validateInventoryQuantity()){
                 Product::create((array)$this->product);
             }else{
                 $this->view->render($this->viewDir . 'details',[
@@ -95,7 +111,9 @@ class ProductController extends Controller
             if($this->validationName() &&
                 $this->validationDescription() &&
                 $this->validateCategory() &&
-                $this->validateManufacturer()){
+                $this->validateManufacturer() &&
+                $this->validatePrice() &&
+                $this->validateInventoryQuantity()){
                 Product::update((array)$this->product);
 
             }else{
@@ -160,6 +178,34 @@ class ProductController extends Controller
     {
         if($this->product->manufacturer==0){
             $this->message->manufacturer='Odaberite jednog od proizvođača.';
+            return false;
+        }
+        return true;
+    }
+
+    private function validatePrice()
+    {
+        if($this->product->price == ''){
+            $this->message->price = 'Cijena ne smije biti 0.';
+            return false;
+        }
+        if(strlen(trim($this->product->price)) > 0){
+            $this->product->price = str_replace('.','',$this->product->price);
+            $this->product->price = (float)str_replace(',','.',$this->product->price);
+            
+            if($this->product->price <= 0){
+                $this->message->price = 'Ako unosite cijenu mora biti decimalni broj veci od 0';
+                $this->product->price = 1.00;
+            return false;
+            }
+        }
+        return true;
+    }
+
+    private function validateInventoryQuantity()
+    {
+        if($this->product->inventoryquantity<0){
+            $this->message->inventoryquantity='Stanje ne smije biti manje od 0.';
             return false;
         }
         return true;

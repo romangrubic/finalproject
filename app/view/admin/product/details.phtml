@@ -1,10 +1,8 @@
 <form class="product-form" action="<?= App::config('url') ?>product/action" method="POST">
-<!-- <?= print_r($_SESSION)?> -->
-    <?php if(App::authorized() && ($_SESSION['authorized']->user_role === 'admin') && ($product->id != 0)):?>
         <div>
         <a onclick="return confirm('Confirm deletion for <?=$product->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>product/delete/<?=$product->id?>">DELETE PRODUCT</a>
         </div>
-    <?php endif;?>
+        <hr>
 
     <legend>Detalji proizvoda:</legend>
     <input type="hidden" name="id" value="<?=$product->id?>">
@@ -43,7 +41,7 @@
         <?= $message->manufacturer ?>
     </p>
 
-    <label for="price">Cijena</label>
+    <label for="price">Cijena (npr. 125,99)</label>
     <input type="text" name="price" id="price" aria-describedby="messageprice" value="<?= $product->price ?>">
     <p class="help-text red-message" id="messageprice">
         <?= $message->price ?>

@@ -1,4 +1,5 @@
-<div class="grid-x">
+<div class="main-index">
+    <div class="grid-x">
     <div class="cell large-6">
         <h1 style="font-size: 1.5rem;">Products</h1>
     </div>
@@ -27,15 +28,16 @@
             <td><?=$product->name?></td>
             <td><?=$product->manufacturer?></td>
             <td><?=$product->category?></td>
-            <td><?=$product->price?>kn</td>
+            <td><?=$product->price?> kn</td>
             <td class="text-center"><?=$product->inventoryquantity?></td>
             <td><?=$product->lastUpdated?></td>
             <td>
-              <a href="<?= App::config('url') ?>product/details/<?= $product->id ?>" class="button expand info">View details (update<?php if($_SESSION['authorized']->user_role == 'admin') echo '/delete';?>)</a>
+              <a href="<?= App::config('url') ?>product/details/<?= $product->id ?>" class="button expand info">View details...</a>
             </td>
         </tr>
     <?php endforeach;?>
     </tbody>
 </table>
+</div>
 
 

@@ -41,18 +41,20 @@ class Product
 
     public static function create($parameters)
     {
+        print_r($parameters);
         $connection = DB::getInstance();
         $connection->beginTransaction();
         $query = $connection->prepare('
         
-                insert into product (name, description, category, price, inventoryquantity, dateadded)
-                values (:name, :description, :category, :price, :inventoryquantity, now())
+                insert into product (name, description, category,manufacturer, price, inventoryquantity, dateadded)
+                values (:name, :description, :category,:manufacturer, :price, :inventoryquantity, now())
         
         ');
         $query->execute([
             'name'=>$parameters['name'],
             'description'=>$parameters['description'],
             'category'=>$parameters['category'],
+            'manufacturer'=>$parameters['manufacturer'],
             'price'=>$parameters['price'],
             'inventoryquantity'=>$parameters['inventoryquantity'],
         ]);
@@ -84,6 +86,7 @@ class Product
             name=:name,
             description=:description,
             category=:category,
+            manufacturer=:manufacturer,
             price=:price,
             inventoryquantity=:inventoryquantity,
             lastUpdated=now()
@@ -94,6 +97,7 @@ class Product
             'name'=>$parameters['name'],
             'description'=>$parameters['description'],
             'category'=>$parameters['category'],
+            'manufacturer'=>$parameters['manufacturer'],
             'price'=>$parameters['price'],
             'inventoryquantity'=>$parameters['inventoryquantity'],
             'id'=>$parameters['id'],

@@ -1,6 +1,10 @@
 <div class="main-index">
     <div class="form">
     <form action="<?= App::config('url') ?>category/action" method="post">
+    <div>
+        <a onclick="return confirm('Confirm deletion for <?=$category->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>category/delete/<?=$category->id?>">DELETE CATEGORY</a>
+        </div>
+        <hr>
         <fieldset>
             <legend>Detalji kategorije</legend>
 
@@ -23,7 +27,7 @@
                     <a class="alert button expanded" href="<?= App::config('url') ?>category/index">Odustani</a>
                 </div>
                 <div class="large-8 cell">
-                    <input type="submit" class="success button expanded" value="<?= $action ?>">
+                    <input type="submit" class="button expanded" value="<?= $action ?>">
                 </div>
             </div>
         </fieldset>

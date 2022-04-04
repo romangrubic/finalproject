@@ -23,7 +23,7 @@
                     <td><?= $category->description ?></td>
                     <td><?= $category->lastUpdated ?></td>
                     <td>
-                        <a href="<?= App::config('url') ?>category/details/<?= $category->id ?>" class="button expand info">View details (update<?php if ($_SESSION['authorized']->user_role == 'admin') echo '/delete'; ?>)</a>
+                        <a href="<?= App::config('url') ?>category/details/<?= $category->id ?>" class="button expand info">View details...</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
