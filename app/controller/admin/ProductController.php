@@ -41,7 +41,28 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::read();
+        if(!isset($_GET['search'])){
+            $search = '';
+        }else{
+            $search = $_GET['search'];
+        }
+
+        if(!isset($_GET['page'])){
+            $page = 1;
+        }else{
+            $page = (int)$_GET['page'];
+        }
+        if($page == 0){
+            $page = 1;
+        }
+
+        $totalProducts = Product::totalProducts($search);
+        $totalPages = ceil($totalProducts / App::config('ppp'));
+
+        if($page > $totalPages){
+            $page = $totalPages;
+        }
+        $products = Product::read($search, $page);
         
         foreach($products as $product){
             $product->price=$this->nf->format($product->price);
@@ -49,7 +70,11 @@ class ProductController extends Controller
 
         $this->view->render($this->viewDir . 'index', [
             'css' => $this->cssDir . 'index.css',
-            'products' => $products
+            'products' => $products,
+            'totalProducts' => $totalProducts,
+            'page'=>$page,
+            'totalPages'=>$totalPages,
+            'search'=>$search
         ]);
     }
 

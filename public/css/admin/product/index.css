@@ -30,3 +30,17 @@
     max-width: 600px;
     margin: auto;
 }
+
+/* Pagination */
+.pagination{
+    margin-top: 50px;
+  }
+  .pagination li{
+    border-radius: 5px;
+    font-size: 1.3rem;
+  }
+  .page-show-button{
+    width: 80px;
+    color: white;
+    background-color: var(--navbar-color);
+  }
