@@ -3,6 +3,25 @@
 class Product
 {
 
+    public static function totalProducts($search)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+            select count(a.id)
+            from product a
+            left join productimage b on a.id=b.product
+            inner join manufacturer c on a.manufacturer=c.id   
+            inner join category d on a.category=d.id        
+            where concat(a.id, a.name, \' \', ifnull(a.description, \' \'),c.name, d.name) like :search
+            
+        ');
+        $search = '%' . $search . '%';
+        $query->bindParam('search', $search);
+        $query->execute();
+        return $query->fetchColumn();
+    }
+
     public static function readOne($id)
     {
         $connection = DB::getInstance();
@@ -22,10 +41,14 @@ class Product
         return $query->fetch();
     }
 
-    public static function read()
+    public static function read($search,$page)
     {
+        $ppp = App::config('ppp');
+        $from = $page * $ppp - $ppp;
+
         $connection = DB::getInstance();
-        $query = $connection->prepare('
+        if(!isset($search)){
+            $query = $connection->prepare('
         
                 select a.id, a.name, a.description, b.name as category,d.name as manufacturer, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded, a.lastUpdated
                 from product a
@@ -33,8 +56,25 @@ class Product
                 left join productimage c on c.product=a.id
                 inner join manufacturer d on a.manufacturer=d.id
                 order by a.id
+                limit :from, :ppp
         
-        ');
+            ');
+        }else{
+            $query = $connection->prepare('
+
+                select a.id, a.name, a.description, b.name as category,d.name as manufacturer, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded, a.lastUpdated
+                from product a
+                inner join category b on a.category=b.id
+                left join productimage c on c.product=a.id
+                inner join manufacturer d on a.manufacturer=d.id     
+                where concat(a.id, a.name, \' \', ifnull(a.description, \' \'),b.name, d.name) like :search
+                limit :from, :ppp
+            ');
+            $search = '%' . $search . '%';
+            $query->bindParam('search', $search);
+        }
+        $query->bindValue('from', $from, PDO::PARAM_INT);
+        $query->bindValue('ppp', $ppp, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchall();
     }
@@ -46,8 +86,8 @@ class Product
         $connection->beginTransaction();
         $query = $connection->prepare('
         
-                insert into product (name, description, category,manufacturer, price, inventoryquantity, dateadded)
-                values (:name, :description, :category,:manufacturer, :price, :inventoryquantity, now())
+                insert into product (name, description, category,manufacturer, price, inventoryquantity, dateadded, lastUpdated)
+                values (:name, :description, :category,:manufacturer, :price, :inventoryquantity, now(), now())
         
         ');
         $query->execute([
