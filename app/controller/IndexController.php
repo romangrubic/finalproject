@@ -4,6 +4,13 @@ class IndexController extends LoginController
 {
     private $cssDir =  'index' . DIRECTORY_SEPARATOR;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->nf = new \NumberFormatter("hr-HR", \NumberFormatter::DECIMAL);
+        $this->nf->setPattern('#,##0.00');
+    }
+
     public function index()
     {
         if (isset($_SESSION['authorized']->user_role) && ($_SESSION['authorized']->user_role == 'admin' || $_SESSION['authorized']->user_role == 'oper')) {
@@ -12,12 +19,22 @@ class IndexController extends LoginController
             ]);
             return;
         }
+
+        $newestProductList=Index::newestProductList();
+        foreach($newestProductList as $product){
+            $product->price=$this->nf->format($product->price);
+        }
+
+        $mostSoldProductList=Index::mostSoldProductList();
+        foreach($mostSoldProductList as $product){
+            $product->price=$this->nf->format($product->price);
+        }
         $this->view->render('index',[
             'email'=>$this->email,
             'message'=>$this->message,
             'css'=>$this->cssDir . 'index.css',
-            'newestProductList'=> Index::newestProductList(),
-            'mostSoldProductList'=> Index::mostSoldProductList()
+            'newestProductList'=> $newestProductList,
+            'mostSoldProductList'=> $mostSoldProductList
         ]);
     }
 

@@ -5,6 +5,13 @@ class ProductController extends LoginController
     private $viewDir = 'public' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR;
     private $cssDir =  'product' . DIRECTORY_SEPARATOR;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->nf = new \NumberFormatter("hr-HR", \NumberFormatter::DECIMAL);
+        $this->nf->setPattern('#,##0.00');
+    }
+
     public function index($category=null)
     {
         if(!isset($_GET['search'])){
@@ -28,9 +35,14 @@ class ProductController extends LoginController
             $manufacturer = $_GET['manufacturer'];
         }
 
+
         $totalProducts = Product::totalProducts($search, $category, $manufacturer);
         $totalPages = ceil($totalProducts / App::config('ppp'));
         $products = Product::read($category, $search, $page, $manufacturer);
+        
+        foreach($products as $product){
+            $product->price=$this->nf->format($product->price);
+        }
         
         $manufacturers = Manufacturer::read($category);
         $category = Category::readOne($category);

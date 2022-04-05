@@ -12,16 +12,16 @@
                 <th>Naziv</th>
                 <th class="text-center">Cijena</th>
                 <th class="text-center">Kolicina</th>
-                <th class="text-center">Total</th>
+                <th class="text-center">Iznos</th>
                 <th></th>
             </thead>
             <tbody>
                 <?php foreach ($shoppingorder as $product) : ?>
                     <tr id="product<?= $product->id ?>">
                         <td class="order-cart-item text-left" data-open="productmodal<?= $product->id ?>" title="Klik za detalje."><?= $product->name ?></td>
-                        <td><?= $product->price ?> kn</td>
+                        <td><?= $product->priceFormatted ?> kn</td>
                         <td><?= $product->quantity ?></td>
-                        <td><?= $product->price * $product->quantity ?> kn</td>
+                        <td><?= number_format($product->price * $product->quantity, 2,',','.') ?> kn</td>
                         <td>
                             <button class="removeFromCart" data-id="<?= $product->id ?>"><i title="Obriši &quot;<?= $product->name ?>&quot;." class="fas fa-2x fa-trash"></i></button>
                         </td>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="grid-x grid-padding-x text-center">
                             <div class="large-6 large-offset-1">
-                                <h3><?= $product->price ?></h3>
+                                <h3><?= $product->priceFormatted ?> kn</h3>
                             </div>
                             <div class="large-3">
 
@@ -67,7 +67,7 @@
             </tbody>
         </table>
         <hr>
-        <h1 id="sumTotal">Total: <?= Shoppingorder::sumTotal($_SESSION['authorized']->id) ?> kn</h1>
+        <h1 id="sumTotal">Sveukupno: <?= number_format(Shoppingorder::sumTotal($_SESSION['authorized']->id), 2,',','.') ?> kn</h1>
         <br>
         <button class="button secondary">Završi kupovinu!</button>
     <?php endif; ?>

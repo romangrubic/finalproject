@@ -28,6 +28,9 @@ class DashboardController extends AuthorizedController
         $this->password->newpassword='';
         $this->password->newpasswordrepeat='';
 
+        $this->nf = new \NumberFormatter("hr-HR", \NumberFormatter::DECIMAL);
+        $this->nf->setPattern('#,##0.00');
+
         $this->message = new stdClass();
         $this->message->firstname='';
         $this->message->lastname='';
@@ -46,13 +49,18 @@ class DashboardController extends AuthorizedController
     {
         $this->customer = Customer::readOne($_SESSION['authorized']->id);
 
+        $cartitems = Dashboard::getOrderDetails($_SESSION['authorized']->id);
+        foreach($cartitems as $cartitem){
+            $cartitem->priceFormatted=$this->nf->format($cartitem->price);
+        }
+
         $this->view->render($this->viewDir . 'index',[
             'css' => $this->cssDir . 'index.css',
             'customer'=>$this->customer,
             'message'=>$this->message,
             'change'=>$change,
             'orders'=>Dashboard::getOrders($_SESSION['authorized']->id),
-            'cartitems'=>Dashboard::getOrderDetails($_SESSION['authorized']->id)
+            'cartitems'=>$cartitems
         ]);
     }
 
