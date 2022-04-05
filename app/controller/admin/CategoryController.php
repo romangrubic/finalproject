@@ -24,10 +24,17 @@ class CategoryController extends AuthorizedController
 
     public function index()
     {
+        $categories = Category::read();
+        
+        foreach($categories as $category){
+            if($category->lastUpdated !=null){
+                $category->lastUpdated= date("F jS, Y, H:i:s", strtotime($category->lastUpdated));
+            }
+        }
 
         $this->view->render($this->viewDir . 'index', [
             'css' => $this->cssDir . 'index.css',
-            'categories' => Category::read(),
+            'categories' => $categories,
             'totalCategories'=>Category::countCategories()
         ]);
     }

@@ -54,12 +54,18 @@ class DashboardController extends AuthorizedController
             $cartitem->priceFormatted=$this->nf->format($cartitem->price);
         }
 
+        $orders = Dashboard::getOrders($_SESSION['authorized']->id);
+        
+        foreach($orders as $order){
+                $order->dateFinished= date("F jS, Y, H:i:s", strtotime($order->dateFinished));
+        }
+
         $this->view->render($this->viewDir . 'index',[
             'css' => $this->cssDir . 'index.css',
             'customer'=>$this->customer,
             'message'=>$this->message,
             'change'=>$change,
-            'orders'=>Dashboard::getOrders($_SESSION['authorized']->id),
+            'orders'=>$orders,
             'cartitems'=>$cartitems
         ]);
     }

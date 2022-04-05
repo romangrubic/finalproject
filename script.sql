@@ -341,8 +341,8 @@ begin
 petlja: loop
 	IF kraj=500 then leave petlja;
 	end if;	
-	insert into shoppingorder(id,customer,dateadded,isFinished) 
-	values (null,floor(rand()*100+1), now(),true);
+	insert into shoppingorder(id,customer,dateadded,isFinished, dateFinished) 
+	values (null,floor(rand()*100+1), now(),true, now());
 
 	set kraj=kraj+1;
 end loop petlja;	

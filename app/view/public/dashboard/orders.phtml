@@ -4,7 +4,7 @@
         <!-- <?php print_r($orders) ?> -->
         <?php foreach ($orders as $order) : ?>
             <li class="accordion-item" data-accordion-item>
-                <a href="#" class="accordion-title" data-id=<?= $order->id ?>>Narudžba <?= $order->dateadded ?></a>
+                <a href="#" class="accordion-title" data-id=<?= $order->id ?>>Narudžba <?= $order->dateFinished ?></a>
                 <div class="accordion-content" id="order<?= $order->id ?>" data-tab-content>
                     <table class="hover">
                         <thead>
