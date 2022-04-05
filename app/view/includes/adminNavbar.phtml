@@ -19,12 +19,12 @@
     <li><a href="<?= App::config('url') ?>" class="homepage"><?= App::config('appName') ?></a></li>
     <hr>
     <!-- CRUD start -->
-    <li><a href="<?= App::config('url') ?>category/index">Category</a></li>
-    <li><a href="<?= App::config('url') ?>product/index">Product</a></li>
+    <li><a href="<?= App::config('url') ?>category/index">Kategorija</a></li>
+    <li><a href="<?= App::config('url') ?>product/index">Proizvod</a></li>
     <!-- CRUD end -->
     <hr>
     <?php if (App::authorized()) : ?>
-      <li><a href="<?= App::config('url') ?>login/logout">Logout</a></li>
+      <li><a href="<?= App::config('url') ?>login/logout">Odjava</a></li>
     <?php else : ?>
       <li><a href="<?= App::config('url') ?>login/index">Prijava</a></li>
     <?php endif; ?>

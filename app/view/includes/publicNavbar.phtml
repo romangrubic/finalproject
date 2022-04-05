@@ -40,7 +40,7 @@
     <ul class="menu" id="cat-menu">
     <li class="cat-button"><a href="<?=App::config('url')?>product/index">Svi proizvodi</a></li>
       <?php foreach(Category::read() as $category):?>
-        <li class="cat-button"><a href="<?=App::config('url')?>product/index/<?=$category->id?>"><?=$category->name?></a></li>
+        <li class="cat-button" title="<?=$category->name?>"><a href="<?=App::config('url')?>product/index/<?=$category->id?>"><?=(strlen($category->name) > 13) ? substr($category->name,0,10).'...' : $category->name;?></a></li>
         <?php endforeach;?>
     </ul>
   </div>
