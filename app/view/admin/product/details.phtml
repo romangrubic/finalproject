@@ -1,4 +1,5 @@
-<form class="product-form" action="<?= App::config('url') ?>product/action" method="POST">
+<div class="product-form">
+<form action="<?= App::config('url') ?>product/action" method="POST">
         <div>
         <a onclick="return confirm('Confirm deletion for <?=$product->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>product/delete/<?=$product->id?>">DELETE PRODUCT</a>
         </div>
@@ -53,17 +54,30 @@
         <?= $message->inventoryquantity ?>
     </p>
 
-    <label for="imageurl">IMAGE IS NOT WORKING YET</label>
-    <input type="file" name="imageurl" id="imageurl" aria-describedby="messageimageurl"/>
-    <p class="help-text red-message" id="messageimageurl">
-        <?= $message->imageurl ?>
-    </p>
     <div class="grid-x grid-padding-x">
         <div class="large-5 cell">
             <a class="alert button expanded" href="<?= App::config('url') ?>product/index">Natrag.</a>
         </div>
         <div class="large-7 cell">
-            <input type="submit" class="info button expanded" value="<?= $action ?>">
+            <input type="submit" class="info button expanded" id="submitForm" value="<?= $action ?>">
         </div>
     </div>
 </form>
+<hr>
+<label for="image">Klik na sliku za automatsku promjenu slike</label>
+    <img class="picture" id="p_<?=$product->id?>" src="<?= App::config('url')?>public/images/product/<?=$product->id?>.png" alt="<?=$product->name?>">
+    <!-- <input type="file" name="image" id="imageInput" aria-describedby="messageimageurl" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff"/> -->
+    <p class="help-text red-message" id="messageimageurl">
+        <?= $message->imageurl ?>
+    </p>
+
+    <div class="reveal" id="pictureModal" data-reveal>
+        <div style="max-height: 600px; overflow: auto;">
+            <img id="image" src="" alt="" />
+        </div>
+
+        <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+        <a class="button" href="#" id="save">Spremi</a>
+        <button class="button warning" data-close aria-label="Close modal" >Odustani</button>
+    </div>
+    </div>

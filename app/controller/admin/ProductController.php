@@ -78,7 +78,7 @@ class ProductController extends Controller
             'page'=>$page,
             'totalPages'=>$totalPages,
             'search'=>$search,
-            'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminSearchProduct.js"></script> '
+            'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminSearchProduct.js"></script>'
 
         ]);
     }
@@ -98,7 +98,9 @@ class ProductController extends Controller
                 'message'=>$this->message,
                 'categories'=>Category::read(),
                 'manufacturers'=>Manufacturer::read(),
-                'action'=>'Dodaj novi proizvod.'
+                'action'=>'Dodaj novi proizvod.',
+                'javascript'=>'<script src="' . App::config('url') . 'public/js/vendor/cropper.js"></script>
+                                <script src="' . App::config('url') . 'public/js/custom/savePicture.js"></script> '
             ]);
         }else{
             $this->product = Product::readOne($id);
@@ -115,7 +117,9 @@ class ProductController extends Controller
                 'categories'=>Category::read(),
                 'manufacturers'=>Manufacturer::read(),
                 'message'=>$this->message,
-                'action'=>'Spremi promijene.'
+                'action'=>'Spremi promijene.',
+                'javascript'=>'<script src="' . App::config('url') . 'public/js/vendor/cropper.js"></script>
+                                <script src="' . App::config('url') . 'public/js/custom/savePicture.js"></script> '
             ]);
         }
     }
@@ -131,7 +135,7 @@ class ProductController extends Controller
                 $this->validateManufacturer()  &&
                 $this->validatePrice() &&
                 $this->validateInventoryQuantity()){
-                Product::create((array)$this->product);
+                    Product::create((array)$this->product);
             }else{
                 $this->view->render($this->viewDir . 'details',[
                     'css' => $this->cssDir . 'index.css',
@@ -150,7 +154,7 @@ class ProductController extends Controller
                 $this->validateManufacturer() &&
                 $this->validatePrice() &&
                 $this->validateInventoryQuantity()){
-                Product::update((array)$this->product);
+                    Product::update((array)$this->product);
 
             }else{
                 $this->view->render($this->viewDir . 'details',[
@@ -168,9 +172,26 @@ class ProductController extends Controller
 
     }
 
+    public function savePicture(){
+
+        $picture = $_POST['image'];
+        $picture=str_replace('data:image/png;base64,','',$picture);
+        $picture=str_replace(' ','+',$picture);
+        $data=base64_decode($picture);
+
+        file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR
+        . 'images' . DIRECTORY_SEPARATOR . 
+        'product' . DIRECTORY_SEPARATOR 
+        . $_POST['id'] . '.png', $data);
+
+        echo "OK";
+    }
+
     public function delete($id)
     {
         Product::delete($id);
+
+        
         header('location:' . App::config('url').'product/index');
     }
 
