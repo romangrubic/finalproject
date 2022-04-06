@@ -2,7 +2,7 @@
       <h1 class="modal-product-name"><?= $product->name ?></h1>
       <div class="grid-x grid-padding-x modal-product-section">
         <div class="large-6 modal-product-image">
-          <img src="<?= $product->imageurl ?>" alt="<?= $product->name ?>">
+          <img src="<?= App::config('url')?>public/images/product/<?= $product->id?>.png" alt="<?= $product->name ?>">
         </div>
         <div class="large-6 modal-product-description">
           <p><?= $product->description ?></p>

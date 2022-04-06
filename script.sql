@@ -41,12 +41,12 @@ create table product(
 
 );
 
-create table productimage(
-    id int not null primary key auto_increment,
-    product int not null,
-    imageurl varchar(255) not null,
-    dateadded datetime not null
-);
+-- create table productimage(
+--     id int not null primary key auto_increment,
+--     product int not null,
+--     imageurl varchar(255) not null,
+--     dateadded datetime not null
+-- );
 
 create table shoppingorder(
     id int not null primary key auto_increment,
@@ -82,7 +82,7 @@ create table operator(
 
 alter table product add foreign key (category) references category(id);
 alter table product add foreign key (manufacturer) references manufacturer(id);
-alter table productimage add foreign key (product) references product(id);
+-- alter table productimage add foreign key (product) references product(id);
 alter table shoppingorder add foreign key (customer) references customer(id);
 alter table cart add foreign key (shoppingorder) references shoppingorder(id);
 alter table cart add foreign key (product) references product(id);
@@ -316,17 +316,17 @@ insert into product(id,name,manufacturer,description,category,price,inventoryqua
 (null,'AMD procesor',10,null,10,749.99,5,now());
 
 -- Insert product images
-insert into productimage(id,product,imageurl,dateadded) values
-(null,1,'https://www.links.hr/content/images/thumbs/009/0096739_tipkovnica-redragon-draconic-k530-rgb-mehanicka-bezicna-usb-us-layout-crna-101200626.png','2021-11-26 13:05'),
-(null,5,'https://www.links.hr/content/images/thumbs/010/0104932_monitor-27-gigabyte-m27f-ek-kvm-gaming-monitor-ips-144hz-1ms-300cd-m2-1000-1-crni-100300841.png','2021-11-26 13:49'),
-(null,2,'https://www.links.hr/content/images/thumbs/006/0068425_mis-logitech-mx-master-3-laserski-bezicni-bt-unifying-receiver-usb-graphite.jpg','2021-11-26 13:49'),
-(null,3,'https://www.links.hr/content/images/thumbs/011/0112952_kuciste-ms-industrial-armor-v700-gaming-midi-atx-window-crno-bez-napajanja.jpg',now()),
-(null,4,'https://www.links.hr/content/images/thumbs/007/0076249_maticna-ploca-gigabyte-b450-gaming-x-amd-b450-ddr4-atx-s-am4-050300477.jpg',now()),
-(null,6,'https://www.instar-informatika.hr/slike/velike/ventilator-za-kuciste-xilence-40x40x10mm-35960_1.jpg',now()),
-(null,7,'https://www.instar-informatika.hr/slike/velike/ssd-hikvision-c100-240gb-25-sata-3-6gb-s-hks-ssd-c100-240g_1.jpg',now()),
-(null,8,'https://www.instar-informatika.hr/slike/velike/akb1500.jpg',now()),
-(null,9,'https://www.instar-informatika.hr/slike/velike/memorija-kingston-ddr4-2666mhz-4gb-brand-king-kcp426ns6-4gb_1.jpg',now()),
-(null,10,'https://www.instar-informatika.hr/slike/velike/procesor-intel-core-i3-10100f-36ghz-6mb--inp-000151_1.jpg',now());
+-- insert into productimage(id,product,imageurl,dateadded) values
+-- (null,1,'https://www.links.hr/content/images/thumbs/009/0096739_tipkovnica-redragon-draconic-k530-rgb-mehanicka-bezicna-usb-us-layout-crna-101200626.png','2021-11-26 13:05'),
+-- (null,5,'https://www.links.hr/content/images/thumbs/010/0104932_monitor-27-gigabyte-m27f-ek-kvm-gaming-monitor-ips-144hz-1ms-300cd-m2-1000-1-crni-100300841.png','2021-11-26 13:49'),
+-- (null,2,'https://www.links.hr/content/images/thumbs/006/0068425_mis-logitech-mx-master-3-laserski-bezicni-bt-unifying-receiver-usb-graphite.jpg','2021-11-26 13:49'),
+-- (null,3,'https://www.links.hr/content/images/thumbs/011/0112952_kuciste-ms-industrial-armor-v700-gaming-midi-atx-window-crno-bez-napajanja.jpg',now()),
+-- (null,4,'https://www.links.hr/content/images/thumbs/007/0076249_maticna-ploca-gigabyte-b450-gaming-x-amd-b450-ddr4-atx-s-am4-050300477.jpg',now()),
+-- (null,6,'https://www.instar-informatika.hr/slike/velike/ventilator-za-kuciste-xilence-40x40x10mm-35960_1.jpg',now()),
+-- (null,7,'https://www.instar-informatika.hr/slike/velike/ssd-hikvision-c100-240gb-25-sata-3-6gb-s-hks-ssd-c100-240g_1.jpg',now()),
+-- (null,8,'https://www.instar-informatika.hr/slike/velike/akb1500.jpg',now()),
+-- (null,9,'https://www.instar-informatika.hr/slike/velike/memorija-kingston-ddr4-2666mhz-4gb-brand-king-kcp426ns6-4gb_1.jpg',now()),
+-- (null,10,'https://www.instar-informatika.hr/slike/velike/procesor-intel-core-i3-10100f-36ghz-6mb--inp-000151_1.jpg',now());
 
 -- To this point, we have 100 customers with ID 1-100
 -- Creating 5 orders for each

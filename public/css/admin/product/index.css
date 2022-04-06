@@ -1,3 +1,7 @@
+/* CSS for cropper.js */
+@import "../../cropper.css";
+/*  */
+
 .button{
     margin: 0px;
 }

@@ -104,7 +104,6 @@ class Product
 
     public static function create($parameters)
     {
-        print_r($parameters);
         $connection = DB::getInstance();
         $connection->beginTransaction();
         $query = $connection->prepare('
@@ -120,20 +119,6 @@ class Product
             'manufacturer'=>$parameters['manufacturer'],
             'price'=>$parameters['price'],
             'inventoryquantity'=>$parameters['inventoryquantity'],
-        ]);
-
-        $lastProductId=$connection->lastInsertId();
-
-        $query = $connection->prepare('
-        
-                insert into productimage (product, imageurl, dateadded)
-                values (:product, :imageurl, now())
-        
-        ');
-        $query->execute([
-            'product'=>$lastProductId,
-            'imageurl'=>$parameters['imageurl']
-            
         ]);
 
         $connection->commit();
@@ -164,19 +149,6 @@ class Product
             'price'=>$parameters['price'],
             'inventoryquantity'=>$parameters['inventoryquantity'],
             'id'=>$parameters['id'],
-        ]);
-
-        $query = $connection->prepare('
-        
-            update productimage set
-            imageurl=:imageurl
-            where product=:product
-        
-        ');
-        $query->execute([
-            'product'=>$parameters['id'],
-            'imageurl'=>$parameters['imageurl']
-            
         ]);
 
         $connection->commit();

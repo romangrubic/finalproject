@@ -5,7 +5,7 @@
         <?= $product->name ?>
       </span>
     </div>
-    <img src="<?= $product->imageurl ?>" data-open="product<?= $product->id ?>" title="Kliknite na sliku za detalje!">
+    <img src="<?= App::config('url')?>public/images/product/<?= $product->id?>.png" data-open="product<?= $product->id ?>" title="Kliknite na sliku za detalje!">
     <hr>
     <div class="card-section">
       <h4><?= $product->price ?> kn
