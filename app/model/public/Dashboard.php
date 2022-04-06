@@ -25,11 +25,10 @@ class Dashboard
         $connection = DB::getInstance();
         $query = $connection->prepare('
 
-            select b.id, c.name, c.description,c.id as productId, c.price as productPrice, d.imageurl, a.price, a.quantity
+            select b.id, c.name, c.description,c.id as productId, c.price as productPrice, a.price, a.quantity
             from cart a
             inner join shoppingorder b on a.shoppingorder=b.id
             inner join product c on a.product=c.id
-            inner join productimage d on d.product=c.id
             where b.customer = :id and b.isFinished = 1
             
         ');

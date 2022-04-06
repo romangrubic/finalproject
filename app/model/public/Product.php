@@ -20,7 +20,6 @@ class Product
             
                 select count(a.id)
                 from product a
-                left join productimage b on a.id=b.product
                 inner join manufacturer c on a.manufacturer=c.id   
                 inner join category d on a.category=d.id        
                 where concat(a.name, \' \', ifnull(a.description, \' \'),c.name, d.name) like :search
@@ -83,9 +82,8 @@ class Product
             if(isset($manufacturer)){
                 $query = $connection->prepare('
         
-                select a.id, a.name, a.description, a.category, a.price, b.imageurl as imageurl
-                from product a
-                left join productimage b on a.id=b.product             
+                select a.id, a.name, a.description, a.category, a.price
+                from product a           
                 where manufacturer = :manufacturer
                 limit :from, :ppp
             ');
@@ -94,9 +92,8 @@ class Product
             }else{
                 $query = $connection->prepare('
         
-                select a.id, a.name,c.name as manufacturer, a.description, d.name as category, a.price, b.imageurl as imageurl
+                select a.id, a.name,c.name as manufacturer, a.description, d.name as category, a.price
                 from product a
-                left join productimage b on a.id=b.product
                 inner join manufacturer c on a.manufacturer=c.id   
                 inner join category d on a.category=d.id        
                 where concat(a.name, \' \', ifnull(a.description, \' \'),c.name, d.name) like :search
@@ -109,9 +106,8 @@ class Product
             if(isset($manufacturer)){
                 $query = $connection->prepare('
             
-                    select a.id, a.name, a.description, a.category, a.price, b.imageurl as imageurl
-                    from product a
-                    left join productimage b on a.id=b.product             
+                    select a.id, a.name, a.description, a.category, a.price
+                    from product a            
                     where manufacturer = :manufacturer
                     and category=:category
                     limit :from, :ppp
@@ -121,10 +117,9 @@ class Product
             }else{
                 $query = $connection->prepare('
             
-                    select a.id, a.name, a.description, a.category, a.price, b.imageurl as imageurl
-                    from product a
-                    left join productimage b on a.id=b.product             
-                    where category = :category
+                    select a.id, a.name, a.description, a.category, a.price
+                    from product a          
+                    where a.category = :category
                     limit :from, :ppp
                 ');
                 $query->bindParam('category', $category);

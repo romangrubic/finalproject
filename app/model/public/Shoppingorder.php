@@ -109,11 +109,10 @@ class Shoppingorder
         $connection = DB::getInstance();
         $query = $connection->prepare('
 
-            select a.id as orderId,c.id as id, c.name, c.description, b.price, b.quantity, b.dateadded, d.imageurl as imageurl
+            select a.id as orderId,c.id as id, c.name, c.description, b.price, b.quantity, b.dateadded
             from shoppingorder a
             inner join cart b on a.id=b.shoppingorder
             inner join product c on b.product=c.id
-            left join productimage d on c.id=d.product
             where a.isFinished = 0 and a.customer = :customerId
             
         ');

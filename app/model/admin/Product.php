@@ -10,7 +10,6 @@ class Product
         
             select count(a.id)
             from product a
-            left join productimage b on a.id=b.product
             inner join manufacturer c on a.manufacturer=c.id   
             inner join category d on a.category=d.id        
             where concat(a.id, a.name, \' \', ifnull(a.description, \' \'),c.name, d.name) like :search
@@ -50,10 +49,9 @@ class Product
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-                select a.id, a.name, a.description, b.id as category, b.name as categoryName, d.id as manufacturer, d.name as manufacturerName, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded
+                select a.id, a.name, a.description, b.id as category, b.name as categoryName, d.id as manufacturer, d.name as manufacturerName, a.price, a.inventoryquantity, a.dateadded
                 from product a
                 inner join category b on a.category=b.id
-                left join productimage c on c.product=a.id
                 inner join manufacturer d on a.manufacturer=d.id
                 where a.id=:id
         
@@ -73,10 +71,9 @@ class Product
         if(!isset($search)){
             $query = $connection->prepare('
         
-                select a.id, a.name, a.description, b.name as category,d.name as manufacturer, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded, a.lastUpdated
+                select a.id, a.name, a.description, b.name as category,d.name as manufacturer, a.price, a.inventoryquantity, a.dateadded, a.lastUpdated
                 from product a
                 inner join category b on a.category=b.id
-                left join productimage c on c.product=a.id
                 inner join manufacturer d on a.manufacturer=d.id
                 order by a.id
                 limit :from, :ppp
@@ -85,10 +82,9 @@ class Product
         }else{
             $query = $connection->prepare('
 
-                select a.id, a.name, a.description, b.name as category,d.name as manufacturer, a.price, a.inventoryquantity, c.imageurl as imageurl, a.dateadded, a.lastUpdated
+                select a.id, a.name, a.description, b.name as category,d.name as manufacturer, a.price, a.inventoryquantity, a.dateadded, a.lastUpdated
                 from product a
                 inner join category b on a.category=b.id
-                left join productimage c on c.product=a.id
                 inner join manufacturer d on a.manufacturer=d.id     
                 where concat(a.id, a.name, \' \', ifnull(a.description, \' \'),b.name, d.name) like :search
                 limit :from, :ppp
@@ -158,14 +154,6 @@ class Product
     {
         $connection = DB::getInstance();
         $connection->beginTransaction();
-        $query = $connection->prepare('
-        
-            delete from productimage where product=:id
-                
-        ');
-        $query->execute([
-            'id'=>$id
-        ]);
 
         $query = $connection->prepare('
         
