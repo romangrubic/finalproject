@@ -135,8 +135,10 @@ class ProductController extends Controller
                 $this->validateCategory() &&
                 $this->validateManufacturer()  &&
                 $this->validatePrice() &&
-                $this->validateInventoryQuantity()){
-                    Product::create((array)$this->product);
+                $this->validateInventoryQuantity() &&
+                $this->validationImage()){
+                    $id = Product::create((array)$this->product);
+                    $this->savePicture($id);
             }else{
                 $this->view->render($this->viewDir . 'details',[
                     'css' => $this->cssDir . 'index.css',
@@ -144,7 +146,9 @@ class ProductController extends Controller
                     'message'=>$this->message,
                     'categories'=>Category::read(),
                     'manufacturers'=>Manufacturer::read(),
-                    'action'=>'Dodaj novi proizvod.'
+                    'action'=>'Dodaj novi proizvod.',
+                    'javascript'=>'<script src="' . App::config('url') . 'public/js/vendor/cropper.js"></script>
+                                <script src="' . App::config('url') . 'public/js/custom/savePicture.js"></script> '
                 ]);
                 return;
             }
@@ -157,8 +161,7 @@ class ProductController extends Controller
                 $this->validateInventoryQuantity() &&
                 $this->validationImage()){
                     Product::update((array)$this->product);
-                    $this->savePicture();
-
+                    $this->savePicture($this->product->id);
             }else{
                 $this->view->render($this->viewDir . 'details',[
                     'css' => $this->cssDir . 'index.css',
@@ -184,8 +187,7 @@ class ProductController extends Controller
     }
 
     // Helper methods for images
-
-    private function savePicture(){
+    private function savePicture($id){
         $picture = $_POST['imageInput'];
         $picture=str_replace('data:image/png;base64,','',$picture);
         $picture=str_replace(' ','+',$picture);
@@ -194,18 +196,16 @@ class ProductController extends Controller
         file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR
         . 'images' . DIRECTORY_SEPARATOR . 
         'product' . DIRECTORY_SEPARATOR 
-        . $_POST['id'] . '.png', $data);
+        . $id . '.png', $data);
 
         echo "OK";
     }
 
     private function getPicture(){
-        if(($this->product->imageInput = base64_encode(file_get_contents(BP . 'public' . DIRECTORY_SEPARATOR
-        . 'images' . DIRECTORY_SEPARATOR . 
-        'product' . DIRECTORY_SEPARATOR 
-        . $this->product->id . '.png')))== false){
-            $this->product->imageInput= '';
-        };
+            $this->product->imageInput = base64_encode(file_get_contents(BP . 'public' . DIRECTORY_SEPARATOR
+                                                                        . 'images' . DIRECTORY_SEPARATOR . 
+                                                                        'product' . DIRECTORY_SEPARATOR 
+                                                                        . $this->product->id . '.png'));
     }
 
     // Validation functions

@@ -101,7 +101,6 @@ class Product
     public static function create($parameters)
     {
         $connection = DB::getInstance();
-        $connection->beginTransaction();
         $query = $connection->prepare('
         
                 insert into product (name, description, category,manufacturer, price, inventoryquantity, dateadded, lastUpdated)
@@ -117,7 +116,7 @@ class Product
             'inventoryquantity'=>$parameters['inventoryquantity'],
         ]);
 
-        $connection->commit();
+        return $connection->lastInsertId();
     }
 
     public static function update($parameters)
