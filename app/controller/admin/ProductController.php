@@ -24,7 +24,7 @@ class ProductController extends Controller
         $this->product->inventoryquantity = '';
         $this->product->dateadded = '';
         $this->product->lastUpdated = '';
-        $this->product->imageurl = '';
+        $this->product->imageInput = '';
 
         $this->nf = new \NumberFormatter("hr-HR", \NumberFormatter::DECIMAL);
         $this->nf->setPattern('#,##0.00');
@@ -36,7 +36,7 @@ class ProductController extends Controller
         $this->message->manufacturer='';
         $this->message->price='';
         $this->message->inventoryquantity='';
-        $this->message->imageurl='';
+        $this->message->imageInput='';
     }
 
     public function index()
@@ -104,6 +104,7 @@ class ProductController extends Controller
             ]);
         }else{
             $this->product = Product::readOne($id);
+            $this->getPicture($this->product->id);
 
             if($this->product->price==0){
                 $this->product->price = '';
@@ -153,8 +154,10 @@ class ProductController extends Controller
                 $this->validateCategory() &&
                 $this->validateManufacturer() &&
                 $this->validatePrice() &&
-                $this->validateInventoryQuantity()){
+                $this->validateInventoryQuantity() &&
+                $this->validationImage()){
                     Product::update((array)$this->product);
+                    $this->savePicture();
 
             }else{
                 $this->view->render($this->viewDir . 'details',[
@@ -163,7 +166,9 @@ class ProductController extends Controller
                     'message'=>$this->message,
                     'categories'=>Category::read(),
                     'manufacturers'=>Manufacturer::read(),
-                    'action'=>'Dodaj novi proizvod.'
+                    'action'=>'Spremi promijene.',
+                    'javascript'=>'<script src="' . App::config('url') . 'public/js/vendor/cropper.js"></script>
+                                <script src="' . App::config('url') . 'public/js/custom/savePicture.js"></script> '
                 ]);
                 return;
             }
@@ -172,9 +177,16 @@ class ProductController extends Controller
 
     }
 
-    public function savePicture(){
+    public function delete($id)
+    {
+        Product::delete($id);
+        header('location:' . App::config('url').'product/index');
+    }
 
-        $picture = $_POST['image'];
+    // Helper methods for images
+
+    private function savePicture(){
+        $picture = $_POST['imageInput'];
         $picture=str_replace('data:image/png;base64,','',$picture);
         $picture=str_replace(' ','+',$picture);
         $data=base64_decode($picture);
@@ -187,12 +199,13 @@ class ProductController extends Controller
         echo "OK";
     }
 
-    public function delete($id)
-    {
-        Product::delete($id);
-
-        
-        header('location:' . App::config('url').'product/index');
+    private function getPicture(){
+        if(($this->product->imageInput = base64_encode(file_get_contents(BP . 'public' . DIRECTORY_SEPARATOR
+        . 'images' . DIRECTORY_SEPARATOR . 
+        'product' . DIRECTORY_SEPARATOR 
+        . $this->product->id . '.png')))== false){
+            $this->product->imageInput= '';
+        };
     }
 
     // Validation functions
@@ -263,6 +276,15 @@ class ProductController extends Controller
     {
         if($this->product->inventoryquantity<0){
             $this->message->inventoryquantity='Stanje ne smije biti manje od 0.';
+            return false;
+        }
+        return true;
+    }
+
+    private function validationImage()
+    {
+        if(strlen(trim($this->product->imageInput)) === 0){
+            $this->message->imageInput = 'Slika je obavezna';
             return false;
         }
         return true;
