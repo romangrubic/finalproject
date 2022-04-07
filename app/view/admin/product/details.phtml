@@ -1,9 +1,11 @@
 <div class="product-form">
 <form action="<?= App::config('url') ?>product/action" method="POST" enctype="multipart/form-data">
-        <div>
-        <a onclick="return confirm('Confirm deletion for <?=$product->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>product/delete/<?=$product->id?>">DELETE PRODUCT</a>
-        </div>
-        <hr>
+    <?php if($product->id != 0):?>        
+    <div>
+        <a onclick="return confirm('Confirm deletion for <?=$product->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>product/delete/<?=$product->id?>">DELETE PRODUCT</a>     
+    </div>
+    <hr>
+    <?php endif;?>
 
     <legend>Detalji proizvoda:</legend>
     <input type="hidden" name="id" value="<?=$product->id?>">
@@ -67,10 +69,17 @@
         <div style="max-height: 600px; overflow: auto;">
             <img id="image" src="" alt="" />
         </div>
+        <br>
         <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
         <br>
-        <a class="button" href="#" id="save">Spremi</a>
-        <button class="button warning" data-close aria-label="Close modal" >Odustani</button>
+        <div class="grid-x text-center">
+            <div class="large-8 text-center">
+                <a class="button expanded" href="#" id="save">Spremi</a>
+            </div>
+            <div class="large-8 text-center">
+                <button class="button alert" data-close aria-label="Close modal" >Odustani</button>
+            </div>
+        </div>
     </div>
     <!-- End modal -->
 <br>

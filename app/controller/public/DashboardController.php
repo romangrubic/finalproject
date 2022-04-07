@@ -57,7 +57,8 @@ class DashboardController extends AuthorizedController
         $orders = Dashboard::getOrders($_SESSION['authorized']->id);
         
         foreach($orders as $order){
-                $order->dateFinished= date("F jS, Y, H:i:s", strtotime($order->dateFinished));
+                setlocale(LC_ALL, 'hr_HR');
+                $order->dateFinished= strftime("%e. %B %Y u %H:%M", strtotime($order->dateFinished));
         }
 
         $this->view->render($this->viewDir . 'index',[

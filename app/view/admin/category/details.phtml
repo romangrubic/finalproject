@@ -1,10 +1,13 @@
 <div class="main-index">
     <div class="form">
     <form action="<?= App::config('url') ?>category/action" method="post">
+    <?php if($category->id != 0):?>        
     <div>
-        <a onclick="return confirm('Confirm deletion for <?=$category->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>category/delete/<?=$category->id?>">DELETE CATEGORY</a>
-        </div>
-        <hr>
+        <a onclick="return confirm('Confirm deletion for <?=$category->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>category/delete/<?=$category->id?>">DELETE CATEGORY</a>     
+    </div>
+    <hr>
+    <?php endif;?>
+    
         <fieldset>
             <legend>Detalji kategorije</legend>
 
