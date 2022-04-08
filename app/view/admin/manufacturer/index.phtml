@@ -1,0 +1,32 @@
+<div class="main-index">
+    <div class="grid-x">
+        <div class="cell large-6">
+            <h1 style="font-size: 1.5rem;">Proizvođači</h1>
+        </div>
+        <div class="cell large-6" style="text-align: right;">
+            <a href="<?= App::config('url') ?>manufacturer/details"><i style="color: green;" title="Dodaj novog proizvođača." class="fas fa-2x fa-plus-circle"></i></a>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Naziv</th>
+                <th>Opis</th>
+                <th>Zadnja promjena</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($manufacturers as $manufacturer) : ?>
+                <tr>
+                    <td><?= $manufacturer->name ?></td>
+                    <td><?= $manufacturer->description ?></td>
+                    <td><?= $manufacturer->lastUpdated ?></td>
+                    <td>
+                        <a href="<?= App::config('url') ?>manufacturer/details/<?= $manufacturer->id ?>" class="button expand info">View details...</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

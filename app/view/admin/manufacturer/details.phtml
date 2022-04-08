@@ -1,0 +1,46 @@
+<div class="main-index">
+    <div class="form">
+    <form action="<?= App::config('url') ?>manufacturer/action" method="post">
+    <?php if($manufacturer->id != 0 && $manufacturer->hasProducts==0):?>        
+    <div>
+        <a onclick="return confirm('Confirm deletion for <?=$manufacturer->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>manufacturer/delete/<?=$manufacturer->id?>">Obriši proizvođača!</a>     
+    </div>
+    <hr>
+    <?php elseif($manufacturer->hasProducts !=0):?>
+        <div>
+        <h4>Proizvođača se ne može obrisati jer ima proizvode!</h4>     
+    </div>
+    <hr>
+    <?php endif;?>
+    
+        <fieldset>
+            <legend>Detalji proizvođača</legend>
+
+            <label for="name">Naziv proizvođača</label>
+            <input type="text" name="name" id="name" value="<?= $manufacturer->name ?>" aria-describedby="messagename">
+            <p class="help-text red-message" id="messagename">
+                <?= $message->name ?>
+            </p>
+
+            <label for="description">Opis proizvođača (do 255 znakova)</label>
+            <input type="text" name="description" id="description" value="<?= $manufacturer->description ?>" aria-describedby="messagedescription">
+            <p class="help-text red-message" id="messagedescription">
+                <?= $message->description ?>
+            </p>
+
+            <input type="hidden" name="id" value="<?= $manufacturer->id ?>">
+
+            <div class="grid-x grid-padding-x">
+                <div class="large-4 cell">
+                    <a class="alert button expanded" href="<?= App::config('url') ?>manufacturer/index">Odustani</a>
+                </div>
+                <div class="large-8 cell">
+                    <input type="submit" class="button expanded" value="<?= $action ?>">
+                </div>
+            </div>
+
+            <input type="hidden" name="hasProducts" value=<?=$manufacturer->hasProducts?>>
+        </fieldset>
+    </form>
+    </div>
+</div>
