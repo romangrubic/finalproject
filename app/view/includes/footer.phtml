@@ -1,9 +1,20 @@
 <?php if (isset($_SESSION['authorized']->user_role) && ($_SESSION['authorized']->user_role == 'admin' || $_SESSION['authorized']->user_role == 'oper')) : ?>
     <div class="footer-main">
         <div class="footer">
-            <h2>
-                <?= App::config('appName') ?> &copy; 2022
-            </h2>
+            <div class="grid-x">
+                <div class="large-3">
+                </div>
+                <div class="large-6">
+                    <h2>
+                        <?= App::config('appName') ?> &copy; 2022
+                    </h2>
+                </div>
+                <div class="large-3">
+                    <h3>Roman Grubić</h3>
+                    <div><a href="https://github.com/romangrubic" target="_blank" rel="noopener noreferrer">Github</a></div>
+                    <div><a href="https://www.linkedin.com/in/roman-grubic/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+                </div>
+            </div>
         </div>
     </div>
 <?php else : ?>
@@ -11,9 +22,6 @@
         <div class="footer">
             <div class="grid-x">
                 <div class="large-3">
-                    <h3>Roman Grubić</h3>
-                <div><a href="https://github.com/romangrubic" target="_blank" rel="noopener noreferrer">Github</a></div>
-                <div><a href="https://www.linkedin.com/in/roman-grubic/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
                 </div>
                 <div class="large-6">
                     <p>Primajte novosti i posebne akcije na Vaš email!</p>
@@ -25,6 +33,11 @@
                     <h2>
                         <?= App::config('appName') ?> &copy; 2022
                     </h2>
+                </div>
+                <div class="large-3">
+                    <h3>Roman Grubić</h3>
+                    <div><a href="https://github.com/romangrubic" target="_blank" rel="noopener noreferrer">Github</a></div>
+                    <div><a href="https://www.linkedin.com/in/roman-grubic/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
                 </div>
             </div>
 
