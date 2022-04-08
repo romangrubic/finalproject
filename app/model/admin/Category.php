@@ -50,9 +50,11 @@ class Category
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-                select *
-                from category
-                where id=:id
+                select a.id, a.name, a.description, a.lastUpdated, count(b.id) as hasProducts
+                from category a
+                left join product b on a.id=b.category
+                where a.id=:id
+                group by a.id, a.name, a.description, a.lastUpdated
         
         ');
         $query->execute(['id' => $id]);

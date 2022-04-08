@@ -1,9 +1,14 @@
 <div class="main-index">
     <div class="form">
     <form action="<?= App::config('url') ?>category/action" method="post">
-    <?php if($category->id != 0):?>        
+    <?php if($category->id != 0 && $category->hasProducts==0):?>        
     <div>
-        <a onclick="return confirm('Confirm deletion for <?=$category->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>category/delete/<?=$category->id?>">DELETE CATEGORY</a>     
+        <a onclick="return confirm('Confirm deletion for <?=$category->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>category/delete/<?=$category->id?>">Obriši kategoriju!</a>     
+    </div>
+    <hr>
+    <?php elseif($category->hasProducts !=0):?>
+        <div>
+        <h4>Kategorija se ne može obrisati jer ima proizvode!</h4>     
     </div>
     <hr>
     <?php endif;?>

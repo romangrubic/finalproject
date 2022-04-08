@@ -16,6 +16,7 @@ class CategoryController extends AuthorizedController
         $this->category->name = '';
         $this->category->description = '';
         $this->category->lastUpdated = '';
+        $this->category->hasProducts = 0;
 
         $this->message = new stdClass();
         $this->message->name='';
@@ -46,14 +47,14 @@ class CategoryController extends AuthorizedController
                 'css' => $this->cssDir . 'index.css',
                 'category'=>$this->category,
                 'message'=>$this->message,
-                'action'=>'Dodaj novu kategoriju'
+                'action'=>'Dodaj novu kategoriju.'
             ]);
         }else{
             $this->view->render($this->viewDir . 'details',[
                 'css' => $this->cssDir . 'index.css',
                 'category'=>Category::readOne($id),
                 'message'=>$this->message,
-                'action'=>'Update'
+                'action'=>'Spremi promijene.'
             ]);
         }
     }
@@ -71,7 +72,7 @@ class CategoryController extends AuthorizedController
                     'css' => $this->cssDir . 'index.css',
                     'category'=>$this->category,
                     'message'=>$this->message,
-                    'action'=>'Spremi promijene'
+                    'action'=>'Spremi promijene.'
                 ]);
                 return;
             }
@@ -84,7 +85,7 @@ class CategoryController extends AuthorizedController
                     'css' => $this->cssDir . 'index.css',
                     'category'=>(object)$_POST,
                     'message'=>$this->message,
-                    'action'=>'Update'
+                    'action'=>'Spremi promijene.'
                 ]);
                 return;
             }
