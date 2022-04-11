@@ -1,10 +1,12 @@
 <div class="main-index">
     <div class="form">
-    <form action="<?= App::config('url') ?>operator/action" method="post">       
+    <form action="<?= App::config('url') ?>operator/action" method="post">  
+    <?php if($operator->id != 0):?>          
     <div>
         <a onclick="return confirm('Confirm deletion for <?=$operator->firstname?> <?=$operator->lastname?> ?')" class="warning button expanded" href="<?=App::config('url')?>operator/delete/<?=$operator->id?>">Obriši operatera!</a>     
     </div>
-    <hr>    
+    <hr>   
+    <?php endif;?> 
         <fieldset>
             <legend>Detalji operatera</legend>
 
