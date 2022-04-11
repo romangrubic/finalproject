@@ -1,0 +1,37 @@
+<div class="main-index">
+    <div class="grid-x">
+        <div class="cell large-6">
+            <h1 style="font-size: 1.5rem;">Operateri</h1>
+        </div>
+        <div class="cell large-6" style="text-align: right;">
+            <a href="<?= App::config('url') ?>operator/details"><i style="color: green;" title="Dodaj novog opeatera." class="fas fa-2x fa-plus-circle"></i></a>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Email</th>
+                <th>Uloga</th>
+                <!-- <th>Zadnja promjena</th> -->
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($operators as $operator) : ?>
+                <tr>
+                    <td><?= $operator->firstname ?></td>
+                    <td><?= $operator->lastname ?></td>
+                    <td><?= $operator->email ?></td>
+                    <td><?= $operator->user_role ?></td>
+                    <!-- <td><?= $operator->lastUpdated ?></td> -->
+                    <td>
+                    <a href="<?= App::config('url') ?>operator/details/<?= $operator->id ?>" class="button expand info">View details...</a>
+                    <a href="<?= App::config('url') ?>operator/changepassword/<?= $operator->id ?>" class="button expand warning">Change password</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

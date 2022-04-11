@@ -1,0 +1,65 @@
+<div class="main-index">
+    <div class="form">
+    <form action="<?= App::config('url') ?>operator/action" method="post">       
+    <div>
+        <a onclick="return confirm('Confirm deletion for <?=$operator->firstname?> <?=$operator->lastname?> ?')" class="warning button expanded" href="<?=App::config('url')?>operator/delete/<?=$operator->id?>">Obriši operatera!</a>     
+    </div>
+    <hr>    
+        <fieldset>
+            <legend>Detalji operatera</legend>
+
+            <label for="firstname">Ime</label>
+            <input type="text" name="firstname" id="firstname" value="<?= $operator->firstname ?>" aria-describedby="messagefirstname">
+            <p class="help-text red-message" id="messagefirstname">
+                <?= $message->firstname ?>
+            </p>
+
+            <label for="lastname">Prezime</label>
+            <input type="text" name="lastname" id="lastname" value="<?= $operator->lastname ?>" aria-describedby="messagelastname">
+            <p class="help-text red-message" id="messagelastname">
+                <?= $message->lastname ?>
+            </p>
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" aria-describedby="messageemail" placeholder="vas.email@gmail.com" value="<?= $operator->email ?>">
+            <p class="help-text red-message" id="messageemail">
+                <?= $message->email ?>
+            </p>
+
+            <label for="user_role">Uloga</label>
+            <select name="user_role" id="user_role">
+                <option value="oper">Operator</option>
+                <option value="admin">Administrator</option>
+            </select>
+            <p class="help-text red-message" id="messageuserrole">
+                <?= $message->user_role ?>
+            </p>
+
+            <?php if($operator->id==0):?>
+            <label for="user_password">Lozinka</label>
+                <input type="password" name="user_password" id="user_password" aria-describedby="messagePassword" value="<?= $operator->user_password ?>">
+                <p class="help-text red-message" id="messagePassword">
+                    <?= $message->user_password ?>
+                </p>
+
+                <label for="user_password_repeat">Ponovno unesite lozinku</label>
+                <input type="password" name="user_password_repeat" id="user_password_repeat" aria-describedby="messagePasswordRepeat" value="<?= $operator->user_password_repeat ?>">
+                <p class="help-text red-message" id="messagePasswordRepeat">
+                    <?= $message->user_password_repeat ?>
+                </p>
+            <?php endif;?>
+
+            <input type="hidden" name="id" value="<?= $operator->id ?>">
+
+            <div class="grid-x grid-padding-x">
+                <div class="large-4 cell">
+                    <a class="alert button expanded" href="<?= App::config('url') ?>operator/index">Odustani</a>
+                </div>
+                <div class="large-8 cell">
+                    <input type="submit" class="button expanded" value="<?= $action ?>">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    </div>
+</div>
