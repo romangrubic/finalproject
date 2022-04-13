@@ -3,21 +3,35 @@
         Dobrodošli/a, <?= $name; ?>
     </h3>
     <hr>
+    <br>
     <div class="grid-x">
-        <div class="large-4">
-            Registrirano korisnika: <?=$totalCustomers?>
+        <div class="large-4 text-center">
+            <h4>Korisnici</h4>
+            Ukupno korisnika <i class="far fa-question-circle" title="Ukupan broj registriranih korisnika od početka."></i><br> <?=$totalCustomers?>
             <br>
-            Zadnjih 14 dana: <?=$last2weeks?>
             <br>
-            Aktivno narudžbi: <?=$activeOrders?>
+            Registrirani zadnjih 14 dana <i class="far fa-question-circle" title="Broj registriranih korisnika u zadnjih 14 dana."></i><br> <?=$last2weeks?>
             <br>
-            Zaključeno narudžbi: <?=$closedOrders?>
+            <br>
+            Aktivni korisnici <i class="far fa-question-circle" title="Broj aktivnih korisnika u zadnjih 24 sata."></i><br> <?=$activeCustomers?>
         </div>
-        <div class="large-4">
-
+        <div class="large-4 text-center">
+        <h4>Narudžbe</h4>
+            Zaključene narudžbe <i class="far fa-question-circle" title="Broj završenih narudžbi."></i><br> <?=$closedOrders?>
+            <br>
+            <br>
+            Prosječna vrijednost narudžbe <i class="far fa-question-circle" title="Iznos prosječne narudžbe."></i><br> <?=$averageTotal?> kn
+            <br>
+            <br>
+            Aktivne narudžbe <i class="far fa-question-circle" title="Broj aktivnih narudžbi."></i><br> <?=$activeOrders?>
         </div>
-        <div class="large-4">
-
+        <div class="large-4 text-center">
+        <h4>Proizvodi</h4>
+            Ukupno proizvoda <i class="far fa-question-circle" title="Ukupan broj proizvoda u katalogu."></i><br> <?=$totalProducts?>
+            <br>
+            <br>
+            Aktivni proizvodi <i class="far fa-question-circle" title="Broj proizvoda koji su trenutno u košaricama kupaca."></i><br> <?=$activeProducts?>
+        </div>
         </div>
     </div>
 </div>

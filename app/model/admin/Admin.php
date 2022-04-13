@@ -29,14 +29,27 @@ class Admin
         return  $query->fetchColumn();
     }
 
+    public static function activeCustomers()
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+                select count(*)
+                from customer
+                where date(lastOnline) > DATE(DATE_SUB(curdate(), INTERVAL 1 day))
+        
+        ');
+        $query->execute();
+        return  $query->fetchColumn();
+    }
+
     public static function activeOrders()
     {
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-            select count(a.id)
-            from shoppingorder a
-            inner join cart b on a.id=b.shoppingorder
+            select count(id)
+            from shoppingorder
             where isFinished = false
             
         ');
@@ -49,10 +62,53 @@ class Admin
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-            select count(a.id)
+            select count(id)
+            from shoppingorder 
+            where isFinished = true
+            
+        ');
+        $query->execute();
+        return  $query->fetchColumn();
+    }
+
+    public static function sumTotal()
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+            select sum(b.price*b.quantity) as number
             from shoppingorder a
             inner join cart b on a.id=b.shoppingorder
-            where isFinished = true
+            where a.isFinished = 1
+            
+        ');
+        $query->execute();
+        return  $query->fetchColumn();
+    }
+
+    public static function totalProducts()
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+            select count(id)
+            from product
+            
+        ');
+        $query->execute();
+        return  $query->fetchColumn();
+    }
+
+    public static function activeProducts()
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+        select count(a.id)
+        from product a
+        inner join cart b on a.id=b.product
+        inner join shoppingorder c on b.shoppingorder=c.id
+        where c.isFinished = false
             
         ');
         $query->execute();
