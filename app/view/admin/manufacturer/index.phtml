@@ -20,7 +20,7 @@
             <?php foreach ($manufacturers as $manufacturer) : ?>
                 <tr>
                     <td><?= $manufacturer->name ?></td>
-                    <td><?= $manufacturer->description ?></td>
+                    <td><?= (strlen($manufacturer->description) >50)?substr($manufacturer->description, 0 ,47).'...': $manufacturer->description?></td>
                     <td><?= $manufacturer->lastUpdated ?></td>
                     <td>
                         <a href="<?= App::config('url') ?>manufacturer/details/<?= $manufacturer->id ?>" class="button expand info">View details...</a>
