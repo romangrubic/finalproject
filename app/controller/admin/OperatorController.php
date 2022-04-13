@@ -220,8 +220,8 @@ class OperatorController extends AuthorizedController
 
     private function validateRole()
     {
-        if($this->operator->user_role==0){
-            $this->message->manufacturer='Odaberite jednu od uloga.';
+        if($this->operator->user_role==''){
+            $this->message->user_role='Odaberite jednu od uloga.';
             return false;
         }
         return true;

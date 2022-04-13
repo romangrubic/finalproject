@@ -264,7 +264,7 @@ class ProductController extends Controller
             $this->product->price = (float)str_replace(',','.',$this->product->price);
             
             if($this->product->price <= 0){
-                $this->message->price = 'Ako unosite cijenu mora biti decimalni broj veci od 0';
+                $this->message->price = 'Ako unosite cijenu mora biti decimalni broj veci od 0.';
                 $this->product->price = 1.00;
             return false;
             }

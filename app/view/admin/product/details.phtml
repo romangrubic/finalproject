@@ -2,7 +2,7 @@
 <form action="<?= App::config('url') ?>product/action" method="POST" enctype="multipart/form-data">
     <?php if($product->id != 0):?>        
     <div>
-        <a onclick="return confirm('Confirm deletion for <?=$product->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>product/delete/<?=$product->id?>">DELETE PRODUCT</a>     
+        <a onclick="return confirm('Confirm deletion for <?=$product->name?> ?')" class="warning button expanded" href="<?=App::config('url')?>product/delete/<?=$product->id?>">Obriši proizvod!</a>     
     </div>
     <hr>
     <?php endif;?>

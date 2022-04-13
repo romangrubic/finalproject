@@ -39,7 +39,7 @@ class Operator
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-                update customer
+                update operator
                 set user_password=:password
                 where id=:id
         
