@@ -6,22 +6,32 @@ class Login
     {
         $connection = DB::getInstance();
 
-        // Looking into customer.email first
+        // Maybe it's admin or operator role
         $query = $connection->prepare('
-            select * from customer where email=:email
+        select * from operator where email=:email
         ');
         $query->execute(['email' => $email]);
 
         $operator = $query->fetch();
 
-        // Maybe it's admin or operator role
+        // Looking into customer.email
         if ($operator == null) {
+            $connection->beginTransaction();
             $query = $connection->prepare('
-            select * from operator where email=:email
+                select * from customer where email=:email
             ');
             $query->execute(['email' => $email]);
 
             $operator = $query->fetch();
+
+            $query = $connection->prepare('
+                update customer set 
+                lastOnline =now()
+                where email=:email
+            ');
+            $query->execute(['email' => $email]);
+
+            $connection->commit();
         }
 
         // If not customer, admin or operator, return null

@@ -12,7 +12,8 @@ create table customer(
     street varchar(255),
     city varchar(50),
     postalnumber char(5),
-    datecreated datetime not null
+    datecreated datetime not null,
+    lastOnline datetime
 );
 
 create table category(
