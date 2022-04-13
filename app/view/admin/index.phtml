@@ -1,3 +1,23 @@
 <div class="main-index">
-Welcome to Admin panel of Moja Trgovina.
+    <h3>
+        Dobrodošli/a, <?= $name; ?>
+    </h3>
+    <hr>
+    <div class="grid-x">
+        <div class="large-4">
+            Registrirano korisnika: <?=$totalCustomers?>
+            <br>
+            Zadnjih 14 dana: <?=$last2weeks?>
+            <br>
+            Aktivno narudžbi: <?=$activeOrders?>
+            <br>
+            Zaključeno narudžbi: <?=$closedOrders?>
+        </div>
+        <div class="large-4">
+
+        </div>
+        <div class="large-4">
+
+        </div>
+    </div>
 </div>

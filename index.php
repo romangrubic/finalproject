@@ -20,8 +20,8 @@ if(isset($_SESSION['authorized']->user_role) && ($_SESSION['authorized']->user_r
 $routes = implode(PATH_SEPARATOR, [
     BP_APP . 'model',
     BP_APP . 'model' . DIRECTORY_SEPARATOR . $view,
-    BP_APP . 'controller',
     BP_APP . 'controller' . DIRECTORY_SEPARATOR . $view,
+    BP_APP . 'controller',
     BP_APP . 'core'
 ]);
 
