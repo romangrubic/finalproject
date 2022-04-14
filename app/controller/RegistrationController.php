@@ -1,9 +1,9 @@
 <?php
 
-class RegistrationController extends Controller
+class RegistrationController extends LoginController
 {
     private $customer;
-    private $message;
+    protected $message;
 
     private $cssDir =  'registration' . DIRECTORY_SEPARATOR;
 
@@ -34,6 +34,8 @@ class RegistrationController extends Controller
         $this->message->street = '';
         $this->message->city = '';
         $this->message->postalnumber = '';
+        $this->message->email = '';
+        $this->message->password = '';
     }
 
     public function index()
@@ -41,7 +43,8 @@ class RegistrationController extends Controller
         $this->view->render('registration', [
             'css' => $this->cssDir . 'index.css',
             'customer'=>$this->customer,
-            'message'=>$this->message
+            'message'=>$this->message,
+            'email'=>$this->email
         ]);
     }
 
