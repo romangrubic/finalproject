@@ -39,6 +39,12 @@
     margin: auto;
 }
 
+.total-product-message{
+    font-style: italic;
+    font-size: 1.1rem;
+    color: gray;
+  }
+  
 /* Pagination */
 .pagination{
     margin-top: 50px;

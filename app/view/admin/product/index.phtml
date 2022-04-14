@@ -12,6 +12,11 @@
             <input type="text" name="search" id="search" class="search-product" placeholder="Traži po id, imenu proizvoda, proizvođaču, kategoriji..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
         </div>
     </form>
+    <?php if($totalProducts == 1):?>
+    <legend class="total-product-message">Pronađen samo jedan proizvod.</legend>
+    <?php else:?>
+    <legend class="total-product-message">Pronađeno ukupno <?=$totalProducts?> proizvoda.</legend>
+    <?php endif;?>
     <table>
         <thead>
             <tr>
