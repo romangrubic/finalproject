@@ -1,0 +1,41 @@
+<div class="main-index">
+    <div class="grid-x">
+        <div class="cell large-6">
+            <h1 style="font-size: 1.5rem;">Narudžbe</h1>
+        </div>
+    </div>
+    <form class="search-product large-6 cell blue-sky" action="<?= App::config('url') ?>order/<?=$type?>" method="get">
+        <div class="ui-widget">
+            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, prezimenu, proizvodu, gradu..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
+        </div>
+    </form>
+    <?php if($totalOrders==0):?>
+    <legend class="total-product-message">Nema niti jedne narudžbe.</legend>
+    <?php elseif($totalOrders == 1):?>
+    <legend class="total-product-message">Pronađena samo jedna narudžba.</legend>
+    <?php elseif($totalOrders > 1):?>
+    <legend class="total-product-message">Pronađeno ukupno <?=$totalOrders?> narudžbi.</legend>
+    <?php endif;?>
+    <table>
+        <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Grad</th>
+                <th>Online</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($orders as $order) : ?>
+                <tr>
+                    <td><?= $order->firstname ?></td>
+                    <td><?= $order->lastname ?></td>
+                    <td><?= $order->city ?></td>
+                    <td><?= $order->lastOnline ?></td>
+                    <td></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
