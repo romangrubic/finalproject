@@ -22,9 +22,15 @@ class IndexController extends AuthorizedController
         $activeCustomers=$this->nf1->format(Admin::activeCustomers());
         $activeOrders=$this->nf1->format(Admin::activeOrders());
         $closedOrders=$this->nf1->format(Admin::closedOrders());
-        $averageTotal=$this->nf2->format(Admin::sumTotal()/Admin::closedOrders());
+        $averageFinishedTotal=$this->nf2->format(Admin::sumFinishedTotal()/Admin::closedOrders());
+        $averageActiveTotal=$this->nf2->format(Admin::sumActiveTotal()/Admin::activeOrders());
         $totalProducts=$this->nf1->format(Admin::totalProducts());
         $activeProducts=$this->nf1->format(Admin::activeProducts());
+        $categories=Admin::byCategory();
+        $manufacturers=Admin::byManufacturer();
+        $city=Admin::byCity();
+        $mostSold=Admin::mostSold();
+        $lessSold=Admin::lessSold();
 
         $this->view->render('admin/index',[
             'css'=>$this->cssDir.'index.css',
@@ -34,9 +40,15 @@ class IndexController extends AuthorizedController
             'activeCustomers'=>$activeCustomers,
             'activeOrders'=>$activeOrders,
             'closedOrders'=>$closedOrders,
-            'averageTotal'=>$averageTotal,
+            'averageFinishedTotal'=>$averageFinishedTotal,
+            'averageActiveTotal'=>$averageActiveTotal,
             'totalProducts'=>$totalProducts,
-            'activeProducts'=>$activeProducts
+            'activeProducts'=>$activeProducts,
+            'categories'=>$categories,
+            'manufacturers'=>$manufacturers,
+            'city'=>$city,
+            'mostSold'=>$mostSold,
+            'lessSold'=>$lessSold,
         ]);
         return;
     }
