@@ -61,7 +61,7 @@ class Order
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-        select distinct a.firstname, a.lastname, a.city, a.lastOnline
+        select a.id, a.firstname, a.lastname, a.city, a.lastOnline, b.id as orderId
         from customer a
         inner join shoppingorder b on a.id=b.customer
         where concat(a.firstname, a.lastname, a.city) like :search
@@ -73,4 +73,24 @@ class Order
         $query->execute();
         return $query->fetchAll();
     }
+
+    public static function readOrderDetails($id)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+        
+        select c.name, c.description,c.id as productId, c.price as productPrice, a.price, a.quantity
+        from cart a
+        inner join shoppingorder b on a.shoppingorder=b.id
+        inner join product c on a.product=c.id
+        where b.id = :id
+        ');
+
+        $query->execute([
+            'id'=>$id
+        ]);
+        return $query->fetchAll();
+    }
+
+
 }
