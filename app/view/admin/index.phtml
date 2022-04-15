@@ -1,37 +1,83 @@
 <div class="main-index">
-    <h3>
+    <h2>
         Dobrodošli/a, <?= $name; ?>
-    </h3>
+    </h2>
     <hr>
     <br>
     <div class="grid-x">
-        <div class="large-4 text-center">
+        <div class="large-4">
             <h4>Korisnici</h4>
-            Ukupno korisnika <i class="far fa-question-circle" title="Ukupan broj registriranih korisnika od početka."></i><br> <?=$totalCustomers?>
-            <br>
-            <br>
-            Registrirani zadnjih 14 dana <i class="far fa-question-circle" title="Broj registriranih korisnika u zadnjih 14 dana."></i><br> <?=$last2weeks?>
-            <br>
-            <br>
-            Aktivni korisnici <i class="far fa-question-circle" title="Broj aktivnih korisnika u zadnjih 24 sata."></i><br> <?=$activeCustomers?>
+            <ul>
+                <li>Ukupno korisnika <i class="far fa-question-circle" title="Ukupan broj registriranih korisnika od početka."></i> - <?= $totalCustomers ?></li>
+                <li>Registrirani zadnjih 14 dana <i class="far fa-question-circle" title="Broj registriranih korisnika u zadnjih 14 dana."></i> - <?= $last2weeks ?></li>
+                <br>
+                <li>Aktivni korisnici <i class="far fa-question-circle" title="Broj aktivnih korisnika u zadnjih 24 sata."></i> - <?= $activeCustomers ?></li>
+            </ul>
         </div>
-        <div class="large-4 text-center">
-        <h4>Narudžbe</h4>
-            Zaključene narudžbe <i class="far fa-question-circle" title="Broj završenih narudžbi."></i><br> <?=$closedOrders?>
-            <br>
-            <br>
-            Prosječna vrijednost narudžbe <i class="far fa-question-circle" title="Iznos prosječne narudžbe."></i><br> <?=$averageTotal?> kn
-            <br>
-            <br>
-            Aktivne narudžbe <i class="far fa-question-circle" title="Broj aktivnih narudžbi."></i><br> <?=$activeOrders?>
+        <div class="large-4">
+            <h4>Narudžbe</h4>
+            <ul>
+                <li>Zaključene narudžbe <i class="far fa-question-circle" title="Broj završenih narudžbi."></i> - <?= $closedOrders ?></li>
+                <li>Prosječna vrijednost <i class="far fa-question-circle" title="Iznos prosječne narudžbe."></i> - <?= $averageFinishedTotal ?> kn</li>
+                <br>
+                <li>Aktivne narudžbe <i class="far fa-question-circle" title="Broj aktivnih narudžbi."></i> - <?= $activeOrders ?></li>
+                <li>Prosječna vrijednost <i class="far fa-question-circle" title="Iznos prosječne aktivne narudžbe."></i> - <?= $averageActiveTotal ?> kn</li>
+            </ul>
         </div>
-        <div class="large-4 text-center">
-        <h4>Proizvodi</h4>
-            Ukupno proizvoda <i class="far fa-question-circle" title="Ukupan broj proizvoda u katalogu."></i><br> <?=$totalProducts?>
-            <br>
-            <br>
-            Aktivni proizvodi <i class="far fa-question-circle" title="Broj proizvoda koji su trenutno u košaricama kupaca."></i><br> <?=$activeProducts?>
-        </div>
+        <div class="large-4">
+            <h4>Proizvodi</h4>
+            <ul>
+                <li>Ukupno proizvoda <i class="far fa-question-circle" title="Ukupan broj proizvoda u katalogu."></i> - <?= $totalProducts ?></li>
+                <li>Aktivni proizvodi <i class="far fa-question-circle" title="Broj proizvoda koji su trenutno u košaricama kupaca."></i> - <?= $activeProducts ?></li>
+            </ul>
         </div>
     </div>
+    <hr>
+    <!-- <h3>Prodaja proizvoda po ključu</h3> -->
+    <div class="grid-x">
+        <div class="large-4 columns">
+            <h4>Kategorija <i class="far fa-question-circle" title="Broj proizvoda prodanih po kategoriji."></i></h4>
+            <ol>
+                <?php foreach ($categories as $cat) : ?>
+                    <li><?= $cat->name ?> - <?= $cat->quantity ?></li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+        <div class="large-4 columns">
+            <h4>Proizvođači <i class="far fa-question-circle" title="Broj proizvoda prodanih po proizvođačima."></i></h4>
+            <ol>
+                <?php foreach ($manufacturers as $man) : ?>
+                    <li><?= $man->name ?> - <?= $man->quantity ?></li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+        <div class="large-4 columns">
+            <h4>Gradovi <i class="far fa-question-circle" title="Broj proizvoda prodanih po gradovima."></i></h4>
+            <ol>
+                <?php foreach ($city as $p) : ?>
+                    <li><?= $p->city ?> - <?= $p->quantity ?></li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+    <hr>
+    <div class="grid-x">
+        <div class="large-6 columns">
+            <h4>Najprodavaniji proizvodi <i class="far fa-question-circle" title="Količina proizvoda prodanih po proizvodu."></i></h4>
+            <ol>
+                <?php foreach ($mostSold as $m) : ?>
+                    <li><?= $m->name ?> - <?= $m->quantity ?></li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+        <div class="large-6 columns">
+            <h4>Najmanje prodani proizvodi <i class="far fa-question-circle" title="Količina proizvoda prodanih po proizvodu."></i></h4>
+            <ol>
+                <?php foreach ($lessSold as $m) : ?>
+                    <li><?= $m->name ?> - <?= $m->quantity ?></li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+    <hr>
 </div>
