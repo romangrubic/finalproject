@@ -37,7 +37,8 @@ class OrderController extends AuthorizedController
             'search'=>$search,
             'orders'=>$orders,
             'totalOrders'=>$totalOrders,
-            'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminActiveOrders.js"></script>'
+            'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminActiveOrders.js"></script>
+            <script src="'. App::config('url'). 'public/js/custom/getOrderDetails.js"></script>'
         ]);
         return;
     }
@@ -45,5 +46,11 @@ class OrderController extends AuthorizedController
     public function searchactive($search){
         header('Content-type: application/json');
         echo json_encode(Order::searchActive($search));
+    }
+
+    public function getDetails($id)
+    {
+        $data = (array)Order::readOrderDetails($id);
+        echo json_encode($data);
     }
 }
