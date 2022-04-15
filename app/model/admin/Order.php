@@ -43,10 +43,14 @@ class Order
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-        select distinct count(a.id)
+        select distinct a.id, a.firstname, a.lastname, a.city, a.lastOnline, b.id as orderId
         from customer a
         inner join shoppingorder b on a.id=b.customer
-        where concat(a.firstname, a.lastname, a.city) like :search
+        inner join cart c on c.shoppingorder=b.id
+        inner join product d on d.id=c.product
+        inner join manufacturer e on d.manufacturer=e.id
+        inner join category f on d.category=f.id
+        where concat(a.city, e.name, f.name) like :search
         and b.isFinished = 0
         ');
 
@@ -61,10 +65,14 @@ class Order
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-        select a.id, a.firstname, a.lastname, a.city, a.lastOnline, b.id as orderId
+        select distinct a.id, a.firstname, a.lastname, a.city, a.lastOnline, b.id as orderId
         from customer a
         inner join shoppingorder b on a.id=b.customer
-        where concat(a.firstname, a.lastname, a.city) like :search
+        inner join cart c on c.shoppingorder=b.id
+        inner join product d on d.id=c.product
+        inner join manufacturer e on d.manufacturer=e.id
+        inner join category f on d.category=f.id
+        where concat(a.city, e.name, f.name) like :search
         and b.isFinished = 0
         ');
 
