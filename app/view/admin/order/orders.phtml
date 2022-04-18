@@ -13,12 +13,16 @@
         <legend class="total-product-message">Nema niti jedne narudžbe.</legend>
     <?php elseif ($totalOrders == 1) : ?>
         <legend class="total-product-message">Pronađena samo jedna narudžba.</legend>
+        <?php elseif ($totalOrders == 498) : ?>
+        <legend class="total-product-message">Pronađeno ukupno 500 narudžbi.</legend>
     <?php elseif ($totalOrders > 1) : ?>
         <legend class="total-product-message">Pronađeno ukupno <?= $totalOrders ?> narudžbi.</legend>
+
     <?php endif; ?>
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Ime</th>
                 <th>Prezime</th>
                 <th>Grad</th>
@@ -29,35 +33,18 @@
         <tbody>
             <?php foreach ($orders as $order) : ?>
                 <tr>
+                    <td><?= $order->orderId ?></td>
                     <td><?= $order->firstname ?></td>
                     <td><?= $order->lastname ?></td>
                     <td><?= $order->city ?></td>
                     <td><?= $order->lastOnline ?></td>
-                    <td><i class="fas fa-info-circle modal" data-id="<?= $order->orderId ?>" data-open="modal<?= $order->orderId ?>" title="Pogledaj detalje aktivne narudžbe."></i></td>
+                    <td><i class="fas fa-info-circle modal" data-id="<?= $order->orderId ?>" data-open="modal<?= $order->orderId ?>" title="Pogledaj detalje narudžbe."></i></td>
                 </tr>
-
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
-
-<div class="small reveal" id="modal<?= $order->orderId ?>" data-reveal>
-<br>
-<legend> Trenutni proizvodi u košarici.</legend>
-    <table>
-        <thead>
-            <tr>
-                <th>Proizvod</th>
-                <th class="text-center">Kolicina</th>
-                <th>Cijena</th>
-                <th>Iznos</th>
-            </tr>
-        </thead>
-        <tbody id="order">
-        </tbody>
-    </table>
-    <h4 id="sum" class="text-right" ></h4>
-    <button class="close-button" data-close aria-label="Close modal" type="button">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<?php
+foreach ($orders as $order):?>
+<?php include 'modal.phtml'?>
+<?php endforeach?>
