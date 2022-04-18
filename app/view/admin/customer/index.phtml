@@ -1,19 +1,28 @@
 <div class="main-index">
-<form class="search-product large-6 cell blue-sky" action="<?= App::config('url') ?>customer/index" method="get">
+<h1 style="font-size: 1.5rem;">Popis kupaca</h1>
+<hr>
+    <form class="search-product large-6 cell" action="<?= App::config('url') ?>customer/index" method="get">
+        <div>
+            <input type="radio" id="normal" name="negation" value="0" <?= ($negation == '0') ? 'checked' : ''; ?>>
+            <label for="normal">Normalno</label>
+            <input type="radio" id="negation" name="negation" value="1" <?= ($negation == '1') ? 'checked' : ''; ?>>
+            <label for="negation">Negacija <i class="fas fa-info-circle" title="Svi koji nemaju traženu vrijednost."></i></label>
+        </div>
         <div class="ui-widget">
             <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, prezimenu, gradu, proizvodu, proizvođaču, kategoriji..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
+
         </div>
     </form>
-    <?php if($totalCustomers == 1):?>
-    <legend class="total-product-message">Pronađen samo jedan kupac.</legend>
-    <?php else:?>
-    <legend class="total-product-message">Pronađeno ukupno <?=$totalCustomers?> kupaca.</legend>
-    <?php endif;?>
-<table>
+    <?php if ($totalCustomers == 1) : ?>
+        <legend class="total-product-message">Pronađen samo jedan kupac.</legend>
+    <?php else : ?>
+        <legend class="total-product-message">Pronađeno ukupno <?= $totalCustomers ?> kupaca.</legend>
+    <?php endif; ?>
+    <table>
         <thead>
             <tr>
-                <th>Naziv</th>
-                <th>Opis</th>
+                <th>Ime i prezime</th>
+                <th>Email</th>
                 <th>Zadnja put online</th>
                 <th></th>
             </tr>
@@ -21,7 +30,7 @@
         <tbody>
             <?php foreach ($customers as $c) : ?>
                 <tr>
-                    <td><?= $c->firstname ?> <?=$c->lastname?></td>
+                    <td><?= $c->firstname ?> <?= $c->lastname ?></td>
                     <td><?= $c->email ?></td>
                     <td><?= $c->lastOnline ?></td>
                     <td>
@@ -31,4 +40,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    <?php include 'pagination.phtml' ?>
 </div>

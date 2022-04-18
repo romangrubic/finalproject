@@ -13,7 +13,30 @@ class CustomerController extends AuthorizedController
             $search = $_GET['search'];
         }
 
-        $customers = AdminCustomer::read($search);
+        if(!isset($_GET['negation'])){
+            $negation = '0';
+        }else{
+            $negation = $_GET['negation'];
+        }
+
+        if(!isset($_GET['page'])){
+            $page = 1;
+        }else{
+            $page = (int)$_GET['page'];
+        }
+        if($page == 0){
+            $page = 1;
+        }
+
+
+        $totalCustomers = AdminCustomer::countCustomer($search, $negation);
+        $totalPages = ceil($totalCustomers / App::config('ppp'));
+
+        if($page > $totalPages){
+            $page = $totalPages;
+        }
+
+        $customers = AdminCustomer::read($search, $negation, $page);
         
         foreach($customers as $customer){
             if($customer->lastOnline !=null){
@@ -24,7 +47,11 @@ class CustomerController extends AuthorizedController
         $this->view->render($this->viewDir . 'index', [
             'css' => $this->cssDir . 'index.css',
             'customers' => $customers,
-            'totalCustomers'=>AdminCustomer::countCustomer($search),
+            'totalCustomers'=>$totalCustomers,
+            'page'=>$page,
+            'totalPages'=>$totalPages,
+            'search'=>$search,
+            'negation'=>$negation,
             'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminCustomer.js"></script>'
         ]);
     }

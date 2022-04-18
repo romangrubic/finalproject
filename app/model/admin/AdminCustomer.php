@@ -1,22 +1,38 @@
-<?php 
+<?php
 
 class AdminCustomer
 {
-    public static function countCustomer($search)
+    public static function countCustomer($search, $negation)
     {
         $connection = DB::getInstance();
-        $query = $connection->prepare('
+        if(!isset($negation) || $negation == '0'){
+            $query = $connection->prepare('
         
-        select count(distinct a.id)
-        from customer a
-        inner join shoppingorder b on a.id=b.customer
-        inner join cart c on b.id=c.shoppingorder
-        inner join product d on d.id=c.product
-        inner join manufacturer e on e.id=d.manufacturer
-        inner join category f on f.id=d.category
-        where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) like :search
-        
+                select count(distinct a.id)
+                from customer a
+                inner join shoppingorder b on a.id=b.customer
+                inner join cart c on b.id=c.shoppingorder
+                inner join product d on d.id=c.product
+                inner join manufacturer e on e.id=d.manufacturer
+                inner join category f on f.id=d.category
+                where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) like :search
+                
         ');
+        }else{
+            $query = $connection->prepare('
+        
+                select count(distinct a.id)
+                from customer a
+                inner join shoppingorder b on a.id=b.customer
+                inner join cart c on b.id=c.shoppingorder
+                inner join product d on d.id=c.product
+                inner join manufacturer e on e.id=d.manufacturer
+                inner join category f on f.id=d.category
+                where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) not like :search
+                
+        ');
+        }
+        
         $search = '%' . $search . '%';
         $query->bindParam('search', $search);
         $query->execute();
@@ -33,27 +49,73 @@ class AdminCustomer
                 where id=:id
         ');
         $query->execute([
-            'id'=>$id
+            'id' => $id
         ]);
         return $query->fetch();
     }
 
-    public static function read($search)
+    public static function read($search, $negation, $page)
     {
+        $ppp = App::config('ppp');
+        $from = $page * $ppp - $ppp;
+
         $connection = DB::getInstance();
-        $query = $connection->prepare('
-        
-        select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated, a.lastOnline
-        from customer a
-        inner join shoppingorder b on a.id=b.customer
-        inner join cart c on b.id=c.shoppingorder
-        inner join product d on d.id=c.product
-        inner join manufacturer e on e.id=d.manufacturer
-        inner join category f on f.id=d.category
-        where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) like :search
-        ');
-        $search = '%' . $search . '%';
-        $query->bindParam('search', $search);
+        if (!isset($search)) {
+            $query = $connection->prepare('
+            
+                select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated, a.lastOnline
+                from customer a
+                inner join shoppingorder b on a.id=b.customer
+                inner join cart c on b.id=c.shoppingorder
+                inner join product d on d.id=c.product
+                inner join manufacturer e on e.id=d.manufacturer
+                inner join category f on f.id=d.category
+                order by a.id
+                limit :from, :ppp
+            ');
+        } else {
+            if($negation=='0'){
+                $query = $connection->prepare('
+            
+                select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated, a.lastOnline
+                from customer a
+                inner join shoppingorder b on a.id=b.customer
+                inner join cart c on b.id=c.shoppingorder
+                inner join product d on d.id=c.product
+                inner join manufacturer e on e.id=d.manufacturer
+                inner join category f on f.id=d.category
+                where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) like :search
+                limit :from, :ppp
+
+            ');
+            }else {
+                $query = $connection->prepare('
+            
+                select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated,
+                 a.lastOnline, d.name as product, e.name as manufacturer, f.name as category 
+                from customer a
+                inner join shoppingorder b on a.id=b.customer
+                inner join cart c on b.id=c.shoppingorder
+                inner join product d on d.id=c.product
+                inner join manufacturer e on e.id=d.manufacturer
+                inner join category f on f.id=d.category
+                where a.firstname not like :search
+                and a.lastname not like :search
+                and a.lastname not like :search
+                and a.city not like :search
+                and d.name not like :search
+                and e.name not like :search
+                and f.name not like :search
+                group by a.id
+                limit :from, :ppp
+
+            ');
+            }
+            $search = '%' . $search . '%';
+            $query->bindParam('search', $search);
+        }
+        $query->bindValue('from', $from, PDO::PARAM_INT);
+        $query->bindValue('ppp', $ppp, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchall();
     }
