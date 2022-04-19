@@ -28,8 +28,23 @@ class OrderController extends AuthorizedController
             $search = $_GET['search'];
         }
 
+        if(!isset($_GET['page'])){
+            $page = 1;
+        }else{
+            $page = (int)$_GET['page'];
+        }
+        if($page == 0){
+            $page = 1;
+        }
+
         $totalOrders = Order::totalActiveOrder($search);
-        $orders = Order::readActiveOrderCustomers($search);
+        $totalPages = ceil($totalOrders / App::config('ppp'));
+
+        if($page > $totalPages){
+            $page = $totalPages;
+        }
+
+        $orders = Order::readActiveOrderCustomers($search, $page);
 
         $this->view->render($this->viewDir . 'orders',[
             'css'=>$this->cssDir . 'index.css',
@@ -37,6 +52,8 @@ class OrderController extends AuthorizedController
             'search'=>$search,
             'orders'=>$orders,
             'totalOrders'=>$totalOrders,
+            'page'=>$page,
+            'totalPages'=>$totalPages,
             'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminActiveOrders.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>'
         ]);
@@ -64,8 +81,23 @@ class OrderController extends AuthorizedController
             $totalOrders = Order::totalFinalizedOrder($search);
         }
 
+        if(!isset($_GET['page'])){
+            $page = 1;
+        }else{
+            $page = (int)$_GET['page'];
+        }
+        if($page == 0){
+            $page = 1;
+        }
+
+        $totalFinalizedOrders = Order::totalFinalizedOrder($search);
+        $totalPages = ceil($totalFinalizedOrders / App::config('ppp'));
+
+        if($page > $totalPages){
+            $page = $totalPages;
+        }
         // $totalOrders = Order::totalFinalizedOrder($search);
-        $orders = Order::readFinalizedOrderCustomers($search);
+        $orders = Order::readFinalizedOrderCustomers($search, $page);
 
         $this->view->render($this->viewDir . 'orders',[
             'css'=>$this->cssDir . 'index.css',
@@ -73,6 +105,8 @@ class OrderController extends AuthorizedController
             'search'=>$search,
             'orders'=>$orders,
             'totalOrders'=>$totalOrders,
+            'page'=>$page,
+            'totalPages'=>$totalPages,
             'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminFinalizedOrders.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>'
         ]);

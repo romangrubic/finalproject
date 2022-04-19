@@ -1,0 +1,53 @@
+<nav aria-label="Pagination">
+  <ul class="pagination text-center">
+
+    <!-- Show return to page one button and previous page button -->
+    <?php if($page-1 == 0):?>
+        <li class="pagination-previous disabled">Početak</li>
+        <li class="pagination-previous disabled">Prethodna</li>
+    <?php else:?>
+        <li class="pagination-previous "><a href="<?=App::config('url')?>order/<?= $type ?>?search=<?=$search?>&page=1" aria-label="Start page" title="Povratak na prvu stranicu">Početak</a></li>
+        <li class="pagination-previous "><a href="<?=App::config('url')?>order/<?= $type ?>?search=<?=$search?>&page=<?=$page-1?>" aria-label="Previous page" title="Prethodna stranica. Stranica broj <?=$page-1?>">Prethodna</a></li>
+    <?php endif;?>
+    <!--  -->
+    <!-- 
+        Find better solution that the one below!
+     -->
+    <!-- Show second previous page if exists -->
+    <?php if($page-2 < 1):?>
+    <?php else:?>
+    <li><a href="<?=App::config('url')?>order/<?= $type ?>?search=<?=$search?>&page=<?=$page-2?>" aria-label="Page <?=$page-2?>"><?=$page-2?></a></li>
+    <?php endif;?>
+    <!--  -->
+    <!-- Show previous page if exists -->
+    <?php if($page-1 < 1):?>
+    <?php else:?>
+    <li><a href="<?=App::config('url')?>order/<?= $type ?>?search=<?=$search?>&page=<?=$page-1?>" aria-label="Page <?=$page-1?>"><?=$page-1?></a></li>
+    <?php endif;?>
+    <!--  -->
+    <!-- Current page -->
+    <li class="page-show-button"><span class="show-for-sr">Vi ste na stranici</span> <?=$page?></li>
+    <!--  -->
+    <!-- Show next page if exists -->
+    <?php if($page+1 > $totalPages):?>
+    <?php else:?>
+    <li><a href="<?=App::config('url')?>order/<?= $type ?>?search=<?=$search?>&page=<?=$page+1?>" aria-label="Page <?=$page+1?>"><?=$page+1?></a></li>
+    <?php endif;?>
+    <!--  -->
+    <!-- Show second next page if exists -->
+    <?php if($page+2 > $totalPages):?>
+    <?php else:?>
+    <li><a href="<?=App::config('url')?>order/<?= $type ?>?search=<?=$search?>&page=<?=$page+2?>" aria-label="Page <?=$page+2?>"><?=$page+2?></a></li>
+    <?php endif;?>
+    <!--  -->
+    <!-- Show next page button and go to end page button -->
+    <?php if($page == $totalPages):?>
+        <li class="pagination-next disabled">Sljedeća</li>
+        <li class="pagination-next disabled">Kraj</li>
+    <?php else:?>
+        <li class="pagination-next"><a href="<?=App::config('url')?>order/<?= $type ?>?search=<?=$search?>&page=<?=$page+1?>" aria-label="Next page" title="Sljedeća stranica. Stranica broj <?=$page+1?>">Sljedeća</a></li>
+        <li class="pagination-next "><a href="<?=App::config('url')?>order/<?= $type ?>?search=<?=$search?>&page=<?=$totalPages?>" aria-label="Final page" title="Idi na zadnju stranicu. Stranica broj <?=$totalPages?>">Kraj</a></li>
+    <?php endif;?>
+    <!--  -->
+  </ul>
+</nav>

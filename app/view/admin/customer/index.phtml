@@ -9,9 +9,10 @@
             <label for="negation">Negacija <i class="fas fa-info-circle" title="Svi koji nemaju traženu vrijednost."></i></label>
         </div>
         <div class="ui-widget">
-            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, prezimenu, gradu, proizvodu, proizvođaču, kategoriji..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
+            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, prezimenu ili gradu." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
 
         </div>
+        <input style="margin-bottom:10px; width: 100%;" type="submit" class="button" value="Traži!">
     </form>
     <?php if ($totalCustomers == 1) : ?>
         <legend class="total-product-message">Pronađen samo jedan kupac.</legend>

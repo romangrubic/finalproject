@@ -60,8 +60,11 @@ class Order
         return $query->fetchColumn();
     }
 
-    public static function readActiveOrderCustomers($search)
+    public static function readActiveOrderCustomers($search, $page)
     {
+        $ppp = App::config('ppp');
+        $from = $page * $ppp - $ppp;
+
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
@@ -74,10 +77,13 @@ class Order
         inner join category f on d.category=f.id
         where concat(a.city, e.name, f.name) like :search
         and b.isFinished = 0
+        limit :from, :ppp
         ');
 
         $search = '%' . $search . '%';
         $query->bindParam('search', $search);
+        $query->bindValue('from', $from, PDO::PARAM_INT);
+        $query->bindValue('ppp', $ppp, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll();
     }
@@ -226,8 +232,11 @@ class Order
         return $query->fetchColumn();
     }
 
-    public static function readFinalizedOrderCustomers($search)
+    public static function readFinalizedOrderCustomers($search, $page)
     {
+        $ppp = App::config('ppp');
+        $from = $page * $ppp - $ppp;
+
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
@@ -241,10 +250,13 @@ class Order
         where concat(b.id, a.city, e.name, f.name) like :search
         and b.isFinished = 1
         order by orderId desc
+        limit :from, :ppp
         ');
 
         $search = '%' . $search . '%';
         $query->bindParam('search', $search);
+        $query->bindValue('from', $from, PDO::PARAM_INT);
+        $query->bindValue('ppp', $ppp, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll();
     }

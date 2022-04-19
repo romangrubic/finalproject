@@ -4,11 +4,13 @@
             <h1 style="font-size: 1.5rem;">Narudžbe</h1>
         </div>
     </div>
+    <?php if($type != 'active'):?>
     <form class="search-product large-6 cell blue-sky" action="<?= App::config('url') ?>order/<?= $type ?>" method="get">
         <div class="ui-widget">
-            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, prezimenu, proizvodu, gradu..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
+            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, prezimenu, proizvođaču, kategoriji ili gradu..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
         </div>
     </form>
+    <?php endif;?>
     <?php if ($totalOrders == 0) : ?>
         <legend class="total-product-message">Nema niti jedne narudžbe.</legend>
     <?php elseif ($totalOrders == 1) : ?>
@@ -48,3 +50,4 @@
 foreach ($orders as $order):?>
 <?php include 'modal.phtml'?>
 <?php endforeach?>
+<?php include 'pagination.phtml' ?>
