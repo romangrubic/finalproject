@@ -43,10 +43,11 @@ $(".modal").on("click", function () {
             .append("<td class=\"text-center\">" + array[i].quantity + "</td>")
             .append("<td>" + array[i].productPrice + " kn</td>")
             .append("<td>" + array[i].price + " kn</td>")
-            .appendTo("#order");
+            .appendTo("#order"+ orderId);
         }
-        let total = 'Sveukupno: '+sum.toFixed(2) + ' kn';
-        $("<span>").append(total).appendTo("#sum");
+        let total = sum;
+        var formattedTotal = numeral(total).format('0,0.00');
+        $("<span>").append('Sveukupuno: ' + formattedTotal + ' kn').appendTo("#sum" + orderId);
       } else {
         alert("Dogodila se greška. Pokusajte ponovo!");
       }
@@ -60,8 +61,8 @@ $(".modal").on("click", function () {
   
     $('[data-reveal]').on('closed.zf.reveal', function () {
       var modal = $(this);
-      $("#order").empty();
-      $("#sum").empty();
+      $(".order").empty();
+      $(".sum").empty();
     });
   
     $(document).foundation();

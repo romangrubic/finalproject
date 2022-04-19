@@ -27,7 +27,6 @@ function submitForm(item) {
 // Get Finalized Order details
 $(".modal").on("click", function () {
   let orderId = $(this).data("id");
-  console.log(orderId);
   $.ajax({
     url: "/order/getFinalizedDetails/" + orderId,
     success: function (response, result) {
@@ -46,8 +45,8 @@ $(".modal").on("click", function () {
             .append("<td>" + numeral(array[i].price).format('0,0.00') + " kn</td>")
             .appendTo("#order" + orderId);
         }
-        let total = sum.toFixed(2);
-        var formattedTotal = numeral(total).format('0,0.0');
+        let total = sum;
+        var formattedTotal = numeral(total).format('0,0.00');
         $("<span>").append('Sveukupuno: ' + formattedTotal + ' kn').appendTo("#sum" + orderId);
       } else {
         alert("Dogodila se greška. Pokusajte ponovo!");

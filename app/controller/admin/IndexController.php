@@ -23,7 +23,11 @@ class IndexController extends AuthorizedController
         $activeOrders=$this->nf1->format(Admin::activeOrders());
         $closedOrders=$this->nf1->format(Admin::closedOrders());
         $averageFinishedTotal=$this->nf2->format(Admin::sumFinishedTotal()/Admin::closedOrders());
-        $averageActiveTotal=$this->nf2->format(Admin::sumActiveTotal()/Admin::activeOrders());
+        if(Admin::activeOrders() != 0){
+            $averageActiveTotal=$this->nf2->format(Admin::sumActiveTotal()/Admin::activeOrders());
+        }else{
+            $averageActiveTotal=$this->nf2->format(0);
+        }
         $totalProducts=$this->nf1->format(Admin::totalProducts());
         $activeProducts=$this->nf1->format(Admin::activeProducts());
         $categories=Admin::byCategory();

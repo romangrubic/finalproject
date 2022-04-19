@@ -37,7 +37,8 @@ class OrderController extends AuthorizedController
             'search'=>$search,
             'orders'=>$orders,
             'totalOrders'=>$totalOrders,
-            'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminActiveOrders.js"></script>'
+            'javascript'=>'<script src="'. App::config('url'). 'public/js/custom/AdminActiveOrders.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>'
         ]);
         return;
     }
