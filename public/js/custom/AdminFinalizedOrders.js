@@ -31,7 +31,6 @@ $(".modal").on("click", function () {
     url: "/order/getFinalizedDetails/" + orderId,
     success: function (response, result) {
       if (result == "success") {
-        console.log(response);
         $("#modal" + orderId).foundation('open');
         let array = JSON.parse(response);
         let sum = 0;

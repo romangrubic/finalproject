@@ -1,0 +1,27 @@
+<div class="small reveal" id="modal<?= $order->orderId ?>" data-reveal>
+    <br>
+    <?php if($type == 'active'):?>
+    <h3 class="text-center"> Trenutni proizvodi u košarici.</h3>
+    <?php else:?>
+    <h3 class="text-center"> Proizvodi iz narudžbe ID:<?=$order->orderId?></h3>
+    <br>
+    <?php endif;?>
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Proizvod</th>
+                    <th class="text-center">Kolicina</th>
+                    <th>Cijena</th>
+                    <th>Iznos</th>
+                </tr>
+            </thead>
+            <tbody class="order" id="order<?=$order->orderId?>">
+            </tbody>
+        </table>
+    </section>
+    <h4 class="sum text-center" id="sum<?=$order->orderId?>"></h4>
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

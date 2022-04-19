@@ -91,21 +91,15 @@ class AdminCustomer
             }else {
                 $query = $connection->prepare('
             
-                select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated,
-                 a.lastOnline, d.name as product, e.name as manufacturer, f.name as category 
+                select a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated,
+                 a.lastOnline, d.name, e.name, f.name 
                 from customer a
                 inner join shoppingorder b on a.id=b.customer
                 inner join cart c on b.id=c.shoppingorder
                 inner join product d on d.id=c.product
                 inner join manufacturer e on e.id=d.manufacturer
                 inner join category f on f.id=d.category
-                where a.firstname not like :search
-                and a.lastname not like :search
-                and a.lastname not like :search
-                and a.city not like :search
-                and d.name not like :search
-                and e.name not like :search
-                and f.name not like :search
+                where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) not like :search
                 group by a.id
                 limit :from, :ppp
 
@@ -132,17 +126,8 @@ class AdminCustomer
         select firstname as name from customer
         where concat(firstname) like :search
         union
-        select name as name from product
-        where concat(name) like :search
-        union
         select lastname as name from customer
         where concat(lastname) like :search
-        union
-        select name from manufacturer
-        where concat(name) like :search
-        union
-        select name from category
-        where concat(name) like :search
         limit 15
         ');
 

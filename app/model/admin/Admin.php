@@ -171,12 +171,11 @@ class Admin
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-        select a.city, count(c.product) as quantity
+        select a.city, count(b.id) as quantity
         from customer a
-        inner join shoppingorder b on a.id=b.customer
-        left join cart c on c.shoppingorder=b.id
+        left join shoppingorder b on a.id=b.customer
 		group by a.city
-        order by quantity  desc
+        order by quantity desc
 
         ');
 

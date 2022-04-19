@@ -1,33 +1,32 @@
-$("#search")
-  .autocomplete({
-    source: function (req, res) {
-      $.ajax({
-        url: "/order/searchactive/" + req.term,
-        success: function (response) {
-          //   Below res is the one from line 2
-          res(response);
-        },
-      });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-      submitForm(ui.item);
-    },
-  })
-  .autocomplete("instance")._renderItem = function (ul, item) {
-  return $("<li>")
-    .append("<div>" + item.name + "</div>")
-    .appendTo(ul);
-};
+// $("#search")
+//   .autocomplete({
+//     source: function (req, res) {
+//       $.ajax({
+//         url: "/order/searchactive/" + req.term,
+//         success: function (response) {
+//           //   Below res is the one from line 2
+//           res(response);
+//         },
+//       });
+//     },
+//     minLength: 1,
+//     select: function (event, ui) {
+//       submitForm(ui.item);
+//     },
+//   })
+//   .autocomplete("instance")._renderItem = function (ul, item) {
+//   return $("<li>")
+//     .append("<div>" + item.name + "</div>")
+//     .appendTo(ul);
+// };
 
-function submitForm(item) {
-    location.replace('/order/active?search='+item.name)
-}
+// function submitForm(item) {
+//     location.replace('/order/active?search='+item.name)
+// }
 
 // Get Active Order details
 $(".modal").on("click", function () {
   let orderId = $(this).data("id");
-  console.log(orderId);
   $.ajax({
     url: "/order/getDetails/" + orderId,
     success: function (response, result) {
@@ -36,7 +35,6 @@ $(".modal").on("click", function () {
         let array = JSON.parse(response);
         let sum = 0;
         for (var i = 0; i < array.length; i++) {
-        //   console.log(array[i]);
           sum += parseFloat(array[i].price);
           $("<tr>")
             .append("<td>" + array[i].name + "</td>")
