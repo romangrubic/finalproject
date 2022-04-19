@@ -27,7 +27,7 @@ class Shoppingorder
         $query = $connection->prepare('
 
             insert into shoppingorder (customer, dateadded, isFinished) values
-            (:customerId, now(), false)
+            (:customerId, now(), 0)
             
         ');
         $query->execute([
@@ -159,6 +159,21 @@ class Shoppingorder
         ]);
 
         return $query->fetchColumn();
+    }
+
+    public static function finishShoppingorder($customerId)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+
+        update shoppingorder
+        set isFinished = 1, dateFinished = now()
+        where isFinished = 0 and customer = :customerId
+            
+        ');
+        $query->execute([
+            'customerId' => (int)$customerId
+        ]);
     }
     
 

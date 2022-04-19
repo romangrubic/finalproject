@@ -9,8 +9,9 @@ class Dashboard
         $query = $connection->prepare('
 
             select *
-            from shoppingorder a
+            from shoppingorder
             where customer=:customerId and isFinished=1
+            order by dateadded desc
             
         ');
         $query->execute([
