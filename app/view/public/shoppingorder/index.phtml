@@ -69,6 +69,6 @@
         <hr>
         <h1 id="sumTotal">Sveukupno: <?= number_format(Shoppingorder::sumTotal($_SESSION['authorized']->id), 2,',','.') ?> kn</h1>
         <br>
-        <button class="button secondary">Završi kupovinu!</button>
+        <button class="button secondary"><a style="color: white;" href="<?=App::config('url')?>shoppingorder/finalized"> Završi kupovinu!</a></button>
     <?php endif; ?>
 </div>

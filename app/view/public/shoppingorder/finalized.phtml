@@ -1,0 +1,162 @@
+<div class="shoppingorder">
+    <h2>Potvrdite detalje</h2>
+    <table class="hover">
+        <thead>
+            <th>Naziv</th>
+            <th class="text-center">Cijena</th>
+            <th class="text-center">Kolicina</th>
+            <th class="text-center">Iznos</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <?php foreach ($shoppingorder as $product) : ?>
+                <tr id="product<?= $product->id ?>">
+                    <td class="order-cart-item text-left" data-open="productmodal<?= $product->id ?>" title="Klik za detalje."><?= $product->name ?></td>
+                    <td><?= $product->priceFormatted ?> kn</td>
+                    <td><?= $product->quantity ?></td>
+                    <td><?= number_format($product->price * $product->quantity, 2, ',', '.') ?> kn</td>
+                    <td>
+                        <button class="removeFromCart" data-id="<?= $product->id ?>"><i title="Obriši &quot;<?= $product->name ?>&quot;." class="fas fa-2x fa-trash"></i></button>
+                    </td>
+                </tr>
+                <div class="small reveal" id="productmodal<?= $product->id ?>" data-reveal>
+                    <h1 class="modal-product-name"><?= $product->name ?></h1>
+                    <div class="grid-x grid-padding-x modal-product-section">
+                        <div class="large-6 modal-product-image">
+                            <img src="<?= App::config('url') ?>public/images/product/<?= $product->id ?>.png" alt="<?= $product->name ?>">
+                        </div>
+                        <div class="large-6 modal-product-description">
+                            <p><?= $product->description ?></p>
+                        </div>
+                    </div>
+                    <div class="grid-x grid-padding-x text-center">
+                        <div class="large-6 large-offset-1">
+                            <h3><?= $product->priceFormatted ?> kn</h3>
+                        </div>
+                        <div class="large-3">
+
+                            <i class="fas fa-3x fa-cart-plus add-to-cart addToCart" data-id="<?= $product->id ?>" data-open="modal<?= $product->id ?>" title="Dodaj &quot;<?= $product->name ?>&quot; u košaricu"></i>
+                            <div class="small reveal add-modal" id="modal<?= $product->id ?>" data-reveal>
+                                <div class="grid-x grid-padding-x text-center">
+                                    <h4 class="text-center">"<?= $product->name ?>" uspješno dodan u Vašu košaricu!</h4>
+                                    <br>
+                                    <br>
+                                    <div class="large-6">
+                                        <button data-close class="button warning">Zatvori</button>
+                                    </div>
+                                    <div class="large-6">
+                                        <a href="<?= App::config('url') ?>shoppingorder/index" data-close class="button expanded">Vaša košarica</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="far fa-3x fa-heart add-to-wishlist" data-id="<?= $product->id ?>" title="Dodaj &quot;<?= $product->name ?>&quot; u listu želja."></i>
+                        </div>
+                    </div>
+                    <button class="close-button" data-close aria-label="Close modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <h3 id="sumTotal">Sveukupno: <?= number_format(Shoppingorder::sumTotal($_SESSION['authorized']->id), 2, ',', '.') ?> kn</h3>
+    <hr>
+    <form action="<?= App::config('url') ?>shoppingorder/action" method="POST">
+        <div class="grid-x shoppingorder">
+            <div class="registration-part">
+                <h3 class="text-center">Podaci za dostavu:</h3>
+
+                <label for="firstname">Ime</label>
+                <input type="text" name="firstname" id="firstname" aria-describedby="messageFirstname" value="<?= $customer->firstname ?>">
+                <p class="help-text red-message" id="messageFirstname">
+                    <?= $message->firstname ?>
+                </p>
+
+                <label for="lastname">Prezime</label>
+                <input type="text" name="lastname" id="lastname" aria-describedby="messageLastname" value="<?= $customer->lastname ?>">
+                <p class="help-text red-message" id="messageLastname">
+                    <?= $message->lastname ?>
+                </p>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" aria-describedby="messageEmail" placeholder="vas.email@gmail.com" value="<?= $customer->email ?>">
+                <p class="help-text red-message" id="messageEmail">
+                    <?= $message->email ?>
+                </p>
+
+                <label for="phonenumber">Broj telefona</label>
+                <input type="number" name="phonenumber" id="phonenumber" aria-describedby="messagePhoneNumber" placeholder="0123456789" value="<?= $customer->phonenumber ?>">
+                <p class="help-text red-message" id="messagePhoneNumber">
+                    <?= $message->phonenumber ?>
+                </p>
+
+                <label for="street">Ulica i kucni broj</label>
+                <input type="text" name="street" id="street" aria-describedby="messageStreet" placeholder="Ulica Republike, 3a" value="<?= $customer->street ?>">
+                <p class="help-text red-message" id="messageStreet">
+                    <?= $message->street ?>
+                </p>
+
+                <label for="city">Grad</label>
+                <input type="text" name="city" id="city" aria-describedby="messageCity" placeholder="Osijek" value="<?= $customer->city ?>">
+                <p class="help-text red-message" id="messageCity">
+                    <?= $message->city ?>
+                </p>
+
+
+                <label for="postalnumber">Postanski broj</label>
+                <input type="number" name="postalnumber" id="postalnumber" aria-describedby="messagePostalNumber" placeholder="31000" value="<?= $customer->postalnumber ?>">
+                <p class="help-text red-message" id="messagePostalNumber">
+                    <?= $message->postalnumber ?>
+                </p>
+
+                <h3 class="text-center">Podaci za plaćanje:</h3>
+
+                <label for="cardnumber">Broj kartice</label>
+                <input type="number" name="cardnumber" id="cardnumber" aria-describedby="messagecardnumber" placeholder="xxxx xxxx xxxx xxxx" value="<?= $customer->cardnumber ?>">
+                <p class="help-text red-message" id="messagecardnumber">
+                    <?= $message->cardnumber ?>
+                </p>
+
+                <label for="cvv">CVV</label>
+                <input type="number" name="cvv" id="cvv" aria-describedby="messagecvv" placeholder="246" value="<?= $customer->cvv ?>">
+                <p class="help-text red-message" id="messagecvv">
+                    <?= $message->cvv ?>
+                </p>
+
+                <label for="postalnumber">Datum isteka</label>
+                <table border="0" cellspacing="0">
+                    <tr>
+                        <td align=left>
+                        <select name=month value=''>Mjesec isteka</option>
+                                <option value='01'>Siječanj</option>
+                                <option value='02'>Veljača</option>
+                                <option value='03'>Ožujak</option>
+                                <option value='04'>Travanj</option>
+                                <option value='05'>Svibanj</option>
+                                <option value='06'>Lipanj</option>
+                                <option value='07'>Srpanj</option>
+                                <option value='08'>Kolovoz</option>
+                                <option value='09'>Rujan</option>
+                                <option value='10'>Listopad</option>
+                                <option value='11'>Studeni</option>
+                                <option value='12'>Prosinac</option>
+                            </select>
+                        </td>
+                        <td align=left>
+                        <select name=day value=''>Dan isteka</option>
+                                <?php for ($i = 2022; $i <= 2027; $i++) : ?>
+                                    <option value='<?= $i ?>'><?= $i ?></option>
+                                <?php endfor; ?>
+                            </select>
+                        
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="<?= $customer->id ?>">
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="registration-button" value="Potvrdi kupovinu!">Potvrdi kupovinu!</button>
+        </div>
+    </form>
+</div>
