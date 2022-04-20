@@ -29,7 +29,9 @@ class ManufacturerController extends AuthorizedController
         
         foreach($manufacturers as $manufacturer){
             if($manufacturer->lastUpdated !=null){
-                $manufacturer->lastUpdated= date("F jS, Y, H:i:s", strtotime($manufacturer->lastUpdated));
+                // $manufacturer->lastUpdated= date("F jS, Y, H:i:s", strtotime($manufacturer->lastUpdated));
+                $manufacturer->lastUpdated = strftime("%e. %B %Y u %H:%M", strtotime($manufacturer->lastUpdated));
+
             }
         }
 

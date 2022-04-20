@@ -45,7 +45,9 @@ class OrderController extends AuthorizedController
         }
 
         $orders = Order::readActiveOrderCustomers($search, $page);
-
+        foreach ($orders as $order) {
+            $order->dateadded = strftime("%e. %B %Y u %H:%M", strtotime($order->dateadded));
+        }
         $this->view->render($this->viewDir . 'orders',[
             'css'=>$this->cssDir . 'index.css',
             'type'=>'active',
@@ -98,7 +100,11 @@ class OrderController extends AuthorizedController
         }
         // $totalOrders = Order::totalFinalizedOrder($search);
         $orders = Order::readFinalizedOrderCustomers($search, $page);
-
+        foreach ($orders as $order) {
+            if ($order->dateFinished != null) {
+                $order->dateFinished = strftime("%e. %B %Y u %H:%M", strtotime($order->dateFinished));
+            }
+        }
         $this->view->render($this->viewDir . 'orders',[
             'css'=>$this->cssDir . 'index.css',
             'type'=>'finalized',

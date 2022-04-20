@@ -40,7 +40,8 @@ class CustomerController extends AuthorizedController
 
         foreach ($customers as $customer) {
             if ($customer->lastOnline != null) {
-                $customer->lastOnline = date("F jS, Y, H:i:s", strtotime($customer->lastOnline));
+                $customer->lastOnline = strftime("%e. %B %Y u %H:%M", strtotime($customer->lastOnline));
+                // $customer->lastOnline = date("F jS, Y, H:i:s", strtotime($customer->lastOnline));
             }
         }
 

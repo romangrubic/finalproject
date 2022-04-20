@@ -67,7 +67,7 @@ class ProductController extends Controller
         foreach($products as $product){
             $product->price=$this->nf->format($product->price);
             if($product->lastUpdated !=null){
-                $product->lastUpdated= date("F jS, Y, H:i:s", strtotime($product->lastUpdated));
+                $product->lastUpdated = strftime("%e. %B %Y u %H:%M", strtotime($product->lastUpdated));
             }
         }
 

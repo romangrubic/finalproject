@@ -70,7 +70,7 @@ class AdminCustomer
                 inner join product d on d.id=c.product
                 inner join manufacturer e on e.id=d.manufacturer
                 inner join category f on f.id=d.category
-                order by a.id
+                order by a.lastOnline desc
                 limit :from, :ppp
             ');
         } else {
@@ -85,14 +85,15 @@ class AdminCustomer
                 inner join manufacturer e on e.id=d.manufacturer
                 inner join category f on f.id=d.category
                 where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) like :search
+                order by a.lastOnline desc
                 limit :from, :ppp
 
             ');
             }else {
                 $query = $connection->prepare('
             
-                select a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated,
-                 a.lastOnline, d.name, e.name, f.name 
+                select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated,
+                 a.lastOnline
                 from customer a
                 inner join shoppingorder b on a.id=b.customer
                 inner join cart c on b.id=c.shoppingorder
@@ -100,7 +101,7 @@ class AdminCustomer
                 inner join manufacturer e on e.id=d.manufacturer
                 inner join category f on f.id=d.category
                 where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) not like :search
-                group by a.id
+                order by a.lastOnline desc
                 limit :from, :ppp
 
             ');

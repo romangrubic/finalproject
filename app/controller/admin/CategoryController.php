@@ -29,7 +29,8 @@ class CategoryController extends AuthorizedController
         
         foreach($categories as $category){
             if($category->lastUpdated !=null){
-                $category->lastUpdated= date("F jS, Y, H:i:s", strtotime($category->lastUpdated));
+                $category->lastUpdated = strftime("%e. %B %Y u %H:%M", strtotime($category->lastUpdated));
+                // $category->lastUpdated= date("F jS, Y, H:i:s", strtotime($category->lastUpdated));
             }
         }
 
