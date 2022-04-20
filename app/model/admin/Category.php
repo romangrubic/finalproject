@@ -70,7 +70,11 @@ class Category
                 set name = :name, description = :description, lastUpdated=now()
                 where id = :id
         ');
-        $query->execute($parameters);
+        $query->execute([
+            'name'=>$parameters['name'],
+            'description'=>$parameters['description'],
+            'id'=>$parameters['id'],
+        ]);
     }
 
     public static function delete($id)

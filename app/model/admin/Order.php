@@ -68,7 +68,7 @@ class Order
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-        select distinct a.id, a.firstname, a.lastname, a.city, a.lastOnline, b.id as orderId
+        select distinct a.id, a.firstname, a.lastname, a.city, a.lastOnline, b.id as orderId,  b.dateadded as dateadded
         from customer a
         inner join shoppingorder b on a.id=b.customer
         inner join cart c on c.shoppingorder=b.id
@@ -240,7 +240,7 @@ class Order
         $connection = DB::getInstance();
         $query = $connection->prepare('
         
-        select distinct a.id, a.firstname, a.lastname, a.city, a.lastOnline, b.id as orderId
+        select distinct a.id, a.firstname, a.lastname, a.city, a.lastOnline, b.id as orderId, b.dateFinished as dateFinished
         from customer a
         inner join shoppingorder b on a.id=b.customer
         inner join cart c on c.shoppingorder=b.id

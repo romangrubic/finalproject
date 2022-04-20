@@ -24,7 +24,8 @@
             <tr>
                 <th>Ime i prezime</th>
                 <th>Email</th>
-                <th>Zadnja put online</th>
+                <th>Grad</th>
+                <th>Zadnji put online</th>
                 <th></th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <tr>
                     <td><?= $c->firstname ?> <?= $c->lastname ?></td>
                     <td><?= $c->email ?></td>
+                    <td><?= $c->city ?></td>
                     <td><?= $c->lastOnline ?></td>
                     <td>
                         <a href="<?= App::config('url') ?>customer/details/<?= $c->id ?>" class="button expand info">View details...</a>

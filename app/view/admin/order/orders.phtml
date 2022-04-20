@@ -4,18 +4,18 @@
             <h1 style="font-size: 1.5rem;">Narudžbe</h1>
         </div>
     </div>
-    <?php if($type != 'active'):?>
-    <form class="search-product large-6 cell blue-sky" action="<?= App::config('url') ?>order/<?= $type ?>" method="get">
-        <div class="ui-widget">
-            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, prezimenu, proizvođaču, kategoriji ili gradu..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
-        </div>
-    </form>
-    <?php endif;?>
+    <?php if ($type != 'active') : ?>
+        <form class="search-product large-6 cell blue-sky" action="<?= App::config('url') ?>order/<?= $type ?>" method="get">
+            <div class="ui-widget">
+                <input type="text" name="search" id="search" class="search-product" placeholder="Traži po proizvođaču, kategoriji ili gradu..." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
+            </div>
+        </form>
+    <?php endif; ?>
     <?php if ($totalOrders == 0) : ?>
         <legend class="total-product-message">Nema niti jedne narudžbe.</legend>
     <?php elseif ($totalOrders == 1) : ?>
         <legend class="total-product-message">Pronađena samo jedna narudžba.</legend>
-        <?php elseif ($totalOrders == 498) : ?>
+    <?php elseif ($totalOrders == 498) : ?>
         <legend class="total-product-message">Pronađeno ukupno 500 narudžbi.</legend>
     <?php elseif ($totalOrders > 1) : ?>
         <legend class="total-product-message">Pronađeno ukupno <?= $totalOrders ?> narudžbi.</legend>
@@ -28,7 +28,11 @@
                 <th>Ime</th>
                 <th>Prezime</th>
                 <th>Grad</th>
-                <th>Online</th>
+                <?php if ($type != 'active') : ?>
+                    <th>Datum izvršenja</th>
+                <?php else : ?>
+                    <th>Datum početka</th>
+                <?php endif; ?>
                 <th></th>
             </tr>
         </thead>
@@ -39,7 +43,12 @@
                     <td><?= $order->firstname ?></td>
                     <td><?= $order->lastname ?></td>
                     <td><?= $order->city ?></td>
-                    <td><?= $order->lastOnline ?></td>
+                    <?php if ($type != 'active') : ?>
+                        <td><?= $order->dateFinished ?></td>
+                    <?php else : ?>
+                        <td><?= $order->dateadded ?></td>
+                    <?php endif; ?>
+                    
                     <td><i class="fas fa-info-circle modal" data-id="<?= $order->orderId ?>" data-open="modal<?= $order->orderId ?>" title="Pogledaj detalje narudžbe."></i></td>
                 </tr>
             <?php endforeach; ?>
@@ -47,7 +56,9 @@
     </table>
 </div>
 <?php
-foreach ($orders as $order):?>
-<?php include 'modal.phtml'?>
-<?php endforeach?>
-<?php include 'pagination.phtml' ?>
+foreach ($orders as $order) : ?>
+    <?php include 'modal.phtml' ?>
+<?php endforeach ?>
+<?php if ($type != 'active') : ?>
+    <?php include 'pagination.phtml' ?>
+<?php endif; ?>
