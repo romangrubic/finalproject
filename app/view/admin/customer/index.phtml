@@ -1,6 +1,6 @@
 <div class="main-index">
-<h1 style="font-size: 1.5rem;">Popis kupaca</h1>
-<hr>
+    <h1 style="font-size: 1.5rem;">Popis kupaca</h1>
+    <hr>
     <form class="search-product large-6 cell" action="<?= App::config('url') ?>customer/index" method="get">
         <div>
             <input type="radio" id="normal" name="negation" value="0" <?= ($negation == '0') ? 'checked' : ''; ?>>
@@ -15,34 +15,55 @@
     </form>
     <?php if ($totalCustomers == 1) : ?>
         <legend class="total-product-message">Pronađen samo jedan kupac.</legend>
+        <p><button class="button" data-open="exampleModal1">Šalji e-mail.</button></p>
     <?php else : ?>
         <legend class="total-product-message">Pronađeno ukupno <?= $totalCustomers ?> kupaca.</legend>
+        <p><button class="button" data-open="exampleModal1">Šalji e-mail.</button></p>
     <?php endif; ?>
     <?php if ($totalCustomers != 0) : ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Ime i prezime</th>
-                <th>Email</th>
-                <th>Grad</th>
-                <th>Zadnji put online</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($customers as $c) : ?>
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $c->firstname ?> <?= $c->lastname ?></td>
-                    <td><?= $c->email ?></td>
-                    <td><?= $c->city ?></td>
-                    <td><?= $c->lastOnline ?></td>
-                    <td>
-                        <a href="<?= App::config('url') ?>customer/details/<?= $c->id ?>" class="button expand info">View details...</a>
-                    </td>
+                    <th>Ime i prezime</th>
+                    <th>Email</th>
+                    <th>Grad</th>
+                    <th>Zadnji put online</th>
+                    <th></th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <?php include 'pagination.phtml' ?>
+            </thead>
+            <tbody>
+                <?php foreach ($customers as $c) : ?>
+                    <tr>
+                        <td><?= $c->firstname ?> <?= $c->lastname ?></td>
+                        <td><?= $c->email ?></td>
+                        <td><?= $c->city ?></td>
+                        <td><?= $c->lastOnline ?></td>
+                        <td>
+                            <a href="<?= App::config('url') ?>customer/details/<?= $c->id ?>" class="button expand info">View details...</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php include 'pagination.phtml' ?>
+        <div class="reveal" id="exampleModal1" data-reveal>
+            <form action="<?= App::config('url') ?>customr/sendemail" method="post">
+
+                <label for="naslov">Naslov</label>
+                <input type="text" name="tittle" id="tittle">
+
+                <label for="poruka">Poruka</label>
+                <textarea name="message" id="message"></textarea>
+                <br>
+                <div class="grid-x grid-padding-x">
+                    <div class="large-4 cell">
+                        <a class="alert button expanded" data-close aria-label="Close modal">Odustani</a>
+                    </div>
+                    <div class="large-8 cell">
+                        <input type="submit" class="success button expanded" value="Pošalji">
+                    </div>
+                </div>
+            </form>
+        </div>
     <?php endif; ?>
 </div>

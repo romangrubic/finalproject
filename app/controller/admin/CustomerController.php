@@ -1,5 +1,8 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class CustomerController extends AuthorizedController
 {
     private $viewDir = 'admin' . DIRECTORY_SEPARATOR . 'customer' . DIRECTORY_SEPARATOR;
@@ -53,7 +56,8 @@ class CustomerController extends AuthorizedController
             'totalPages' => $totalPages,
             'search' => $search,
             'negation' => $negation,
-            'javascript' => '<script src="' . App::config('url') . 'public/js/custom/AdminCustomer.js"></script>'
+            'javascript' => '<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+                            <script src="' . App::config('url') . 'public/js/custom/AdminCustomer.js"></script>'
         ]);
     }
 
@@ -70,5 +74,28 @@ class CustomerController extends AuthorizedController
             'css' => $this->cssDir . 'index.css',
             'customer' => AdminCustomer::readOne($id)
         ]);
+    }
+
+    // Email functionality
+    public function sendemail($array)
+    {
+        foreach($this->entitet->polaznici as $p){
+            $mail = new PHPMailer();
+            $mail->IsSMTP();
+            $mail->Mailer = "smtp";
+            $mail->SMTPAuth   = TRUE;
+            $mail->SMTPSecure = "tls";
+            $mail->Port       = 587;
+            $mail->Host       = "smtp.gmail.com";
+            $mail->Username   = "mojatrgovina@gmail.com";
+            $mail->Password   = "mojaTrgovina!123";
+            $mail->IsHTML(true);
+            $mail->AddAddress($p->email, $p->ime . ' ' . $p->prezime);
+            $mail->SetFrom("mojatrgovina@gmail.com", "Moja Trgovina");
+            $mail->Subject = $_POST['tittle'];
+            $mail->MsgHTML($_POST['message']); 
+            $mail->Send();
+        }
+
     }
 }

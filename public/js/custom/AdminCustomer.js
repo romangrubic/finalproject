@@ -20,3 +20,11 @@ $("#search")
     .append("<div>" + item.name + "</div>")
     .appendTo(ul);
 };
+
+
+  /* CKEDIT */
+  CKEDITOR.replace('message', {
+    height: 300,
+    baseFloatZIndex: 10005,
+    removeButtons: 'PasteFromWord'
+  });
