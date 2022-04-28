@@ -58,6 +58,9 @@ class AdminCustomer
     {
         $ppp = App::config('ppp');
         $from = $page * $ppp - $ppp;
+        if($from == '-12'){
+            $from = 0;
+        }
 
         $connection = DB::getInstance();
         if (!isset($search)) {

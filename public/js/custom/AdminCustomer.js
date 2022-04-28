@@ -11,7 +11,8 @@ $("#search")
     },
     minLength: 1,
     select: function (event, ui) {
-      submitForm(ui.item);
+      $(this).val(ui.item.name)
+      return false;
     },
   })
   .autocomplete("instance")._renderItem = function (ul, item) {
@@ -19,7 +20,3 @@ $("#search")
     .append("<div>" + item.name + "</div>")
     .appendTo(ul);
 };
-
-function submitForm(item) {
-    location.replace('/customer/index?search='+item.name)
-}

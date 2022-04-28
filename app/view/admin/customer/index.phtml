@@ -9,8 +9,7 @@
             <label for="negation">Negacija <i class="fas fa-info-circle" title="Svi koji nemaju traženu vrijednost."></i></label>
         </div>
         <div class="ui-widget">
-            <input type="text" name="search" id="search" class="search-product" placeholder="Traži po imenu, prezimenu ili gradu." <?= (isset($_GET['search'])) ? 'value="' . $_GET['search'] . '"' : '' ?>>
-
+            <input type="text" id="search" name="search" class="search-product" placeholder="Traži po imenu, prezimenu ili gradu." value="<?= (isset($_GET['search'])) ? $_GET['search'] . '"' : '' ?>">
         </div>
         <input style="margin-bottom:10px; width: 100%;" type="submit" class="button" value="Traži!">
     </form>
@@ -19,6 +18,7 @@
     <?php else : ?>
         <legend class="total-product-message">Pronađeno ukupno <?= $totalCustomers ?> kupaca.</legend>
     <?php endif; ?>
+    <?php if ($totalCustomers != 0) : ?>
     <table>
         <thead>
             <tr>
@@ -44,4 +44,5 @@
         </tbody>
     </table>
     <?php include 'pagination.phtml' ?>
+    <?php endif; ?>
 </div>
