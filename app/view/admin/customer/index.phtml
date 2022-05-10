@@ -1,4 +1,8 @@
 <div class="main-index">
+    <?php if (isset($_GET['email'])):?>
+        <p>E-mail uspješno poslan!</p>
+        <hr>
+        <?php endif;?>
     <h1 style="font-size: 1.5rem;">Popis kupaca</h1>
     <hr>
     <form class="search-product large-6 cell" action="<?= App::config('url') ?>customer/index" method="get">
@@ -47,13 +51,15 @@
         </table>
         <?php include 'pagination.phtml' ?>
         <div class="reveal" id="exampleModal1" data-reveal>
-            <form action="<?= App::config('url') ?>customr/sendemail" method="post">
+            <p>E-mail prima <?=$totalCustomers?> kupaca.</p>
+            <hr>
+            <form action="<?= App::config('url') ?>customer/sendemail/<?=(isset($_GET['negation'])) ? $_GET['negation'] : '0';?>,<?=(isset($_GET['search'])) ? $_GET['search'] : '';?>" method="post">
 
                 <label for="naslov">Naslov</label>
-                <input type="text" name="tittle" id="tittle">
+                <input type="text" name="tittle" id="tittle" required>
 
                 <label for="poruka">Poruka</label>
-                <textarea name="message" id="message"></textarea>
+                <textarea name="message" id="message" required></textarea>
                 <br>
                 <div class="grid-x grid-padding-x">
                     <div class="large-4 cell">

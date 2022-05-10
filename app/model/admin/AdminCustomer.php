@@ -140,4 +140,58 @@ class AdminCustomer
         $query->execute();
         return $query->fetchAll();
     }
+
+    public static function email($search, $negation)
+    {
+        $connection = DB::getInstance();
+
+        if (!isset($search)) {
+            $query = $connection->prepare('
+            
+                select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated, a.lastOnline
+                from customer a
+                inner join shoppingorder b on a.id=b.customer
+                inner join cart c on b.id=c.shoppingorder
+                inner join product d on d.id=c.product
+                inner join manufacturer e on e.id=d.manufacturer
+                inner join category f on f.id=d.category
+                order by a.lastOnline desc
+            ');
+        } else {
+            if($negation=='0'){
+                $query = $connection->prepare('
+            
+                select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated, a.lastOnline
+                from customer a
+                inner join shoppingorder b on a.id=b.customer
+                inner join cart c on b.id=c.shoppingorder
+                inner join product d on d.id=c.product
+                inner join manufacturer e on e.id=d.manufacturer
+                inner join category f on f.id=d.category
+                where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) like :search
+                order by a.lastOnline desc
+
+            ');
+            }else {
+                $query = $connection->prepare('
+            
+                select distinct a.id, a.firstname, a.lastname, a.email, a.phonenumber, a.street, a.city, a.postalnumber, a.datecreated,
+                 a.lastOnline
+                from customer a
+                inner join shoppingorder b on a.id=b.customer
+                inner join cart c on b.id=c.shoppingorder
+                inner join product d on d.id=c.product
+                inner join manufacturer e on e.id=d.manufacturer
+                inner join category f on f.id=d.category
+                where concat(a.firstname, a.lastname, a.city,d.name ,e.name, f.name) not like :search
+                order by a.lastOnline desc
+
+            ');
+            }
+            $search = '%' . $search . '%';
+            $query->bindParam('search', $search);
+        }
+        $query->execute();
+        return $query->fetchall();
+    }
 }

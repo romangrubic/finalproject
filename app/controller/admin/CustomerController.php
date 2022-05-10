@@ -77,25 +77,54 @@ class CustomerController extends AuthorizedController
     }
 
     // Email functionality
-    public function sendemail($array)
-    {
-        foreach($this->entitet->polaznici as $p){
-            $mail = new PHPMailer();
-            $mail->IsSMTP();
-            $mail->Mailer = "smtp";
-            $mail->SMTPAuth   = TRUE;
-            $mail->SMTPSecure = "tls";
-            $mail->Port       = 587;
-            $mail->Host       = "smtp.gmail.com";
-            $mail->Username   = "mojatrgovina@gmail.com";
-            $mail->Password   = "mojaTrgovina!123";
-            $mail->IsHTML(true);
-            $mail->AddAddress($p->email, $p->ime . ' ' . $p->prezime);
-            $mail->SetFrom("mojatrgovina@gmail.com", "Moja Trgovina");
-            $mail->Subject = $_POST['tittle'];
-            $mail->MsgHTML($_POST['message']); 
-            $mail->Send();
+    public function sendemail($array){
+        $term = explode(',',$array);
+
+        print_r($term);
+
+        $negation = $term[0];
+        $search = $term[1];
+
+        if(!$search){
+            $search = '';
+        }
+        if(!$negation){
+            $negation = 0;
         }
 
+        $customers = AdminCustomer::email($search, $negation);
+
+        if (!$customers) {
+            return header('location:' . App::config('url').'customer/index');
+            
+        }
+
+        // print_r($customers);
+
+        $this->email($customers);
     }
+
+    public function email($customers)
+    {
+        // foreach($customers as $c){
+        //     $mail = new PHPMailer();
+        //     $mail->IsSMTP();
+        //     $mail->Mailer = "smtp";
+        //     $mail->SMTPAuth   = TRUE;
+        //     $mail->SMTPSecure = "tls";
+        //     $mail->Port       = 587;
+        //     $mail->Host       = "smtp.gmail.com";
+        //     $mail->Username   = "mojatrgovina@gmail.com";
+        //     $mail->Password   = "mojaTrgovina!123";
+        //     $mail->IsHTML(true);
+        //     $mail->AddAddress($c->email, $c->firstName . ' ' . $c->lastName);
+        //     $mail->SetFrom("mojatrgovina@gmail.com", "Moja Trgovina");
+        //     $mail->Subject = $_POST['tittle'];
+        //     $mail->MsgHTML($_POST['message']); 
+        //     $mail->Send();
+        // }
+
+        header('location:' . App::config('url').'customer/index?email=1');
+    }
+
 }
